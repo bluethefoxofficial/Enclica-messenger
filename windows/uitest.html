@@ -1,0 +1,68 @@
+<script>
+  const template = require("../js/template.js");
+  const electron = require("electron");
+
+  function login(e) {
+    e.preventDefault();
+    var stuff =
+      "https://csoftware.cf/api/api1.php?key=grUs07Md3s4o9WIb7fi3vu0AGdjinGP8BvFFSvcNI6viEkXFhNY9ZODlNnNWMXfaapeb20NbVBadZtwH9kFUnOgPXn8oWuPPnqJL&function=login&username=" +
+      document.getElementById("username").value +
+      "&password=" +
+      document.getElementById("password").value;
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        var obj = JSON.parse(this.responseText);
+        if (obj.error) {
+          document.getElementById("errortext").innerHTML = obj.error;
+          document.getElementById("error").style.display = "inline";
+        }
+        if (obj.login_token) {
+          localStorage.setItem("token", obj.login_token);
+          window.location = "../windows/main.html";
+          alert(
+            "Lets not leak our hard work.\nleaking this software can result in your contract being terminated."
+          );
+        }
+      }
+    };
+    xhttp.open("GET", stuff, true);
+    xhttp.send();
+  }
+
+  var title = "CPM login ";
+  var head = "";
+  var body = `
+    <h1 style='position: center; text-align: center;'> JANE DOE, JOHN DOE</h3>
+    <h2 style='position: center; text-align: center;'> JANE DOE, JOHN DOE</h3>
+    <h3 style='position: center; text-align: center;'> JANE DOE, JOHN DOE</h3>
+    <h4 style='position: center; text-align: center;'> JANE DOE, JOHN DOE</h3>
+    <h5 style='position: center; text-align: center;'> JANE DOE, JOHN DOE</h3>
+    <h6 style='position: center; text-align: center;'> JANE DOE, JOHN DOE</h3>
+    <p style='position: center; text-align: center;'>
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec efficitur vel dolor imperdiet fermentum. In hac habitasse platea dictumst. Suspendisse molestie pretium convallis. Donec varius nec dolor a lacinia. Donec sit amet odio orci. Suspendisse potenti. Cras consequat justo a iaculis molestie. Phasellus nisi ex, semper nec convallis a, iaculis ac odio. Donec ut velit ex. Nam eu dignissim lorem. Proin commodo blandit sem, lacinia rhoncus massa hendrerit sit amet. In nec mollis neque, eu molestie mauris.
+
+Ut maximus eros in lectus suscipit, at aliquet augue rhoncus. Sed scelerisque at risus pharetra ornare. Proin eu turpis lacus. Cras mauris risus, eleifend vel luctus et, dapibus in elit. Sed in justo urna. Cras facilisis consequat risus a aliquet. Ut eget purus mollis, hendrerit purus eget, tristique ex. Vestibulum eleifend dignissim nunc at faucibus. Integer rutrum facilisis congue. Curabitur egestas urna nec lorem suscipit pharetra.
+
+Nulla facilisi. Morbi viverra convallis enim, vitae venenatis erat lobortis ac. Mauris quis orci vitae tortor imperdiet porta. Proin feugiat purus vitae egestas cursus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Mauris arcu sapien, aliquet eu posuere eu, luctus volutpat arcu. Vivamus eget quam vel justo sollicitudin eleifend. Proin in viverra libero. Pellentesque vitae tempor tortor. Maecenas porttitor elementum facilisis. Aenean vestibulum leo sit amet enim dignissim, et efficitur orci tincidunt. Aliquam convallis tellus sit amet elit suscipit vulputate. Sed vehicula scelerisque diam, id volutpat ligula. Donec placerat ipsum eget sem dignissim, a mattis orci vehicula. Donec id iaculis nunc, quis blandit lectus. Pellentesque convallis odio risus, non condimentum velit dignissim a.
+
+Fusce lobortis ante velit, et tempus urna faucibus a. Aliquam erat volutpat. Sed vitae urna ante. Vivamus semper justo ut sapien scelerisque auctor. In ac tortor lacinia, eleifend leo vel, condimentum diam. Curabitur sed justo turpis. Sed fermentum ultrices erat, ut pretium nulla laoreet sit amet. Vestibulum fermentum risus condimentum tortor dignissim, at cursus libero vehicula. Aenean sed purus non elit interdum ornare. Proin ultrices purus vel justo tincidunt, in tempor purus ullamcorper. Fusce vitae ligula aliquet, mollis justo nec, vehicula risus. Etiam placerat, dolor vel cursus tincidunt, elit odio hendrerit ipsum, vitae congue quam mi ut sapien. Duis porttitor consectetur metus vitae rutrum.
+
+Donec a dapibus ex. Phasellus vel sem volutpat, accumsan nisi sit amet, imperdiet tellus. Mauris efficitur pharetra leo, quis pulvinar lacus posuere nec. Praesent lobortis sapien risus, non congue urna feugiat non. Curabitur id tortor pharetra, ullamcorper orci sit amet, porta risus. Nulla vitae dolor at nibh efficitur aliquam. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nulla laoreet eget diam eget volutpat. Suspendisse in varius nunc. Curabitur non urna nec mi dictum mollis non at mauris. Vestibulum erat tortor, malesuada vel nisi vitae, vulputate rutrum enim. Suspendisse ac augue nunc. Morbi ultricies consequat interdum. Cras accumsan turpis quis purus euismod lacinia. </p>
+
+
+
+<button class="btn btn-white">Jane doe</button>
+<button class="btn btn-danger">Jane doe</button>
+<button class="btn btn-success">Jane doe</button>
+<button class="btn btn-info">Jane doe</button>
+<button class="btn btn-primary">Jane doe</button>
+<button class="btn btn-alert">Jane doe</button>
+
+    
+    
+    `;
+
+  template.createPage(title, head, body);
+</script>

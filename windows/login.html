@@ -1,0 +1,95 @@
+<script>
+  const template = require("../js/template.js");
+  const electron = require("electron");
+
+  function login(e) {
+    e.preventDefault();
+    var username = document.getElementById("username").value;
+    var password = document.getElementById("password").value;
+    var stuff = `https://csoftware.cf/api/api1.php?key=grUs07Md3s4o9WIb7fi3vu0AGdjinGP8BvFFSvcNI6viEkXFhNY9ZODlNnNWMXfaapeb20NbVBadZtwH9kFUnOgPXn8oWuPPnqJL&function=login&username=${username}&password=${password}`;
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        var obj = JSON.parse(this.responseText);
+        if (obj.error) {
+          var error = new Audio("../assets/sounds/mp3-converted/denied2.mp3");
+          error.setAttribute("crossorigin", "anonymous");
+          error.play();
+          document.getElementById("errortext").innerHTML = obj.error;
+          document.getElementById("error").style.display = "inline";
+        }
+        if (obj.login_token) {
+          localStorage.setItem("token", obj.login_token);
+          window.location = "../windows/main.html";
+          alert(
+            "Lets not leak our hard work.\nleaking this software can result in your contract being terminated."
+          );
+        }
+      }
+    };
+    xhttp.open("GET", stuff, true);
+    xhttp.send();
+  }
+
+  var title = "CPM login ";
+  var head = `
+  <style>
+      *{
+        color: white;
+      }
+      body{
+        background-image: url("../assets/images/cpm_2020.jpg");
+          background-repeat: no-repeat;
+  background-size: cover;
+      }
+      input{
+        color: black !important; 
+      }
+
+
+  </style>
+  
+
+          
+  `;
+  var body = `<br/>`;
+
+  template.createPage(title, head, body);
+
+  if (localStorage.getItem("token")) {
+    window.location = "../windows/main.html";
+  }
+</script>
+
+<h3 style="position: center; text-align: center">Login to CPM.</h3>
+<br />
+<form id="login" style="text-align: center">
+  <div class="container">
+    <div>
+      <div id="error" class="alert">
+        <span id="errortext"></span>
+      </div>
+    </div>
+    <label for="username" style="margin-top: 5px"><b>Username</b></label>
+    <input type="text" placeholder="Enter Username" id="username" required />
+
+    <label for="psw"><b>Password</b></label>
+    <input
+      type="password"
+      placeholder="Enter Password"
+      id="password"
+      required
+    />
+
+    <button type="submit" class="btn btn-primary">Login</button>
+  </div>
+</form>
+<script>
+  document.getElementById("login").addEventListener("submit", function (e) {
+    login(e);
+  });
+</script>
+<br />
+<script>
+  document.getElementById("error").style.display = "none";
+</script>

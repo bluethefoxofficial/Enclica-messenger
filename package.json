@@ -1,0 +1,23 @@
+{
+  "name": "creativepublicmessage-cpm",
+  "version": "1.0.0",
+  "description": "A messaging application for everyone",
+  "main": "index.js",
+  "scripts": {
+    "test": "electron .",
+    "compile": "electron-packager . --all --overwrite"
+  },
+  "keywords": [
+    "messaging",
+    "msn"
+  ],
+  "author": "Csoftware",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^8.2.3",
+    "electron-builder": "^22.8.0",
+    "electron-localstorage": "^1.0.5",
+    "md5": "^2.2.1"
+  },
+  "devDependencies": {}
+}
