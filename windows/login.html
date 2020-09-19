@@ -1,3 +1,4 @@
+<div class="loading" id="preloader"></div>
 <script>
   const template = require("../js/template.js");
   const electron = require("electron");
@@ -20,10 +21,14 @@
         }
         if (obj.login_token) {
           localStorage.setItem("token", obj.login_token);
-          window.location = "../windows/main.html";
-          alert(
-            "Lets not leak our hard work.\nleaking this software can result in your contract being terminated."
-          );
+
+          var success = new Audio("../assets/sounds/mp3-converted/noti4.mp3");
+          document.getElementById("preloader").style.display = "inline";
+          success.setAttribute("crossorigin", "anonymous");
+          success.play();
+          success.addEventListener("ended", function () {
+            window.location = "../windows/main.html";
+          });
         }
       }
     };
@@ -55,7 +60,7 @@
   var body = `<br/>`;
 
   template.createPage(title, head, body);
-
+  document.getElementById("preloader").style.display = "none";
   if (localStorage.getItem("token")) {
     window.location = "../windows/main.html";
   }

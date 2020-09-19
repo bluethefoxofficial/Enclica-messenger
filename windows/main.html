@@ -110,8 +110,9 @@
 
 <div class="main" id="chats" >
   <h2>Chats</h2>
-  <input type="text" id="serverjoininputbox" placeholder="server invite code" />
+  <input type="text" required id="serverjoininputbox" placeholder="server invite code" />
   <button class="btn btn-success" onclick="joinserver()" height="90px" width="90px">Join server</button>
+  <p>test invite code: 6T0twcXc</p>
 
     <button id="create_btn" class="btn btn-info">Create server</button>
 <div class="loading" id="preloader"></div>
@@ -177,8 +178,10 @@
 
 
 function logout(){
+  document.getElementById("preloader").style = "display: inline;";
           var logout = new Audio("../assets/sounds/mp3-converted/logout.mp3");
   logout.play();
+        
            setTimeout(function () {
              localStorage.clear();
              window.location = "../windows/login.html";
@@ -187,9 +190,12 @@ function logout(){
 }
 
   document.getElementById("chatoblock").click();
-  function sectiondiv(evt, sectiondiv, colour1,colour2) {
+  function sectiondiv(evt, sectiondiv, colour1,colour2, serverid) {
   
 
+    if (serverid) {
+      currentserver = serverid;
+    }
     document.getElementById("body").style = `background-image: linear-gradient( to right, ${colour1},${colour2});  transition: background-image 3s ease-in;`;    
 
     // Declare all variables
@@ -210,6 +216,7 @@ function logout(){
     // Show the current tab, and add an "active" class to the button that opened the tab
     document.getElementById(sectiondiv).style.display = "block";
     evt.currentTarget.className += " active";
+
 
   } 
 
@@ -266,26 +273,32 @@ function logout(){
   function joinserver(){
 
     if(sevmax == 100) return;
-    var random = Math.random(1,99999999999);
+    var server = currentserver;
+        var stuff =
+      "https://csoftware.cf/api/api1.php?key=grUs07Md3s4o9WIb7fi3vu0AGdjinGP8BvFFSvcNI6viEkXFhNY9ZODlNnNWMXfaapeb20NbVBadZtwH9kFUnOgPXn8oWuPPnqJL&function=joingroup&token=" +
+      localStorage.getItem("token") + "&invite=" + document.getElementById("serverjoininputbox").value;
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+      console.log(stuff);
 
+      if (this.readyState == 4 && this.status == 200) {
 
-    
-    document.getElementById("chatsnav").innerHTML += `  <a id="btn_${random}" class="activation" onclick='sectiondiv(event, "win_${random}","#00a2ff","#ab34e6")' ></a>`;
-    document.getElementById("chatsitem").innerHTML += 
-    `
-    <div class="main" id="win_${random}">
-    <div><h2> </h2><button class="btn btn-danger" style="width: 90px;">Leave</button></div>
-
-    <div class="msg-container" id="${random}_container">
-
-    </div>
-
-      <input type="text" placeholder="Message" id="textbox_${random}"/>
-
-</div>
-    
-    `;
-      sevmax += 1;
+        setTimeout(function () {
+          document.getElementById("l1-968b").style.display = "none";
+          document.getElementById("preloader").style = "display: none;";
+        }, 1000);
+        obj = JSON.parse(this.responseText);
+        console.log(obj);
+        if(obj.code === 568999){
+          alert(obj.error);
+        }else{
+          listgroups();
+          alert("success");
+        }
+      }
+    };
+    xhttp.open("GET", stuff, true);
+    xhttp.send();
 
   }
 
@@ -307,18 +320,18 @@ function listgroups(){
                     var randomColor = Math.floor(Math.random() * 16777215).toString(16);
                   var randomColortwo = Math.floor(Math.random() * 16777215).toString(16);
                   console.log(data);
-                      document.getElementById("chatsnav").innerHTML += `<a class="font-size: 10vw" id="btn_${random}" class="activation" onclick='sectiondiv(event, "win_${random}","#${randomColor}","#${randomColortwo}")' >${data.name}</a>`;
+                      document.getElementById("chatsnav").innerHTML += `<a class="font-size: 10vw" id="btn_${data.ID}" class="activation" onclick='sectiondiv(event, "win_${data.ID}","#${randomColor}","#${randomColortwo}", ${data.ID})' >${data.name}</a>`;
                 
                     document.getElementById("chatsitem").innerHTML +=
                     `
-    <div class="main" id="win_${random}">
+    <div class="main" id="win_${data.ID}">
     <div><h2>${data.name}</h2><button class="btn btn-danger" style="width: 90px;">Leave</button></div>
 
-    <div class="msg-container" id="${random}_container">
+    <div class="msg-container" id="${data.ID}_container">
 
     </div>
 
-      <input type="text" placeholder="Message" id="textbox_${random}"/>
+      <input type="text" placeholder="Message" id="textbox_${obj.ID}"/>
 
 </div>
     

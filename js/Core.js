@@ -1,7 +1,7 @@
 // Get the modal
 
 var modal = document.getElementById("create");
-
+var currentserver = null;
 // Get the button that opens the modal
 var modalbtn = document.getElementById("create_btn");
 

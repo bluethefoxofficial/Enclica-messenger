@@ -534,28 +534,25 @@ textarea {
   width: 1em;
   height: 1em;
   margin-top: -0.5em;
-  -webkit-animation: spinner 150ms infinite linear;
-  -moz-animation: spinner 150ms infinite linear;
-  -ms-animation: spinner 150ms infinite linear;
-  -o-animation: spinner 150ms infinite linear;
-  animation: spinner 150ms infinite linear;
+  -webkit-animation: spinner 550ms infinite linear;
+  -moz-animation: spinner 550ms infinite linear;
+  -ms-animation: spinner 550ms infinite linear;
+  -o-animation: spinner 550ms infinite linear;
+  animation: spinner 550ms infinite linear;
   border-radius: 0.5em;
-  -webkit-box-shadow: rgba(197, 0, 0, 0.829) 1.5em 0 0 0,
-    rgba(255, 255, 255, 0.75) 1.1em 1.1em 0 0,
-    rgba(255, 255, 255, 0.75) 0 1.5em 0 0,
-    rgba(255, 255, 255, 0.75) -1.1em 1.1em 0 0,
-    rgba(255, 255, 255, 0.75) -1.5em 0 0 0,
-    rgba(255, 255, 255, 0.75) -1.1em -1.1em 0 0,
-    rgba(255, 255, 255, 0.75) 0 -1.5em 0 0,
-    rgba(255, 255, 255, 0.75) 1.1em -1.1em 0 0;
-  box-shadow: rgba(255, 255, 255, 0.75) 1.5em 0 0 0,
-    rgba(255, 255, 255, 0.75) 1.1em 1.1em 0 0,
-    rgba(255, 255, 255, 0.75) 0 1.5em 0 0,
-    rgba(255, 255, 255, 0.75) -1.1em 1.1em 0 0,
-    rgba(255, 255, 255, 0.75) -1.5em 0 0 0,
-    rgba(255, 255, 255, 0.75) -1.1em -1.1em 0 0,
-    rgba(255, 255, 255, 0.75) 0 -1.5em 0 0,
-    rgba(255, 255, 255, 0.75) 1.1em -1.1em 0 0;
+  box-shadow: rgba(38, 0, 255, 0.75) 1.5em 0 0 0,
+    rgba(254, 160, 0, 0.75) 1.1em 1.1em 0 0, rgba(208, 0, 255, 0.75) 0 1.5em 0 0,
+    rgba(255, 0, 238, 0.75) -1.1em 1.1em 0 0,
+    rgba(0, 255, 12, 0.75) -1.5em 0 0 0,
+    rgba(255, 246, 0, 0.75) -1.1em -1.1em 0 0,
+    rgba(255, 0, 0, 0.75) 0 -1.5em 0 0;
+  /* rgba(255, 255, 255, 0.75) 1.1em -1.1em 0 0; */
+
+  /* 
+  
+  kesbook easter egg spinner 2020 refrence to old logo from 2014-2017
+  
+  */
 }
 
 /* Animation */
