@@ -1,3 +1,5 @@
+var currentmessages = null;
+
 // Get the modal
 
 var modal = document.getElementById("create");
@@ -83,6 +85,7 @@ function refreshprofile() {
         document.getElementById("preloader").style = "display: none;";
       }, 1000);
       obj = JSON.parse(this.responseText);
+      currentmessages = this.responseText;
       console.log(obj);
       window.title = "Welcome to CPM " + obj.username;
       document.getElementById("pfp").src =
@@ -186,7 +189,7 @@ function listgroups() {
 
     </div>
 
-      <input type="text" placeholder="Message" id="textbox_${data.ID}"/>
+      <input type="text" placeholder="Message" id="textbox_${data.ID}" onKeyPress="sendmessage(event, this)"/>
 
 </div>
     
@@ -276,7 +279,10 @@ function devmode() {
 }
 
 function getmessages() {
-  document.getElementById(currentserver + "_container").innerHTML += "";
+  if (currentserver === null) {
+    return;
+  }
+
   var stuff =
     "https://csoftware.cf/api/api1.php?key=grUs07Md3s4o9WIb7fi3vu0AGdjinGP8BvFFSvcNI6viEkXFhNY9ZODlNnNWMXfaapeb20NbVBadZtwH9kFUnOgPXn8oWuPPnqJL&function=getmessages&token=" +
     localStorage.getItem("token") +
@@ -285,14 +291,36 @@ function getmessages() {
   console.log(stuff);
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
-    obj = JSON.parse(this.responseText);
-    console.log(this.responseText);
-    obj.forEach(function (data, index) {
-      document.getElementById(currentserver + "_container").innerHTML +=
-        data.message + "\n";
+    if (this.readyState == 4 && this.status == 200) {
+      obj = JSON.parse(this.responseText);
 
-      console.log(index);
-    });
+      if (currentmessages == this.responseText) {
+        return;
+      }
+      if (currentserver === obj[0].serverid) {
+        if (
+          document.getElementById(currentserver + "_container").innerHTML !== ""
+        ) {
+          var newmsg = new Audio("../assets/sounds/mp3-converted/message.mp3");
+          newmsg.play();
+        }
+      }
+      //console.log(this.responseText);
+      document.getElementById(currentserver + "_container").innerHTML = "";
+      document.getElementById(currentserver + "_container").innerHTML = "";
+      currentmessages = this.responseText;
+      obj.forEach(function (data, index) {
+        // document.getElementById(currentserver + "_container").innerHTML = ""; debug
+        document.getElementById(currentserver + "_container").innerHTML +=
+          "<div class='msg'><p style='color: blue;'>" +
+          +"</p><p>" +
+          data.message +
+          "</p></div>\n";
+
+        //console.log(index);
+      });
+    } else {
+    }
   };
 
   xhttp.open("GET", stuff, true);
@@ -300,4 +328,37 @@ function getmessages() {
   console.log("RECEIVED hopefully");
 }
 
-window.setInterval(getmessages(), 5000);
+window.setInterval(function () {
+  getmessages();
+}, 1000);
+
+function sendmessage(e, input) {
+  var code = e.keyCode ? e.keyCode : e.which;
+  if (code == 13) {
+    //Enter keycode
+    //insert csoftware send message code here.
+
+    var stuff = "https://csoftware.cf/api/api1.php";
+    console.log(stuff);
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        console.log(this.responseText);
+        getmessages();
+      } else {
+      }
+    };
+
+    xhttp.open("POST", stuff, true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send(
+      "key=grUs07Md3s4o9WIb7fi3vu0AGdjinGP8BvFFSvcNI6viEkXFhNY9ZODlNnNWMXfaapeb20NbVBadZtwH9kFUnOgPXn8oWuPPnqJL&function=sendmessage&token=" +
+        localStorage.getItem("token") +
+        "&serverid=" +
+        currentserver +
+        "&message=" +
+        input.value
+    );
+    input.value = "";
+  }
+}

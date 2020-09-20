@@ -2,7 +2,6 @@ body {
   font-family: "Lato", sans-serif;
   /* Chrome 10-25, Safari 5.1-6 */
   transition: 1s;
-  width: 100%;
 }
 
 .sidenav {
