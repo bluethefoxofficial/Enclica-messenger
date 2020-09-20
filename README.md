@@ -1,15 +1,5 @@
-# CreativePublicMessenger
+# Creative Public Messenger
 
+You need NodeJS and Visual Studio Code for this to work.
 
-
-requirements
-
-
-you need nodejs and visual studio code
-
-
-
-
-to start type in visual studio code terminal
-
-npm install *
+To start CPM, Type ``npm install *`` in the Visual Studio Code terminal.
