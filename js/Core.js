@@ -43,9 +43,6 @@ function sectiondiv(evt, sectiondiv, colour1, colour2, serverid) {
   if (serverid) {
     currentserver = serverid;
   }
-  document.getElementById(
-    "body"
-  ).style = `background-image: linear-gradient( to right, ${colour1},${colour2});  transition: background-image 3s ease-in;`;
 
   // Declare all variables
   var i, tabcontent, tablinks;
