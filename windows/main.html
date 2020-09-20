@@ -24,7 +24,7 @@
   <img id="pfp" ></img><p class="usernametextblock" id="usernametext"></p>
   <a class="activation" id="chatoblock" onclick='sectiondiv(event, "chats","#ec6ead","#3494e6")' >chats</a>
   <a class="activation" onclick='sectiondiv(event, "settings","#00a2ff","#ab34e6")' >settings</a>
-  <a class="activation" >call history</a>
+  <a class="activation" onclick='sectiondiv(event, "friends","#00a2ff","#ab34e6")' >friends</a>
   <p>Server List</p>
   <div id="chatsnav">
 
@@ -63,18 +63,20 @@
   <h2>Settings</h2>
 
 
-  <textarea disabled id="bio" ></textarea>
-  <button class="btn btn-success" onclick="refreshprofile();">Refresh<img src="../assets/images/sysload.gif" id="l1-968b" style="display:none;" width="20px"/></button>
+  <textarea disabled id="bio"></textarea>
+  <button class="btn btn-success" onclick="refreshprofile();">Refresh<img src="../assets/images/sysload.gif"
+      id="l1-968b" style="display:none;" width="20px" /></button>
 
 
-    <p>Custom CSS</p>
-    <textarea id="customcss"></textarea>
+  <p>Custom CSS</p>
+  <textarea id="customcss"></textarea>
 
 
-    <button onclick="savecss();" class="btn btn-primary">apply custom css to file<img src="../assets/images/sysload.gif" id="l1-968c" style="display:none;" width="20px" /></button>
- 
+  <button onclick="savecss();" class="btn btn-primary">apply custom css to file<img src="../assets/images/sysload.gif"
+      id="l1-968c" style="display:none;" width="20px" /></button>
 
-   
+
+
 
   <p>Client settings:</p>
 
@@ -85,7 +87,11 @@
 
 
   <p>SERVER (Windows Only)</p>
-    <button onclick="cpmdirect();" class="btn btn-info">start CPM server direct</button>
+  <button onclick="cpmdirect();" class="btn btn-info">start CPM server direct</button>
+</div>
+<div class="main" id="friends">
+  <h2>friends</h2>
+
 </div>
 
 

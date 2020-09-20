@@ -26,7 +26,7 @@ window.onclick = function (event) {
 };
 
 function logout() {
-  document.getElementById("preloader").style = "display: inline;";
+  document.getElementById("preloader").style.display = "inline";
   var logout = new Audio("../assets/sounds/mp3-converted/logout.mp3");
   logout.play();
 
@@ -274,3 +274,30 @@ function devmode() {
   console.log("Dev mode activated goto settings then UITEST.");
   document.getElementById("uitest").style.display = "block";
 }
+
+function getmessages() {
+  document.getElementById(currentserver + "_container").innerHTML += "";
+  var stuff =
+    "https://csoftware.cf/api/api1.php?key=grUs07Md3s4o9WIb7fi3vu0AGdjinGP8BvFFSvcNI6viEkXFhNY9ZODlNnNWMXfaapeb20NbVBadZtwH9kFUnOgPXn8oWuPPnqJL&function=getmessages&token=" +
+    localStorage.getItem("token") +
+    "&serverid=" +
+    currentserver;
+  console.log(stuff);
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    obj = JSON.parse(this.responseText);
+    console.log(this.responseText);
+    obj.forEach(function (data, index) {
+      document.getElementById(currentserver + "_container").innerHTML +=
+        data.message + "\n";
+
+      console.log(index);
+    });
+  };
+
+  xhttp.open("GET", stuff, true);
+  xhttp.send();
+  console.log("RECEIVED hopefully");
+}
+
+window.setInterval(getmessages(), 5000);
