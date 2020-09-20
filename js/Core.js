@@ -312,8 +312,9 @@ function getmessages() {
       obj.forEach(function (data, index) {
         // document.getElementById(currentserver + "_container").innerHTML = ""; debug
         document.getElementById(currentserver + "_container").innerHTML +=
-          "<div class='msg'><p style='color: blue;'>" +
-          +"</p><p>" +
+          "<div class='msg'><p style='color: grey;'>" +
+          data.sender +
+          "</p><p>" +
           data.message +
           "</p></div>\n";
 
