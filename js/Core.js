@@ -1,5 +1,5 @@
 var currentmessages = null;
-
+var sent = 1;
 // Get the modal
 
 var modal = document.getElementById("create");
@@ -40,6 +40,8 @@ function logout() {
 
 document.getElementById("chatoblock").click();
 function sectiondiv(evt, sectiondiv, colour1, colour2, serverid) {
+  currentmessages = null;
+  sent = 1;
   if (serverid) {
     currentserver = serverid;
   }
@@ -62,6 +64,7 @@ function sectiondiv(evt, sectiondiv, colour1, colour2, serverid) {
   // Show the current tab, and add an "active" class to the button that opened the tab
   document.getElementById(sectiondiv).style.display = "block";
   evt.currentTarget.className += " active";
+  getmessages();
 }
 
 const fs = require("fs");
@@ -263,6 +266,7 @@ function removeElement(elementId) {
   element.parentNode.removeChild(element);
 }
 var md5 = require("md5");
+const { getServers } = require("dns");
 var obj;
 var email;
 var username;
@@ -274,7 +278,32 @@ function devmode() {
   console.log("Dev mode activated goto settings then UITEST.");
   document.getElementById("uitest").style.display = "block";
 }
+function linkify(inputText) {
+  var replacedText, replacePattern1, replacePattern2, replacePattern3;
 
+  //URLs starting with http://, https://, or ftp://
+  replacePattern1 = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
+  replacedText = inputText.replace(
+    replacePattern1,
+    '<a href="$1" target="_blank">$1</a>'
+  );
+
+  //URLs starting with "www." (without // before it, or it'd re-link the ones done above).
+  replacePattern2 = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
+  replacedText = replacedText.replace(
+    replacePattern2,
+    '$1<a href="http://$2" target="_blank">$2</a>'
+  );
+
+  //Change email addresses to mailto:: links.
+  replacePattern3 = /(([a-zA-Z0-9\-\_\.])+@[a-zA-Z\_]+?(\.[a-zA-Z]{2,6})+)/gim;
+  replacedText = replacedText.replace(
+    replacePattern3,
+    '<a href="mailto:$1">$1</a>'
+  );
+
+  return replacedText;
+}
 function getmessages() {
   if (currentserver === null) {
     return;
@@ -290,16 +319,23 @@ function getmessages() {
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       obj = JSON.parse(this.responseText);
-
-      if (currentmessages == this.responseText) {
+      if (this.responseText == currentmessages) {
         return;
       }
-      if (currentserver === obj[0].serverid) {
+      if (currentmessages == "") {
+        return;
+      }
+      if (currentserver == obj[0].serverid) {
         if (
-          document.getElementById(currentserver + "_container").innerHTML !== ""
+          document.getElementById(currentserver + "_container").innerHTML != ""
         ) {
-          var newmsg = new Audio("../assets/sounds/mp3-converted/message.mp3");
-          newmsg.play();
+          if (sent == 1) {
+          } else {
+            var newmsg = new Audio(
+              "../assets/sounds/mp3-converted/message.mp3"
+            );
+            newmsg.play();
+          }
         }
       }
       //console.log(this.responseText);
@@ -309,12 +345,17 @@ function getmessages() {
       obj.forEach(function (data, index) {
         // document.getElementById(currentserver + "_container").innerHTML = ""; debug
         document.getElementById(currentserver + "_container").innerHTML +=
-          "<div class='msg'><p style='color: grey;'>" +
+          "<div class='msg'><p style='color: rgba(100,100,240,1); font-size: 12px;'>" +
           data.sender +
           "</p><p>" +
-          data.message +
+          linkify(data.message) +
           "</p></div>\n";
-
+        document.getElementById(
+          currentserver + "_container"
+        ).scrollTop = document.getElementById(
+          currentserver + "_container"
+        ).scrollHeight;
+        sent = 0;
         //console.log(index);
       });
     } else {
@@ -342,6 +383,7 @@ function sendmessage(e, input) {
     xhttp.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
         console.log(this.responseText);
+        sent = 1;
         getmessages();
       } else {
       }
@@ -359,4 +401,26 @@ function sendmessage(e, input) {
     );
     input.value = "";
   }
+}
+
+function createserver() {
+  var stuff = "https://csoftware.cf/api/api1.php";
+  console.log(stuff);
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      sent = 1;
+      listgroups();
+    } else {
+    }
+  };
+
+  xhttp.open("POST", stuff, true);
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.send(
+    "key=grUs07Md3s4o9WIb7fi3vu0AGdjinGP8BvFFSvcNI6viEkXFhNY9ZODlNnNWMXfaapeb20NbVBadZtwH9kFUnOgPXn8oWuPPnqJL&function=create&token=" +
+      localStorage.getItem("token") +
+      "&name=" +
+      input.value
+  );
 }

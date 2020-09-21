@@ -22,7 +22,7 @@ body {
   -ms-user-select: none; /* Internet Explorer/Edge */
   user-select: none; /* Non-prefixed version, currently
   supported by Chrome, Edge, Opera and Firefox */
-  transition: 1s;
+  transition: 200ms;
 }
 .sidenav:hover img {
   text-align: center;
@@ -67,12 +67,7 @@ body {
   margin-bottom: 5px;
   text-decoration: none;
   font-size: 20px;
-  color: #a1a1a1;
-  background-image: linear-gradient(
-    to right,
-    rgba(0, 162, 255, 0.24),
-    rgba(56, 0, 119, 0.733)
-  );
+  color: #dddada;
   margin-left: 0px;
   text-align: center;
   display: block;
@@ -665,12 +660,17 @@ textarea {
   padding-top: 10px;
   padding-left: 5px;
   padding-right: 5px;
-  background-color: rgba(11, 0, 56, 0.7);
-  height: 70%;
-  border-radius: 8px;
+  background-color: rgba(78, 78, 78, 0.7);
+  height: 79%;
   width: 100%;
   overflow: auto;
   overflow-x: hidden;
+}
+.msg-container a {
+  color: rgb(0, 162, 255);
+}
+.msg-container a:hover {
+  color: rgb(0, 89, 255);
 }
 
 .msg {
