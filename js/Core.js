@@ -150,7 +150,6 @@ function joinserver() {
         });
       } else {
         listgroups();
-        alert("success");
       }
     }
   };
@@ -170,30 +169,30 @@ function listgroups() {
     if (this.readyState == 4 && this.status == 200) {
       obj = JSON.parse(this.responseText);
       console.log(obj);
+      document.getElementById("chatsnav").innerHTML = "";
+      document.getElementById("chatsitem").innerHTML = "";
       obj.forEach(function (data, index) {
         var random = Math.random(1, 99999999999);
-        var randomColor = Math.floor(Math.random() * 16777215).toString(16);
-        var randomColortwo = Math.floor(Math.random() * 16777215).toString(16);
+
         console.log(data);
-        document.getElementById("chatsnav").innerHTML = "";
-        document.getElementById("chatsitem").innerHTML = "";
         document.getElementById(
           "chatsnav"
-        ).innerHTML += `<a class="font-size: 10vw" id="btn_${data.ID}" class="activation" onclick='sectiondiv(event, "win_${data.ID}","#${randomColor}","#${randomColortwo}", ${data.ID})' >${data.name}</a>`;
+        ).innerHTML += `<a class="font-size: 10vw" id="btn_${data.ID}" class="activation" onclick='sectiondiv(event, "win_${data.ID}","0000","0000", ${data.ID})' >${data.name}</a>`;
 
         document.getElementById("chatsitem").innerHTML += `
     <div class="main" id="win_${data.ID}">
-    <div><h2>${data.name}</h2><button class="btn btn-danger" style="width: 90px;">Leave</button></div>
+    <div><h2>${data.name}</h2><button class="btn btn-danger" style="width: 90px;">Leave</button></div><p>Server invite code: ${data.invite}</p>
 
     <div class="msg-container" id="${data.ID}_container">
-
+            
     </div>
+     <input type="text" style="width: 69%;" placeholder="Message" id="textbox_${data.ID}" onKeyPress="sendmessage(event, this)"/>
 
-      <input type="text" placeholder="Message" id="textbox_${data.ID}" onKeyPress="sendmessage(event, this)"/>
 
 </div>
     
     `;
+        console.log(index);
       });
     }
   };
@@ -373,6 +372,10 @@ window.setInterval(function () {
 
 function sendmessage(e, input) {
   var code = e.keyCode ? e.keyCode : e.which;
+  if (input.value.startsWith("/")) {
+    commandhandler();
+    return;
+  }
   if (code == 13) {
     //Enter keycode
     //insert csoftware send message code here.
@@ -404,7 +407,15 @@ function sendmessage(e, input) {
 }
 
 function createserver() {
-  var stuff = "https://csoftware.cf/api/api1.php";
+  var input = document.getElementById("name_creation");
+  if (input.value == "") {
+    return;
+  }
+  var stuff =
+    "https://csoftware.cf/api/api1.php?key=grUs07Md3s4o9WIb7fi3vu0AGdjinGP8BvFFSvcNI6viEkXFhNY9ZODlNnNWMXfaapeb20NbVBadZtwH9kFUnOgPXn8oWuPPnqJL&function=creategroup&token=" +
+    localStorage.getItem("token") +
+    "&name=" +
+    input.value;
   console.log(stuff);
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
@@ -412,15 +423,13 @@ function createserver() {
       sent = 1;
       listgroups();
     } else {
+      console.log(this.responseText.toString());
+      console.log("error");
+      console.log(this.readyState.toString());
+      console.log(this.status.toString());
     }
   };
 
-  xhttp.open("POST", stuff, true);
-  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  xhttp.send(
-    "key=grUs07Md3s4o9WIb7fi3vu0AGdjinGP8BvFFSvcNI6viEkXFhNY9ZODlNnNWMXfaapeb20NbVBadZtwH9kFUnOgPXn8oWuPPnqJL&function=create&token=" +
-      localStorage.getItem("token") +
-      "&name=" +
-      input.value
-  );
+  xhttp.open("GET", stuff, true);
+  xhttp.send();
 }
