@@ -1,16 +1,19 @@
 const { app, BrowserWindow } = require("electron");
 const storage = require("electron-localstorage");
 
+ 
+
 function createWindow() {
   // Create the browser window.
   let win = new BrowserWindow({
+    titleBarStyle: 'hidden',
     width: 1080,
     height: 720,
     icon: __dirname + "/assets/images/icon.ico",
     webPreferences: {
       nodeIntegration: true,
       allowRunningInsecureContent: true,
-      webSecurity: false,
+      webSecurity: false
     },
   });
 

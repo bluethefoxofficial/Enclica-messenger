@@ -173,7 +173,13 @@ function listgroups() {
       document.getElementById("chatsitem").innerHTML = "";
       obj.forEach(function (data, index) {
         var random = Math.random(1, 99999999999);
+        var list = "";
+        members = data.members.split(" ");
+        members.forEach(function (data, index){
+          list += `<p class="membername">${data}</p>`;
+        });
 
+        
         console.log(data);
         document.getElementById(
           "chatsnav"
@@ -182,14 +188,17 @@ function listgroups() {
         document.getElementById("chatsitem").innerHTML += `
     <div class="main" id="win_${data.ID}">
     <div><h2>${data.name}</h2><button class="btn btn-danger" style="width: 90px;">Leave</button></div><p>Server invite code: ${data.invite}</p>
-
+    <div class="members" id="${data.ID}_members">
+    ${list}
+    </div>
     <div class="msg-container" id="${data.ID}_container">
             
     </div>
-     <input type="text" style="width: 69%;" placeholder="Message" id="textbox_${data.ID}" onKeyPress="sendmessage(event, this)"/>
 
+    
+    <input type="text" style="width: 69%;" placeholder="Message" id="textbox_${data.ID}" onKeyPress="sendmessage(event, this)"/>
 
-</div>
+    </div>
     
     `;
         console.log(index);
@@ -204,7 +213,7 @@ listgroups();
 function cpmdirect() {
   const msg = new Notification(" CPM Error", {
     body:
-      "CPM direct requires you to run it seprately from here note from dev build 1.5 CPM direct will stop",
+      "CPM direct requires you to run it seprately from here note from dev build 1.5 CPM direct will no longer be supported.",
     silent: false,
     icon: "../assets/images/icons/info.png",
   });
@@ -372,13 +381,29 @@ window.setInterval(function () {
 
 function sendmessage(e, input) {
   var code = e.keyCode ? e.keyCode : e.which;
-  if (input.value.startsWith("/")) {
-    commandhandler();
-    return;
-  }
+
   if (code == 13) {
     //Enter keycode
     //insert csoftware send message code here.
+
+    if (input.value.startsWith("/")) {
+      commandhandler();
+      return;
+    }
+    if(input.value == ""){
+      var newmsg = new Audio(
+        "../assets/sounds/mp3-converted/denied1.mp3"
+      );
+      newmsg.play();
+      document.getElementById(currentserver + "_container").innerHTML +=
+      "<div class='msg'><p style='color: rgba(255,255,0,1); font-size: 12px;'>SYSTEM</p><p>You cant send a blank message. (this message is only viewable by you. This message will hide when someone sends a mesage to the server.)</p></div>\n";
+      
+  
+      
+      return;
+  
+    }
+
 
     var stuff = "https://csoftware.cf/api/api1.php";
     console.log(stuff);
@@ -433,3 +458,5 @@ function createserver() {
   xhttp.open("GET", stuff, true);
   xhttp.send();
 }
+require('../renderer.js');
+

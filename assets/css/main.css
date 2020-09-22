@@ -662,7 +662,27 @@ textarea {
   padding-right: 5px;
   background-color: rgba(78, 78, 78, 0.7);
   height: 69%;
-  width: 70%;
+  width: 69%;
+  overflow: auto;
+  overflow-x: hidden;
+}
+.membername{
+  color: white;
+
+  
+}.membername:hover{
+  color: rgb(150, 150, 150);
+  background-color: #000;
+  
+}
+.members{
+  float:right;
+  padding-top: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+  background-color: rgba(78, 78, 78, 0.7);
+  height: 69%;
+  width: 30%;
   overflow: auto;
   overflow-x: hidden;
 }
