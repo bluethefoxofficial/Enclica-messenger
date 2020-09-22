@@ -1,11 +1,13 @@
 <script>
+ 
   const template = require("../js/template.js");
   const electron = require("electron");
+
   if (!localStorage.getItem("token")) {
     window.location = "../windows/login.html";
   }
 
-  var title = `Welcome to CPM`;
+  var title = `Welcome to Encilica`;
   var head = `
   
 
@@ -46,7 +48,7 @@
   <div class="modal-content">
     <div class="modal-header bg-primary">
       <span class="close">&times;</span>
-      <h2>Create CPM server</h2>
+      <h2>Create Encilica server</h2>
     </div>
     <div class="modal-body">
 
@@ -87,7 +89,7 @@
 
 
   <p>SERVER (Windows Only)</p>
-  <button onclick="cpmdirect();" class="btn btn-info">start CPM server direct</button>
+  <button onclick="Encilicadirect();" class="btn btn-info">start Encilica server direct</button>
 </div>
 <div class="main" id="friends">
   <h2>friends</h2>

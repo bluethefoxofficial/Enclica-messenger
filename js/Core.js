@@ -87,7 +87,7 @@ function refreshprofile() {
       obj = JSON.parse(this.responseText);
       currentmessages = this.responseText;
       console.log(obj);
-      window.title = "Welcome to CPM " + obj.username;
+      window.title = "Welcome to Encilica " + obj.username;
       document.getElementById("pfp").src =
         "https://www.gravatar.com/avatar/" + md5(obj.email) + "?s=60";
       document.getElementById("bio").innerHTML = obj.bio;
@@ -143,7 +143,7 @@ function joinserver() {
         error.setAttribute("crossorigin", "anonymous");
         error.play();
 
-        const error = new Notification(" CPM Error", {
+        const error = new Notification(" Encilica Error", {
           body: obj.error,
           silent: true,
           icon: "../assets/images/icons/warning.png",
@@ -210,10 +210,10 @@ function listgroups() {
   sl.send();
 }
 listgroups();
-function cpmdirect() {
-  const msg = new Notification(" CPM Error", {
+function Encilicadirect() {
+  const msg = new Notification(" Encilica Error", {
     body:
-      "CPM direct requires you to run it seprately from here note from dev build 1.5 CPM direct will no longer be supported.",
+      "Encilica direct requires you to run it seprately from here note from dev build 1.5 Encilica direct will no longer be supported.",
     silent: false,
     icon: "../assets/images/icons/info.png",
   });
@@ -246,7 +246,7 @@ xhttp.onreadystatechange = function () {
     document.getElementById("preloader").style = "display: none;";
     obj = JSON.parse(this.responseText);
     console.log(obj);
-    window.title = "Welcome to CPM " + obj.username;
+    window.title = "Welcome to Encilica " + obj.username;
     document.getElementById("usernametext").innerHTML = obj.username;
     document.getElementById("pfp").src =
       "https://www.gravatar.com/avatar/" + md5(obj.email) + "?s=60";
