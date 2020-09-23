@@ -187,7 +187,7 @@ function listgroups() {
 
         document.getElementById("chatsitem").innerHTML += `
     <div class="main" id="win_${data.ID}">
-    <div><h2>${data.name}</h2><button class="btn btn-danger" style="width: 90px;">Leave</button></div><p>Server invite code: ${data.invite}</p>
+    <div><h2>${data.name}</h2><button class="btn btn-danger" onclick="leave(${data.ID}); sectiondiv(event, 'chats',null,null)" style="width: 90px;">Leave</button></div><p>Server invite code: ${data.invite}</p>
     <div class="members" id="${data.ID}_members">
     ${list}
     </div>
@@ -458,5 +458,57 @@ function createserver() {
   xhttp.open("GET", stuff, true);
   xhttp.send();
 }
+
+
+
+
+
+
+
+
+
+
+//leave server via the client
+
+
+function leave(id){
+  var stuff =
+  "https://csoftware.cf/api/api1.php?key=grUs07Md3s4o9WIb7fi3vu0AGdjinGP8BvFFSvcNI6viEkXFhNY9ZODlNnNWMXfaapeb20NbVBadZtwH9kFUnOgPXn8oWuPPnqJL&function=leavegroup&token=" +
+  localStorage.getItem("token") +
+  "&serverid=" +
+  id;
+console.log(stuff);
+var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function () {
+  if (this.readyState == 4 && this.status == 200) {
+    sent = 1;
+    listgroups();
+  } else {
+    console.log(this.responseText.toString());
+    console.log("error");
+    console.log(this.readyState.toString());
+    console.log(this.status.toString());
+  }
+};
+
+xhttp.open("GET", stuff, true);
+xhttp.send(); 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 require('../renderer.js');
 
