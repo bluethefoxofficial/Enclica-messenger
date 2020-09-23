@@ -9,7 +9,7 @@ function createWindow() {
     titleBarStyle: 'hidden',
     width: 1080,
     height: 720,
-    icon: __dirname + "/assets/images/icon.ico",
+    icon: __dirname + "/assets/images/icon.png",
     webPreferences: {
       nodeIntegration: true,
       allowRunningInsecureContent: true,

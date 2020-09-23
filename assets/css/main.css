@@ -36,13 +36,9 @@ body {
   width: 400px;
   max-width: 400px;
 }
-.usernametextblock .sidenav{
+.sidenav .usernametextblock {
+
   display: none;
-  opacity: 0;
-}
-.sidenav:hover + .usernametextblock {
-  display: block;
-  opacity: 1;
 }
 
 .sidenav img {
@@ -64,7 +60,7 @@ body {
   text-align: left;
 }
 
-.sidenav p {
+.sidenav .normaltext {
   margin-left: 30px;
   margin-bottom: 5px;
   text-decoration: none;
@@ -100,10 +96,11 @@ body {
 }
 .alert {
   padding: 30px;
-  background-color: #f44336;
+  background-color: #ff2213;
   color: white;
-  position: relative;
+  position: block;
   height: 30px;
+  z-index: 10;
   display: block;
   margin-top: 16px;
   margin-bottom: 16px;
@@ -234,7 +231,7 @@ p {
 }
 /* Extra styles for other elements */
 .bg-danger {
-  background-color: #997e7c !important;
+  background-color: #f44336 !important;
 }
 .bg-success {
   background-color: #4caf50 !important;

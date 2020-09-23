@@ -1,5 +1,6 @@
 var currentmessages = null;
 var sent = 1;
+var username;
 // Get the modal
 
 var modal = document.getElementById("create");
@@ -184,10 +185,21 @@ function listgroups() {
         document.getElementById(
           "chatsnav"
         ).innerHTML += `<a class="font-size: 10vw" id="btn_${data.ID}" class="activation" onclick='sectiondiv(event, "win_${data.ID}","0000","0000", ${data.ID})' >${data.name}</a>`;
-
+        var ownermenu = `<!-- Not the owner of  ${data.name} sorry. -->
+        <button class="btn btn-danger" onclick="leave(${data.ID}); sectiondiv(event, 'chats',null,null); listgroups();" style="width: 90px;">Leave</button>
+        `;  
+        if(username = data.owner){
+          ownermenu = `
+          <button class="btn btn-danger" onclick="delete(${data.ID}); sectiondiv(event, 'chats',null,null)" style="width: 90px;">Delete Server</button>
+          
+          `;
+        }
         document.getElementById("chatsitem").innerHTML += `
     <div class="main" id="win_${data.ID}">
-    <div><h2>${data.name}</h2><button class="btn btn-danger" onclick="leave(${data.ID}); sectiondiv(event, 'chats',null,null)" style="width: 90px;">Leave</button></div><p>Server invite code: ${data.invite}</p>
+    <div><h2>${data.name}</h2>
+    ${ownermenu}
+    </div><p>Server invite code: <input type="text" value="${data.invite}" style="width: 200px;" disabled />
+    </p>
     <div class="members" id="${data.ID}_members">
     ${list}
     </div>
@@ -247,6 +259,7 @@ xhttp.onreadystatechange = function () {
     obj = JSON.parse(this.responseText);
     console.log(obj);
     window.title = "Welcome to Encilica " + obj.username;
+    username = obj.username;
     document.getElementById("usernametext").innerHTML = obj.username;
     document.getElementById("pfp").src =
       "https://www.gravatar.com/avatar/" + md5(obj.email) + "?s=60";
@@ -447,6 +460,7 @@ function createserver() {
     if (this.readyState == 4 && this.status == 200) {
       sent = 1;
       listgroups();
+      
     } else {
       console.log(this.responseText.toString());
       console.log("error");
@@ -482,7 +496,17 @@ var xhttp = new XMLHttpRequest();
 xhttp.onreadystatechange = function () {
   if (this.readyState == 4 && this.status == 200) {
     sent = 1;
+    var leave = new Audio(
+      "../assets/sounds/mp3-converted/noti7.mp3"
+    );
+    leave.play();
     listgroups();
+    const error = new Notification("Server message", {
+      body: "You just left a server. If this wasnt you check to see if you have a virus.",
+      silent: true,
+      icon: "../assets/images/icons/info_2.png",
+    });
+
   } else {
     console.log(this.responseText.toString());
     console.log("error");
@@ -495,20 +519,4 @@ xhttp.open("GET", stuff, true);
 xhttp.send(); 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 require('../renderer.js');
-

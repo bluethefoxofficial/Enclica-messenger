@@ -23,11 +23,12 @@
 
 
 <div class="sidenav">
- <img id="pfp"></img><p class="usernametextblock" id="usernametext"></p>
+  <p class="usernametextblock" id="usernametext"></p>
+ <img id="pfp"></img>
   <a class="activation" id="chatoblock" onclick='sectiondiv(event, "chats","#ec6ead","#3494e6")' >chats</a>
   <a class="activation" onclick='sectiondiv(event, "settings","#00a2ff","#ab34e6")' >settings</a>
   <a class="activation" onclick='sectiondiv(event, "friends","#00a2ff","#ab34e6")' >friends</a>
-  <p>Server List</p>
+  <p class="normaltext">Server List</p>
   <div id="chatsnav">
 
   </div>
@@ -92,7 +93,11 @@
 </div>
 <div class="main" id="friends">
   <h2>friends</h2>
-
+<a onclick="sendfr();">Add friend</a>
+</div>
+<div class="main" id="games">
+  <h2>your games</h2>
+<a onclick="sendfr();">Add a game to lib</a>
 </div>
 
 
