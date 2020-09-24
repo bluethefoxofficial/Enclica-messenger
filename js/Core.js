@@ -185,13 +185,12 @@ function listgroups() {
         document.getElementById(
           "chatsnav"
         ).innerHTML += `<a class="font-size: 10vw" id="btn_${data.ID}" class="activation" onclick='sectiondiv(event, "win_${data.ID}","0000","0000", ${data.ID})' >${data.name}</a>`;
-        var ownermenu = `<!-- Not the owner of  ${data.name} sorry. -->
+        var ownermenu = `<!-- Not the owner of  ${data.name} sorry you can only leave mate. -->
         <button class="btn btn-danger" onclick="leave(${data.ID}); sectiondiv(event, 'chats',null,null); listgroups();" style="width: 90px;">Leave</button>
         `;  
         if(username = data.owner){
           ownermenu = `
-          <button class="btn btn-danger" onclick="delete(${data.ID}); sectiondiv(event, 'chats',null,null)" style="width: 90px;">Delete Server</button>
-          
+          <button class="btn btn-danger" onclick="delete(${data.ID}); sectiondiv(event, 'chats',null,null)"  >Delete Server</button>
           `;
         }
         document.getElementById("chatsitem").innerHTML += `
@@ -460,7 +459,7 @@ function createserver() {
     if (this.readyState == 4 && this.status == 200) {
       sent = 1;
       listgroups();
-      
+      modal.style.display = "none";
     } else {
       console.log(this.responseText.toString());
       console.log("error");

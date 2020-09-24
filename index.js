@@ -9,7 +9,7 @@ function createWindow() {
     titleBarStyle: 'hidden',
     width: 1080,
     height: 720,
-    icon: __dirname + "/assets/images/icon.png",
+    icon: __dirname + "/assets/images/Enclica logo.png",
     webPreferences: {
       nodeIntegration: true,
       allowRunningInsecureContent: true,
