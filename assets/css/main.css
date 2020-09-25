@@ -671,6 +671,7 @@ textarea {
   overflow: auto;
   overflow-x: hidden;
 }
+
 .membername{
   color: white;
 
@@ -697,12 +698,22 @@ textarea {
 .msg-container a:hover {
   color: rgb(0, 89, 255);
 }
+.sender{
+  text-align: right;
+  padding-right: 6px;
+}
 
 .msg {
   width: 100%;
   background-color: rgba(80, 80, 80, 0.6);
   padding-bottom: 9px;
   transition: 0.6s;
+}.msg .sender {
+  width: 100%;
+  background-color: rgba(80, 80, 80, 0.6);
+  padding-bottom: 9px;
+  transition: 0.6s;
+  text-align: right !important; 
 }
 .msg:hover {
   width: 100%;

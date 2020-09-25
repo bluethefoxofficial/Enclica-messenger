@@ -190,7 +190,7 @@ function listgroups() {
         `;  
         if(username = data.owner){
           ownermenu = `
-          <button class="btn btn-danger" onclick="delete(${data.ID}); sectiondiv(event, 'chats',null,null)"  >Delete Server</button>
+          <button class="btn btn-danger" onclick="deletegroup(${data.ID}); sectiondiv(event, 'chats',null,null)"  >Delete Server</button>
           `;
         }
         document.getElementById("chatsitem").innerHTML += `
@@ -364,12 +364,21 @@ function getmessages() {
       currentmessages = this.responseText;
       obj.forEach(function (data, index) {
         // document.getElementById(currentserver + "_container").innerHTML = ""; debug
+        if(data.sender == username){
+          document.getElementById(currentserver + "_container").innerHTML +=
+          "<div class='msg sender'><p style='color: rgba(100,100,240,1); font-size: 12px;'>" +
+          data.sender +
+          "</p><p>" +
+          linkify(data.message) +
+          "</p></div>\n";
+        }else{
         document.getElementById(currentserver + "_container").innerHTML +=
           "<div class='msg'><p style='color: rgba(100,100,240,1); font-size: 12px;'>" +
           data.sender +
           "</p><p>" +
           linkify(data.message) +
           "</p></div>\n";
+        }
         document.getElementById(
           currentserver + "_container"
         ).scrollTop = document.getElementById(
@@ -504,6 +513,39 @@ xhttp.onreadystatechange = function () {
       body: "You just left a server. If this wasnt you check to see if you have a virus.",
       silent: true,
       icon: "../assets/images/icons/info_2.png",
+    });
+
+  } else {
+    console.log(this.responseText.toString());
+    console.log("error");
+    console.log(this.readyState.toString());
+    console.log(this.status.toString());
+  }
+};
+
+xhttp.open("GET", stuff, true);
+xhttp.send(); 
+}
+function deletegroup(id){
+  var stuff =
+  "https://csoftware.cf/api/api1.php?key=grUs07Md3s4o9WIb7fi3vu0AGdjinGP8BvFFSvcNI6viEkXFhNY9ZODlNnNWMXfaapeb20NbVBadZtwH9kFUnOgPXn8oWuPPnqJL&function=deletegroup&token=" +
+  localStorage.getItem("token") +
+  "&serverid=" +
+  id;
+console.log(stuff);
+var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function () {
+  if (this.readyState == 4 && this.status == 200) {
+    sent = 1;
+    var leave = new Audio(
+      "../assets/sounds/mp3-converted/noti7.mp3"
+    );
+    leave.play();
+    listgroups();
+    const error = new Notification("Server message", {
+      body: "You just deleated a server. If this wasnt you check to see if you have a virus.",
+      silent: true,
+      icon: "../assets/images/icons/info.png",
     });
 
   } else {
