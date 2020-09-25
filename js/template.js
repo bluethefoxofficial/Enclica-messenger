@@ -25,4 +25,3 @@ var createPage = function(title, head, body){
 }
 
 module.exports.createPage = createPage;
-

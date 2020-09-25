@@ -1,7 +1,7 @@
 {
-  "name": "creativepublicmessage-cpm",
+  "name": "enclica",
   "version": "1.0.0",
-  "description": "A messaging application for everyone",
+  "description": "A messaging application for artists and you",
   "main": "index.js",
   "scripts": {
     "test": "electron .",
@@ -14,10 +14,11 @@
   "author": "Csoftware",
   "license": "ISC",
   "dependencies": {
-    "electron": "^8.2.4",
-    "electron-builder": "^22.8.0",
     "electron-localstorage": "^1.0.5",
     "md5": "^2.2.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "electron": "^8.5.2",
+    "electron-builder": "^22.8.0"
+  }
 }
