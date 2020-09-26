@@ -98,6 +98,7 @@ function refreshprofile() {
   xhttp.send();
 }
 
+
 function savecss() {
   var refresh = new Audio("../assets/sounds/mp3-converted/noti3.mp3");
   refresh.play();
@@ -119,6 +120,7 @@ function savecss() {
     }
   );
 }
+
 
 function joinserver() {
   if (sevmax == 100) return;
@@ -526,6 +528,7 @@ xhttp.onreadystatechange = function () {
 xhttp.open("GET", stuff, true);
 xhttp.send(); 
 }
+
 function deletegroup(id){
   var stuff =
   "https://csoftware.cf/api/api1.php?key=grUs07Md3s4o9WIb7fi3vu0AGdjinGP8BvFFSvcNI6viEkXFhNY9ZODlNnNWMXfaapeb20NbVBadZtwH9kFUnOgPXn8oWuPPnqJL&function=deletegroup&token=" +
