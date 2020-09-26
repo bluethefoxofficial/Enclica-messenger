@@ -1,0 +1,63 @@
+<div class="loading" id="preloader"></div>
+<script>
+  const template = require("../js/template.js");
+  const electron = require("electron");
+  var title = "Enclica login ";
+  var head = `
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i">
+  <style>
+      *{
+        color: white;
+      }
+      body{
+        background-image: url("../assets/images/background_Encilica.png");
+          background-repeat: no-repeat;
+  background-size: cover;
+      }
+      img { border-style: none; }
+      input{
+        color: black !important; 
+      }
+      .loginbox{
+        width:30%;
+        background-color: rgba(0,0,0,0.2);
+        padding: 10px;
+
+      }#preloader{
+        transition:1s;
+      }
+    #fixedbutton {
+    position: fixed;
+    bottom: 0px;
+    right: 0px; 
+    }
+
+
+  </style>
+  
+
+          
+  `;
+  var body = `<br/>`;
+
+  template.createPage(title, head, body);
+  document.getElementById("preloader").style.display = "none";
+  if (localStorage.getItem("token")) {
+    window.location = "../windows/main.html";
+  }
+</script>
+<div class="loginbox">
+    <h1>EXTERNAL SERVER SETUP.</h1>
+<p>REFER TO README.TXT FOR INSTRUCTIONS WHY? We both know you might break it.</p>
+<input type="text" placeholder="server API key" id="ak"/>
+<input type="text" placeholder="server host" id="sh"/>
+
+<button onclick="setup();" class="btn btn-success" style="width: max-content;">Setup and test connection</button>
+  <br/>  <img width="30px" height="30px" id="msg"/>
+  <p id="txt">Awaiting input</p>
+</div>
+<a id="fixedbutton" style="width: 100px" href="login.html" class="btn btn-primary">Return to login</a>
+
+
+
+<script src="../js/externalserver.js"></script>

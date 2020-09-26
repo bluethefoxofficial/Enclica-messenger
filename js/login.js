@@ -1,8 +1,17 @@
 function login(e) {
   e.preventDefault();
+var host;
+var api;
+if(localStorage.getItem("host")){
+host =  localStorage.getItem("host");
+api =  localStorage.getItem("ak");
+}else{
+  host = "csoftware.cf";
+  api = "grUs07Md3s4o9WIb7fi3vu0AGdjinGP8BvFFSvcNI6viEkXFhNY9ZODlNnNWMXfaapeb20NbVBadZtwH9kFUnOgPXn8oWuPPnqJL";
+}
   var username = document.getElementById("username").value;
   var password = document.getElementById("password").value;
-  var stuff = `https://csoftware.cf/api/api1.php?key=grUs07Md3s4o9WIb7fi3vu0AGdjinGP8BvFFSvcNI6viEkXFhNY9ZODlNnNWMXfaapeb20NbVBadZtwH9kFUnOgPXn8oWuPPnqJL&function=login&username=${username}&password=${password}`;
+  var stuff = `https://${host}/api/api1.php?key=${api}&function=login&username=${username}&password=${password}`;
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {

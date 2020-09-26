@@ -2,7 +2,7 @@ const { app, BrowserWindow, Menu } = require("electron");
 const storage = require("electron-localstorage");
 
 
-Menu.setApplicationMenu(false);
+//Menu.setApplicationMenu(false);
 function createWindow() {
   // Create the browser window.
   let win = new BrowserWindow({

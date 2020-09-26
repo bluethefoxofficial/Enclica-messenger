@@ -1,6 +1,22 @@
 var currentmessages = null;
-var sent = 1;
+var silent = 1;
 var username;
+
+
+var host;
+
+
+var api;
+
+if(localStorage.getItem("host")){
+host =  localStorage.getItem("host");
+api =  localStorage.getItem("ak");
+}else{
+  host = "csoftware.cf";
+  api = "grUs07Md3s4o9WIb7fi3vu0AGdjinGP8BvFFSvcNI6viEkXFhNY9ZODlNnNWMXfaapeb20NbVBadZtwH9kFUnOgPXn8oWuPPnqJL";
+}
+
+document.getElementById("host").innerHTML = host;
 // Get the modal
 
 var modal = document.getElementById("create");
@@ -42,7 +58,7 @@ function logout() {
 document.getElementById("chatoblock").click();
 function sectiondiv(evt, sectiondiv, colour1, colour2, serverid) {
   currentmessages = null;
-  sent = 1;
+  silent = 1;
   if (serverid) {
     currentserver = serverid;
   }
@@ -74,7 +90,7 @@ function refreshprofile() {
   refresh.play();
   document.getElementById("l1-968b").style.display = "block";
   var stuff =
-    "https://csoftware.cf/api/api1.php?key=grUs07Md3s4o9WIb7fi3vu0AGdjinGP8BvFFSvcNI6viEkXFhNY9ZODlNnNWMXfaapeb20NbVBadZtwH9kFUnOgPXn8oWuPPnqJL&function=UAC&token=" +
+    `https://${host}/api/api1.php?key=${api}&function=UAC&token=` +
     localStorage.getItem("token");
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
@@ -126,7 +142,7 @@ function joinserver() {
   if (sevmax == 100) return;
   var server = currentserver;
   var stuff =
-    "https://csoftware.cf/api/api1.php?key=grUs07Md3s4o9WIb7fi3vu0AGdjinGP8BvFFSvcNI6viEkXFhNY9ZODlNnNWMXfaapeb20NbVBadZtwH9kFUnOgPXn8oWuPPnqJL&function=joingroup&token=" +
+    `https://${host}/api/api1.php?key=${api}&function=joingroup&token=` +
     localStorage.getItem("token") +
     "&invite=" +
     document.getElementById("serverjoininputbox").value;
@@ -164,7 +180,7 @@ function listgroups() {
   document.getElementById("chatsnav").innerHTML = "";
   document.getElementById("chatsitem").innerHTML = "";
   var stuff =
-    "https://csoftware.cf/api/api1.php?key=grUs07Md3s4o9WIb7fi3vu0AGdjinGP8BvFFSvcNI6viEkXFhNY9ZODlNnNWMXfaapeb20NbVBadZtwH9kFUnOgPXn8oWuPPnqJL&function=listgroups&token=" +
+    `https://${host}/api/api1.php?key=${api}&function=listgroups&token=` +
     localStorage.getItem("token");
   console.log(stuff);
   var sl = new XMLHttpRequest();
@@ -251,7 +267,7 @@ console.log(
   "font-size: 20px; color: #FA34B5"
 );
 var stuff =
-  "https://csoftware.cf/api/api1.php?key=grUs07Md3s4o9WIb7fi3vu0AGdjinGP8BvFFSvcNI6viEkXFhNY9ZODlNnNWMXfaapeb20NbVBadZtwH9kFUnOgPXn8oWuPPnqJL&function=UAC&token=" +
+  `https://${host}/api/api1.php?key=${api}&function=UAC&token=` +
   localStorage.getItem("token");
 var xhttp = new XMLHttpRequest();
 xhttp.onreadystatechange = function () {
@@ -332,7 +348,7 @@ function getmessages() {
   }
 
   var stuff =
-    "https://csoftware.cf/api/api1.php?key=grUs07Md3s4o9WIb7fi3vu0AGdjinGP8BvFFSvcNI6viEkXFhNY9ZODlNnNWMXfaapeb20NbVBadZtwH9kFUnOgPXn8oWuPPnqJL&function=getmessages&token=" +
+    `https://${host}/api/api1.php?key=${api}&function=getmessages&token=` +
     localStorage.getItem("token") +
     "&serverid=" +
     currentserver;
@@ -351,7 +367,7 @@ function getmessages() {
         if (
           document.getElementById(currentserver + "_container").innerHTML != ""
         ) {
-          if (sent == 1) {
+          if (silent == 1) {
           } else {
             var newmsg = new Audio(
               "../assets/sounds/mp3-converted/message.mp3"
@@ -386,7 +402,7 @@ function getmessages() {
         ).scrollTop = document.getElementById(
           currentserver + "_container"
         ).scrollHeight;
-        sent = 0;
+        silent = 0;
         //console.log(index);
       });
     } else {
@@ -428,13 +444,13 @@ function sendmessage(e, input) {
     }
 
 
-    var stuff = "https://csoftware.cf/api/api1.php";
+    var stuff = `https://${host}/api/api1.php`;
     console.log(stuff);
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
         console.log(this.responseText);
-        sent = 1;
+        silent = 1;
         getmessages();
       } else {
       }
@@ -443,7 +459,7 @@ function sendmessage(e, input) {
     xhttp.open("POST", stuff, true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send(
-      "key=grUs07Md3s4o9WIb7fi3vu0AGdjinGP8BvFFSvcNI6viEkXFhNY9ZODlNnNWMXfaapeb20NbVBadZtwH9kFUnOgPXn8oWuPPnqJL&function=sendmessage&token=" +
+      `key=${api}&function=sendmessage&token=` +
         localStorage.getItem("token") +
         "&serverid=" +
         currentserver +
@@ -460,7 +476,7 @@ function createserver() {
     return;
   }
   var stuff =
-    "https://csoftware.cf/api/api1.php?key=grUs07Md3s4o9WIb7fi3vu0AGdjinGP8BvFFSvcNI6viEkXFhNY9ZODlNnNWMXfaapeb20NbVBadZtwH9kFUnOgPXn8oWuPPnqJL&function=creategroup&token=" +
+    `https://${host}/api/api1.php?key=${api}&function=creategroup&token=` +
     localStorage.getItem("token") +
     "&name=" +
     input.value;
@@ -468,7 +484,7 @@ function createserver() {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
-      sent = 1;
+      silent = 1;
       listgroups();
       modal.style.display = "none";
     } else {
@@ -505,7 +521,7 @@ console.log(stuff);
 var xhttp = new XMLHttpRequest();
 xhttp.onreadystatechange = function () {
   if (this.readyState == 4 && this.status == 200) {
-    sent = 1;
+    silent = 1;
     var leave = new Audio(
       "../assets/sounds/mp3-converted/noti7.mp3"
     );
@@ -531,7 +547,7 @@ xhttp.send();
 
 function deletegroup(id){
   var stuff =
-  "https://csoftware.cf/api/api1.php?key=grUs07Md3s4o9WIb7fi3vu0AGdjinGP8BvFFSvcNI6viEkXFhNY9ZODlNnNWMXfaapeb20NbVBadZtwH9kFUnOgPXn8oWuPPnqJL&function=deletegroup&token=" +
+  `https://${host}/api/api1.php?key=${api}&function=deletegroup&token=` +
   localStorage.getItem("token") +
   "&serverid=" +
   id;
@@ -539,7 +555,7 @@ console.log(stuff);
 var xhttp = new XMLHttpRequest();
 xhttp.onreadystatechange = function () {
   if (this.readyState == 4 && this.status == 200) {
-    sent = 1;
+    silent = 1;
     var leave = new Audio(
       "../assets/sounds/mp3-converted/noti7.mp3"
     );
