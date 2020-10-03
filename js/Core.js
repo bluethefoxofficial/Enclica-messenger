@@ -206,9 +206,11 @@ function listgroups() {
         var ownermenu = `<!-- Not the owner of  ${data.name} sorry you can only leave mate. -->
         <button class="btn btn-danger" onclick="leave(${data.ID}); sectiondiv(event, 'chats',null,null); listgroups();" style="width: 90px;">Leave</button>
         `;  
-        if(username = data.owner){
+        if(username == data.owner){
           ownermenu = `
           <button class="btn btn-danger" onclick="deletegroup(${data.ID}); sectiondiv(event, 'chats',null,null)"  >Delete Server</button>
+
+          <input type="text" placeholder="rename server" onkeydown="rename(${data.ID});"  style="width: 600px;"/>
           `;
         }
         document.getElementById("chatsitem").innerHTML += `
@@ -580,3 +582,4 @@ xhttp.send();
 }
 
 require('../renderer.js');
+listgroups();
