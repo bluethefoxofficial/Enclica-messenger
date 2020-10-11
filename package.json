@@ -1,6 +1,6 @@
 {
   "name": "enclica",
-  "version": "1.0.1",
+  "version": "1.1.1",
   "description": "A messaging application for artists and you",
   "main": "index.js",
   "scripts": {

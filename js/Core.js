@@ -94,7 +94,7 @@ function refreshprofile() {
     localStorage.getItem("token");
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
-    console.log(stuff);
+    //console.log(stuff);
 
     if (this.readyState == 4 && this.status == 200) {
       setTimeout(function () {
@@ -103,7 +103,7 @@ function refreshprofile() {
       }, 1000);
       obj = JSON.parse(this.responseText);
       currentmessages = this.responseText;
-      console.log(obj);
+      //console.log(obj);
       window.title = "Welcome to Encilica " + obj.username;
       document.getElementById("pfp").src =
         "https://www.gravatar.com/avatar/" + md5(obj.email) + "?s=60";
@@ -119,7 +119,7 @@ function savecss() {
   var refresh = new Audio("../assets/sounds/mp3-converted/noti3.mp3");
   refresh.play();
   document.getElementById("l1-968c").style.display = "block";
-  console.log();
+  //console.log();
   const data = new Uint8Array(
     Buffer.from(document.getElementById("customcss").value)
   );
@@ -148,7 +148,7 @@ function joinserver() {
     document.getElementById("serverjoininputbox").value;
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
-    console.log(stuff);
+    //console.log(stuff);
 
     if (this.readyState == 4 && this.status == 200) {
       setTimeout(function () {
@@ -156,11 +156,11 @@ function joinserver() {
         document.getElementById("preloader").style = "display: none;";
       }, 1000);
       obj = JSON.parse(this.responseText);
-      console.log(obj);
+      ////console.log(obj);
       if (obj.code === 568999) {
         var errornoti = new Audio("../assets/sounds/mp3-converted/denied1.mp3");
-        error.setAttribute("crossorigin", "anonymous");
-        error.play();
+        errornoti.setAttribute("crossorigin", "anonymous");
+        errornoti.play();
 
         const error = new Notification(" Encilica Error", {
           body: obj.error,
@@ -170,6 +170,8 @@ function joinserver() {
       } else {
         listgroups();
       }
+    }else{
+   
     }
   };
   xhttp.open("GET", stuff, true);
@@ -182,12 +184,12 @@ function listgroups() {
   var stuff =
     `https://${host}/api/api1.php?key=${api}&function=listgroups&token=` +
     localStorage.getItem("token");
-  console.log(stuff);
+  //console.log(stuff);
   var sl = new XMLHttpRequest();
   sl.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       obj = JSON.parse(this.responseText);
-      console.log(obj);
+      //console.log(obj);
       document.getElementById("chatsnav").innerHTML = "";
       document.getElementById("chatsitem").innerHTML = "";
       obj.forEach(function (data, index) {
@@ -199,7 +201,7 @@ function listgroups() {
         });
 
         
-        console.log(data);
+        //console.log(data);
         document.getElementById(
           "chatsnav"
         ).innerHTML += `<a class="font-size: 10vw" id="btn_${data.ID}" class="activation" onclick='sectiondiv(event, "win_${data.ID}","0000","0000", ${data.ID})' >${data.name}</a>`;
@@ -208,9 +210,41 @@ function listgroups() {
         `;  
         if(username == data.owner){
           ownermenu = `
-          <button class="btn btn-danger" onclick="deletegroup(${data.ID}); sectiondiv(event, 'chats',null,null)"  >Delete Server</button>
+          <button id="sm_${data.ID}_btn" onclick="document.getElementById('sm_${data.ID}').style.display = 'block';" class="btn btn-info">Server manager</button>
 
-          <input type="text" placeholder="rename server" onkeydown="rename(${data.ID});"  style="width: 600px;"/>
+          <!-- The Modal for server -->
+<div id="sm_${data.ID}" class="modal" style="height: 100%; overflow: auto;">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header bg-info">
+      <span class="close" onclick="document.getElementById('sm_${data.ID}').style.display = 'none';">&times;</span>
+      <h2>${data.name} server settings</h2>
+    </div>
+    <div class="modal-body">
+
+    
+    <br/>
+    <input type="text" placeholder="rename server" onkeydown="rename(${data.ID});" value="${data.name}"  style="width: 600px;"/>
+    <br/>
+    <textarea placeholder="description of server" id="${data.ID}_description"></textarea>
+    <br/>
+    <button class="btn btn-success">Apply description</button>
+   <br/>
+   <p>Member management</p>
+   <input type="text" placeholder="remove member (press enter to remove member)" onkeydown="kick(${data.ID});"  style="width: 600px;"/>
+          <br/>
+   <h2>Server management</h2>
+   <button class="btn btn-danger" onclick="deletegroup(${data.ID}); sectiondiv(event, 'chats',null,null)">Delete Server</button>
+
+   <br/>
+
+   <button class="btn btn-info" onclick="">Submit to communities.</button>
+    </div>
+  </div>
+
+</div>
+
           `;
         }
         document.getElementById("chatsitem").innerHTML += `
@@ -232,7 +266,7 @@ function listgroups() {
     </div>
     
     `;
-        console.log(index);
+        //console.log(index);
       });
     }
   };
@@ -276,7 +310,7 @@ xhttp.onreadystatechange = function () {
   if (this.readyState == 4 && this.status == 200) {
     document.getElementById("preloader").style = "display: none;";
     obj = JSON.parse(this.responseText);
-    console.log(obj);
+    //console.log(obj);
     window.title = "Welcome to Encilica " + obj.username;
     username = obj.username;
     document.getElementById("usernametext").innerHTML = obj.username;
@@ -315,7 +349,7 @@ if (!localStorage.getItem("token")) {
 }
 
 function devmode() {
-  console.log("Dev mode activated goto settings then UITEST.");
+  //console.log("Dev mode activated goto settings then UITEST.");
   document.getElementById("uitest").style.display = "block";
 }
 function linkify(inputText) {
@@ -354,7 +388,7 @@ function getmessages() {
     localStorage.getItem("token") +
     "&serverid=" +
     currentserver;
-  console.log(stuff);
+  //console.log(stuff);
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
@@ -378,23 +412,24 @@ function getmessages() {
           }
         }
       }
-      //console.log(this.responseText);
+      ////console.log(this.responseText);
       document.getElementById(currentserver + "_container").innerHTML = "";
       document.getElementById(currentserver + "_container").innerHTML = "";
       currentmessages = this.responseText;
       obj.forEach(function (data, index) {
+        const dateTimeString = convert(data.time);
         // document.getElementById(currentserver + "_container").innerHTML = ""; debug
         if(data.sender == username){
           document.getElementById(currentserver + "_container").innerHTML +=
-          "<div class='msg sender'><p style='color: rgba(100,100,240,1); font-size: 12px;'>" +
-          data.sender +
-          "</p><p>" +
+          `<div class='msg sender' oncontextmenu="menu('${data.ID}_menu'); return false;"><p style='color: rgba(0,0,0,1); font-size: 12px;'>` +
+          data.sender + " | " +  dateTimeString +
+          `</p><p>` +
           linkify(data.message) +
           "</p></div>\n";
         }else{
         document.getElementById(currentserver + "_container").innerHTML +=
-          "<div class='msg'><p style='color: rgba(100,100,240,1); font-size: 12px;'>" +
-          data.sender +
+          "<div class='msg'><p style='color: rgba(0,0,0,1); font-size: 12px;'>" +
+          data.sender + " | " +  dateTimeString +
           "</p><p>" +
           linkify(data.message) +
           "</p></div>\n";
@@ -405,7 +440,7 @@ function getmessages() {
           currentserver + "_container"
         ).scrollHeight;
         silent = 0;
-        //console.log(index);
+        ////console.log(index);
       });
     } else {
     }
@@ -413,9 +448,11 @@ function getmessages() {
 
   xhttp.open("GET", stuff, true);
   xhttp.send();
-  console.log("RECEIVED hopefully");
+  //console.log("RECEIVED hopefully");
 }
-
+function menu(chatid){
+console.log("hi");
+}
 window.setInterval(function () {
   getmessages();
 }, 1000);
@@ -447,11 +484,11 @@ function sendmessage(e, input) {
 
 
     var stuff = `https://${host}/api/api1.php`;
-    console.log(stuff);
+    //console.log(stuff);
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
-        console.log(this.responseText);
+        //console.log(this.responseText);
         silent = 1;
         getmessages();
       } else {
@@ -482,7 +519,7 @@ function createserver() {
     localStorage.getItem("token") +
     "&name=" +
     input.value;
-  console.log(stuff);
+  //console.log(stuff);
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
@@ -490,24 +527,16 @@ function createserver() {
       listgroups();
       modal.style.display = "none";
     } else {
-      console.log(this.responseText.toString());
-      console.log("error");
-      console.log(this.readyState.toString());
-      console.log(this.status.toString());
+      //console.log(this.responseText.toString());
+      //console.log("error");
+      //console.log(this.readyState.toString());
+      //console.log(this.status.toString());
     }
   };
 
   xhttp.open("GET", stuff, true);
   xhttp.send();
 }
-
-
-
-
-
-
-
-
 
 
 //leave server via the client
@@ -519,7 +548,7 @@ function leave(id){
   localStorage.getItem("token") +
   "&serverid=" +
   id;
-console.log(stuff);
+//console.log(stuff);
 var xhttp = new XMLHttpRequest();
 xhttp.onreadystatechange = function () {
   if (this.readyState == 4 && this.status == 200) {
@@ -536,10 +565,10 @@ xhttp.onreadystatechange = function () {
     });
 
   } else {
-    console.log(this.responseText.toString());
-    console.log("error");
-    console.log(this.readyState.toString());
-    console.log(this.status.toString());
+    //console.log(this.responseText.toString());
+    //console.log("error");
+    //console.log(this.readyState.toString());
+    //console.log(this.status.toString());
   }
 };
 
@@ -553,7 +582,7 @@ function deletegroup(id){
   localStorage.getItem("token") +
   "&serverid=" +
   id;
-console.log(stuff);
+//console.log(stuff);
 var xhttp = new XMLHttpRequest();
 xhttp.onreadystatechange = function () {
   if (this.readyState == 4 && this.status == 200) {
@@ -570,10 +599,10 @@ xhttp.onreadystatechange = function () {
     });
 
   } else {
-    console.log(this.responseText.toString());
-    console.log("error");
-    console.log(this.readyState.toString());
-    console.log(this.status.toString());
+    //console.log(this.responseText.toString());
+    //console.log("error");
+    //console.log(this.readyState.toString());
+    //console.log(this.status.toString());
   }
 };
 
@@ -583,3 +612,43 @@ xhttp.send();
 
 require('../renderer.js');
 listgroups();
+
+
+
+
+
+
+function convert(unixtimestamp){
+
+  
+ 
+  // Months array
+  var months_arr = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+ 
+  // Convert timestamp to milliseconds
+  var date = new Date(unixtimestamp*1000);
+ 
+  // Year
+  var year = date.getFullYear();
+ 
+  // Month
+  var month = months_arr[date.getMonth()];
+ 
+  // Day
+  var day = date.getDate();
+ 
+  // Hours
+  var hours = date.getHours();
+ 
+  // Minutes
+  var minutes = "0" + date.getMinutes();
+ 
+  // Seconds
+  var seconds = "0" + date.getSeconds();
+ 
+  // Display date time in MM-dd-yyyy h:m:s format
+  var convdataTime = month+'-'+day+'-'+year+' '+hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+  
+  return convdataTime;
+  
+ }

@@ -29,7 +29,7 @@
  <img id="pfp"></img>
   <a class="activation" id="chatoblock" onclick='sectiondiv(event, "chats","#ec6ead","#3494e6")' >chats</a>
   <a class="activation" onclick='sectiondiv(event, "settings","#00a2ff","#ab34e6")' >settings</a>
-  <a class="activation" onclick='sectiondiv(event, "friends","#00a2ff","#ab34e6")' >friends</a>
+  <!--<a class="activation" onclick='sectiondiv(event, "friends","#00a2ff","#ab34e6")' >friends</a> -->
   <p class="normaltext">Server List</p>
   <div id="chatsnav">
 
@@ -41,9 +41,23 @@
   <h2>Chats</h2>
   <input type="text" required id="serverjoininputbox" placeholder="server invite code" />
   <button class="btn btn-success" onclick="joinserver();" height="90px" width="90px">Join server</button>
-  <p>test invite code: pQEpHDpI</p>
+ 
+  <h2>Submitted communities.</h2>
+  <div id="communities"> <!-- communities here -->
+    <p>WIP</p>
+    <div class="card">
+      <div class="container">
+        <h4><b>Test</b></h4>
+        <p>This server is a example description which is edited on the server manager</p>
 
-    <button id="create_btn" class="btn btn-info">Create server</button>
+        <p>Invite code: 1g0YxpKa</p>
+        <br/>
+      </div>
+    </div> 
+  </div>
+  <br/>
+  <p>Want to make your own community? Create a server.</p>
+  <button id="create_btn" class="btn btn-info">Create server</button>
 <div class="loading" id="preloader"></div>
 <!-- The Modal -->
 <div id="create" class="modal">
@@ -58,6 +72,7 @@
 
         <input id="name_creation" type="text" placeholder="Server Name" />
         <button class="btn btn-info" onclick="createserver();">Create</button>
+        <p>Once created you can use the server manager to edit your server to fit your perpous.</p>
 
     </div>
   </div>
