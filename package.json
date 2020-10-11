@@ -27,17 +27,17 @@
     "directories": {
       "buildResources": "resources",
       "output": "release"
-  },
-  "win": {
+    },
+    "win": {
       "asar": true,
       "target": "nsis",
       "icon": "resources/icon.png"
-  },
-  "nsis": {
-    "installerIcon": "resources/icons/icon.ico",
-    "installerHeaderIcon": "resources/icons/icon.ico",
-    "deleteAppDataOnUninstall": true,
-    "oneClick": false
+    },
+    "nsis": {
+      "installerIcon": "resources/icons/icon.ico",
+      "installerHeaderIcon": "resources/icons/icon.ico",
+      "deleteAppDataOnUninstall": true,
+      "oneClick": false
+    }
   }
-}
 }
