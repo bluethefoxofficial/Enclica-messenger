@@ -1,6 +1,7 @@
 var currentmessages = null;
 var silent = 1;
 var username;
+var numberofmessages = 0;
 
 
 var host;
@@ -45,7 +46,7 @@ window.onclick = function (event) {
 };
 
 function logout() {
-  document.getElementById("preloader").style.display = "inline";
+ //document.getElementById("preloader").style.display = "block";
   var logout = new Audio("../assets/sounds/mp3-converted/logout.mp3");
   logout.play();
 
@@ -86,8 +87,12 @@ function sectiondiv(evt, sectiondiv, colour1, colour2, serverid) {
 
 const fs = require("fs");
 function refreshprofile() {
+  var silent = 0;
+  if(silent != 1){
   var refresh = new Audio("../assets/sounds/mp3-converted/noti2.mp3");
   refresh.play();
+  }
+  silent = 1;
   document.getElementById("l1-968b").style.display = "block";
   var stuff =
     `https://${host}/api/api1.php?key=${api}&function=UAC&token=` +
@@ -109,6 +114,7 @@ function refreshprofile() {
         "https://www.gravatar.com/avatar/" + md5(obj.email) + "?s=32";
       document.getElementById("name").innerHTML = username;
       document.getElementById("bio").innerHTML = obj.bio;
+      silent = 0;
     }
   };
   xhttp.open("GET", stuff, true);
@@ -210,7 +216,6 @@ function listgroups() {
         if(username == data.owner){
           ownermenu = `
           <button class="btn btn-danger" onclick="deletegroup(${data.ID}); sectiondiv(event, 'chats',null,null)"  >Delete Server</button>
-
           <input type="text" placeholder="rename server" onkeydown="rename(${data.ID});"  style="width: 600px;"/>
           `;
         }
@@ -226,10 +231,8 @@ function listgroups() {
     <div class="msg-container" id="${data.ID}_container">
             
     </div>
-
     
     <input type="text" style="width: 69%;" placeholder="Message" id="textbox_${data.ID}" onKeyPress="sendmessage(event, this)"/>
-
     </div>
     
     `;
@@ -423,6 +426,8 @@ window.setInterval(function () {
 }, 1000);
 
 function sendmessage(e, input) {
+
+
   var code = e.keyCode ? e.keyCode : e.which;
 
   if (code == 13) {
@@ -430,7 +435,11 @@ function sendmessage(e, input) {
     //insert csoftware send message code here.
 
     if (input.value.startsWith("/")) {
-      commandhandler();
+      commandhandler(input.value,"");
+      return;
+    }
+    if(numberofmessages == 10){
+      document.getElementById("spam").style.display = "block";
       return;
     }
     if(input.value == ""){
@@ -444,6 +453,7 @@ function sendmessage(e, input) {
   
       
       return;
+      
   
     }
 
@@ -471,6 +481,7 @@ function sendmessage(e, input) {
         input.value
     );
     input.value = "";
+    numberofmessages += 1;
   }
 }
 
@@ -585,3 +596,29 @@ xhttp.send();
 
 require('../renderer.js');
 listgroups();
+
+
+function commandhandler(info, messagecontainer){
+
+var split = info.split(" ");
+
+if(split[0] == "/help"){
+  alert("WIP");
+}
+else if(split[0] == "/shrug"){
+  info += "¯\\_(ツ)_/¯";
+}
+}
+
+
+
+function spamprevention(){
+
+  numberofmessages = 0;
+
+  setTimeout(spamprevention,5000)
+}
+
+function dismissspam(){
+  document.getElementById("spam").style.display = "none";
+}

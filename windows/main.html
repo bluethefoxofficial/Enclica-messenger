@@ -39,6 +39,22 @@
   <p id="name"></p>
 </div>
 
+<!-- Modal for spam prevention -->
+<div id="spam" class="modal">
+
+
+  <div class="modal-content">
+    <div class="modal-header bg-primary">
+      <span class="close"><a onClick="dismissspam();">&times;</a></span>
+      <h2>YOU'RE SPAMMING</h2>
+    </div>
+    <div class="modal-body">
+  
+        <p>Please dont spam servers.</p>
+  
+    </div>
+  </div>
+  </div>
 
 <div class="main" id="chats" >
   <h2>Chats</h2>
@@ -61,12 +77,15 @@
 
         <input id="name_creation" type="text" placeholder="Server Name" />
         <button class="btn btn-info" onclick="createserver();">Create</button>
+        <p>Build your own community server quick and easy.</p>
 
     </div>
   </div>
 
 </div>
 
+
+</div>
 <!-- community servers-->
 
 
