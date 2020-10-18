@@ -92,7 +92,7 @@ function refreshprofile() {
   document.getElementById("rbtn").disabled = true;
   var silent = 0;
   if(silent != 1){
-  var refresh = new Audio("../assets/sounds/mp3-converted/noti2.mp3");
+  var refresh = new Audio("../assets/sounds/mp3-converted/noti2.mp3"); // shoutout to josephpham494 for spamming this down our fragile ears ;) even me a guy with ADD thinks this sounds is utterly fucking annoying to spam
   refresh.play();
   }
   silent = 1;
