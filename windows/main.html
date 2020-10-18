@@ -59,7 +59,7 @@
 <div class="main" id="chats" >
   <h2>Chats</h2>
   <input type="text" required id="serverjoininputbox" placeholder="server invite code" />
-  <button class="btn btn-success" onclick="joinserver();" height="90px" width="90px">Join server</button>
+  <button class="btn btn-success" id="joinserverbutton" onclick="joinserver();" height="90px" width="90px">Join server</button>
   <p>test invite code: pQEpHDpI</p>
 
     <button id="create_btn" class="btn btn-info">Create server</button>
@@ -96,7 +96,7 @@
 
 
   <textarea disabled id="bio"></textarea>
-  <button class="btn btn-success" onclick="refreshprofile();">Refresh<img src="../assets/images/sysload.gif"
+  <button class="btn btn-success" id="rbtn" onclick="refreshprofile();">Refresh<img src="../assets/images/sysload.gif"
       id="l1-968b" style="display:none;" width="20px" /></button>
 
 
@@ -104,7 +104,7 @@
   <textarea id="customcss"></textarea>
 
 
-  <button onclick="savecss();" class="btn btn-primary">apply custom css to file<img src="../assets/images/sysload.gif"
+  <button onclick="savecss();" id="cbtn" class="btn btn-primary">apply custom css to file<img src="../assets/images/sysload.gif"
       id="l1-968c" style="display:none;" width="20px" /></button>
 
 

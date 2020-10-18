@@ -8,7 +8,7 @@ function createWindow() {
   let win = new BrowserWindow({
     titleBarStyle: 'hidden',
     width: 1080,
-    height: 720,
+    height: 900,
     icon: __dirname + "/assets/images/Enclica logo.png",
     webPreferences: {
       nodeIntegration: true,

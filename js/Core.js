@@ -2,6 +2,8 @@ var currentmessages = null;
 var silent = 1;
 var username;
 var numberofmessages = 0;
+var call = null;
+var nomessages = "";
 
 
 var host;
@@ -87,6 +89,7 @@ function sectiondiv(evt, sectiondiv, colour1, colour2, serverid) {
 
 const fs = require("fs");
 function refreshprofile() {
+  document.getElementById("rbtn").disabled = true;
   var silent = 0;
   if(silent != 1){
   var refresh = new Audio("../assets/sounds/mp3-converted/noti2.mp3");
@@ -103,6 +106,7 @@ function refreshprofile() {
 
     if (this.readyState == 4 && this.status == 200) {
       setTimeout(function () {
+        document.getElementById("rbtn").disabled = false;
         document.getElementById("l1-968b").style.display = "none";
         document.getElementById("preloader").style = "display: none;";
       }, 1000);
@@ -115,6 +119,7 @@ function refreshprofile() {
       document.getElementById("name").innerHTML = username;
       document.getElementById("bio").innerHTML = obj.bio;
       silent = 0;
+
     }
   };
   xhttp.open("GET", stuff, true);
@@ -123,6 +128,7 @@ function refreshprofile() {
 
 
 function savecss() {
+  document.getElementById("cbtn").disabled = true;
   var refresh = new Audio("../assets/sounds/mp3-converted/noti3.mp3");
   refresh.play();
   document.getElementById("l1-968c").style.display = "block";
@@ -193,6 +199,8 @@ function listgroups() {
   var sl = new XMLHttpRequest();
   sl.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
+
+      
       obj = JSON.parse(this.responseText);
       console.log(obj);
       document.getElementById("chatsnav").innerHTML = "";
@@ -202,7 +210,12 @@ function listgroups() {
         var list = "";
         members = data.members.split(" ");
         members.forEach(function (data, index){
-          list += `<p class="membername">${data}</p>`;
+          if(data == ""){return;}
+          list += `<p class="membername"><div class='icon-container' style="clear: left;">
+          <img style="float: right;"class="iconimg" src="https://cdn2.iconfinder.com/data/icons/flatfaces-everyday-people-square/128/beard_male_man_face_avatar-512.png" />
+          <div class='status-circle'>
+          </div>
+        </div></p>`;
         });
 
         
@@ -231,8 +244,10 @@ function listgroups() {
     <div class="msg-container" id="${data.ID}_container">
             
     </div>
-    
-    <input type="text" style="width: 69%;" placeholder="Message" id="textbox_${data.ID}" onKeyPress="sendmessage(event, this)"/>
+    <br/>
+    <textarea type="text" height="20px" style="width: 58%;" rows="1" class="auto_height" placeholder="Message" id="textbox_${data.ID}" onload="auto_height(this);" onKeyPress="sendmessage(event, this); "></textarea> <button style="height: 40px; width: 40px; inline: block; padding: 0px 0px;" class="btn btn-info"><svg id="i-upload" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+    <path d="M9 22 C0 23 1 12 9 13 6 2 23 2 22 10 32 7 32 23 23 22 M11 18 L16 14 21 18 M16 14 L16 29" />
+</svg></button>
     </div>
     
     `;
@@ -362,8 +377,21 @@ function getmessages() {
   console.log(stuff);
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
+    var obj = null;
     if (this.readyState == 4 && this.status == 200) {
+try{
       obj = JSON.parse(this.responseText);
+}catch(e){
+  if(nomessages) return;
+  document.getElementById(currentserver + "_container").innerHTML ="";
+    document.getElementById(currentserver + "_container").innerHTML +=
+    `<svg id="i-msg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="50" height="50" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+    <path d="M2 4 L30 4 30 22 16 22 8 29 8 22 2 22 Z" />
+</svg><h3>This server is alittle empty. Let start a conversation</h3>`;
+    nomessages = 1;
+    return;
+}
+nomessages = 0;
       if (this.responseText == currentmessages) {
         return;
       }
@@ -387,22 +415,23 @@ function getmessages() {
       document.getElementById(currentserver + "_container").innerHTML = "";
       document.getElementById(currentserver + "_container").innerHTML = "";
       currentmessages = this.responseText;
+     
       obj.forEach(function (data, index) {
         // document.getElementById(currentserver + "_container").innerHTML = ""; debug
         if(data.sender == username){
           document.getElementById(currentserver + "_container").innerHTML +=
-          "<div class='msg sender'><p style='color: rgba(100,100,240,1); font-size: 12px;'>" +
-          data.sender +
+          "<div class='msg sender'><p style='color: rgba(0,0,0,1); font-size: 12px;'>" +
+          data.sender + " | " + timeConverter(data.time) +
           "</p><p>" +
           linkify(data.message) +
           "</p></div>\n";
         }else{
         document.getElementById(currentserver + "_container").innerHTML +=
-          "<div class='msg'><p style='color: rgba(100,100,240,1); font-size: 12px;'>" +
-          data.sender +
-          "</p><p>" +
-          linkify(data.message) +
-          "</p></div>\n";
+        "<div class='msg'><p style='color: rgba(0,0,0,1); font-size: 12px;'>" +
+        data.sender + " | " + timeConverter(data.time) +
+        "</p><p>" +
+        linkify(data.message) +
+        "</p></div>\n";
         }
         document.getElementById(
           currentserver + "_container"
@@ -427,15 +456,16 @@ window.setInterval(function () {
 
 function sendmessage(e, input) {
 
-
+ 
   var code = e.keyCode ? e.keyCode : e.which;
 
   if (code == 13) {
+    e.preventDefault();
     //Enter keycode
     //insert csoftware send message code here.
 
     if (input.value.startsWith("/")) {
-      commandhandler(input.value,"");
+      commandhandler(input,"");
       return;
     }
     if(numberofmessages == 10){
@@ -449,7 +479,8 @@ function sendmessage(e, input) {
       newmsg.play();
       document.getElementById(currentserver + "_container").innerHTML +=
       "<div class='msg'><p style='color: rgba(255,255,0,1); font-size: 12px;'>SYSTEM</p><p>You cant send a blank message. (this message is only viewable by you. This message will hide when someone sends a mesage to the server.)</p></div>\n";
-      
+      input.value = "";
+      input.innerHTML = "";
   
       
       return;
@@ -598,15 +629,16 @@ require('../renderer.js');
 listgroups();
 
 
-function commandhandler(info, messagecontainer){
+function commandhandler(input, messagecontainer){
 
-var split = info.split(" ");
 
-if(split[0] == "/help"){
+
+if(input == "/help"){
   alert("WIP");
 }
-else if(split[0] == "/shrug"){
-  info += "¯\\_(ツ)_/¯";
+else if(input == "/shrug"){
+  input = "¯\\_(ツ)_/¯";
+  console.log("shrug command");
 }
 }
 
@@ -616,9 +648,22 @@ function spamprevention(){
 
   numberofmessages = 0;
 
-  setTimeout(spamprevention,5000)
+  setTimeout(spamprevention,5000);
 }
+spamprevention();
 
 function dismissspam(){
   document.getElementById("spam").style.display = "none";
+}
+function timeConverter(UNIX_timestamp){
+  var a = new Date(UNIX_timestamp * 1000);
+  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var year = a.getFullYear();
+  var month = months[a.getMonth()];
+  var date = a.getDate();
+  var hour = a.getHours();
+  var min = a.getMinutes();
+  var sec = a.getSeconds();
+  var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+  return time;
 }

@@ -63,13 +63,15 @@ body {
   margin-left: 30px;
   margin-bottom: 5px;
   height: 24px;
-  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap; 
   text-decoration: none;
   font-size: 20px;
   color: rgb(100, 100, 100);
   transition: 0.3s;
   display: block;
   text-align: left;
+  text-overflow: ellipsis; 
 }
 
 .sidenav .normaltext {
@@ -505,13 +507,13 @@ body {
 }
 textarea {
   width: 100%;
-  height: 150px;
   padding: 12px 20px;
+  border-radius: 0px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #000000;
   box-sizing: border-box;
-  border: 2px solid #ccc;
-  border-radius: 4px;
-  background-color: #f8f8f8;
-  resize: none;
+
 }
 .center {
   display: block;
@@ -773,6 +775,7 @@ textarea {
 }
 
 .msg {
+  white-space: pre-wrap;
   width: 100%;
   background-color: rgba(80, 80, 80, 0.6);
   padding-bottom: 9px;
@@ -896,4 +899,30 @@ textarea {
   to {
     opacity: 1;
   }
+}
+.auto_height { /* CSS */
+  width: 100%;
+  height: auto;
+}
+.icon-container {
+  width: 50px;
+  height: 50px;
+  position: relative;
+}
+
+.iconimg {
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+}
+
+.status-circle {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: grey;
+  border: 2px solid white;
+  bottom: 0;
+  right: 0;
+  position: absolute;
 }
