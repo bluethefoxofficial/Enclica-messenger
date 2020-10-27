@@ -6,17 +6,17 @@ body {
 }
 
 #dragbar {
-	top: 0;
-	left: 0;
-	right: 0;
-	margin: 0;
-	border: 0;
-	height:150px;
-	-webkit-user-select: none;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0;
+  border: 0;
+  height:150px;
+  -webkit-user-select: none;
 }
 
 .sidenav {
-	-webkit-app-region: no-drag;
+  -webkit-app-region: no-drag;
   height: 100%;
   width: 220px;
   max-width: 220px;
@@ -49,7 +49,6 @@ body {
   max-width: 400px;
 }
 .sidenav .usernametextblock {
-
   display: none;
 }
 
@@ -86,60 +85,60 @@ body {
   cursor: default;
 }
 #madeby {
-	position: fixed;
-	bottom: 48px;
-	margin-left: 10px;
-	margin-right: 10px;
-	color: #333;
+  position: fixed;
+  bottom: 48px;
+  margin-left: 10px;
+  margin-right: 10px;
+  color: #333;
 }
 #enclica {
-	position: fixed;
-	margin-top: 2px;
-	margin-bottom: 2px;
-	margin-left: 10px;
-	margin-right: 10px;
-	display: block;
+  position: fixed;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  margin-left: 10px;
+  margin-right: 10px;
+  display: block;
 }
 #serverlist {
-	margin-bottom: 5px;
-	text-decoration: none;
-	font-size: 20px;
-	color: #dddada;
-	display: block;
-	cursor: default;
-	margin-left: 10px;
+  margin-bottom: 5px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #dddada;
+  display: block;
+  cursor: default;
+  margin-left: 10px;
 }
 #chatoblock {
-	margin-top: 24px;
+  margin-top: 24px;
 }
 #lighter {
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	position: absolute;
-	/*left: 0px;*/
-	width: 100%;
-	height: 42px;
-	bottom: 0px;
-	display: table-cell;
-	background: rgb(24,24,24);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  position: absolute;
+  /*left: 0px;*/
+  width: 100%;
+  height: 42px;
+  bottom: 0px;
+  display: table-cell;
+  background: rgb(24,24,24);
 }
 #pfp {
-	position: fixed;
-	bottom: 0px;
-	left: -24px;
-	border-radius: 15%;
+  position: fixed;
+  bottom: 0px;
+  left: -24px;
+  border-radius: 15%;
 }
 #name {
-	position: absolute;
-	margin-bottom: 5px;
-	text-decoration: none;
-	font-size: 20px;
-	color: #dddada;
-	display: block;
-	cursor: default;
-	margin-left: 48px;
-	bottom: 5px;
+  position: absolute;
+  margin-bottom: 5px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #dddada;
+  display: block;
+  cursor: default;
+  margin-left: 48px;
+  bottom: 5px;
 }
 
 .sidenav a:hover {
@@ -207,7 +206,7 @@ body {
   color: black;
 }
 .main {
-	-webkit-app-region: no-drag;
+  -webkit-app-region: no-drag;
   margin-left: 220px; /* Same as the width of the sidenav */
   font-size: 28px; /* Increased text to enable scrolling */
   padding: 0px 10px;
@@ -743,16 +742,73 @@ textarea {
   overflow-x: hidden;
 }
 
+.icon-container {
+  width: 100%;
+  height: 64px;
+  position: relative;
+  margin-bottom: 12px;
+  --back: #3f3f3f;
+}
+.icon-container:hover{
+  color: rgb(150, 150, 150);
+  transition: 0.2s;
+  --back: #222222;
+  background-color: var(--back);
+  border-radius: 8px;
+}
+
 .membername{
   color: white;
   font-size: small;
-
-  
-}.membername:hover{
-  color: rgb(150, 150, 150);
-  background-color: #000;
-  
+  margin-left: 8px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-weight: bold;
 }
+
+.iconimg {
+  position: absolute;
+  top: 50%;
+  margin-top: -24px;
+  right: 8px;
+  height: 48px;
+  width: 48px;
+  border-radius: 50%;
+  clip-path: ellipse
+
+}
+
+.status-circle {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: grey;
+  /*border: 1px solid white;*/
+  bottom: 6px;
+  right: 6px;
+  position: absolute;
+}
+.online{
+  background-color: rgb(0, 255, 85);
+}
+.away {
+  background-color: rgb(255, 230, 0);
+}
+.offline{
+  background-color: grey;
+}
+.statusmask {
+  position: absolute;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  bottom: 2px;
+  right: 2px;
+  background-color: var(--back);
+  transition: 0.05s;
+}
+
 .members{
   float:right;
   padding-top: 10px;
@@ -780,12 +836,13 @@ textarea {
   width: 100%;
   background-color: rgba(80, 80, 80, 0.6);
   padding-bottom: 9px;
-  transition: 0.6s;
-}.msg .sender {
+  transition: 0.2s;
+}  
+.msg .sender {
   width: 100%;
   background-color: rgba(80, 80, 80, 0.6);
   padding-bottom: 9px;
-  transition: 0.6s;
+  transition: 0.2s;
   text-align: right !important; 
 }
 .msg:hover {
@@ -905,35 +962,7 @@ textarea {
   width: 100%;
   height: auto;
 }
-.icon-container {
-  width: 50px;
-  height: 50px;
-  position: relative;
-}
 
-.iconimg {
-  height: 100%;
-  width: 100%;
-  border-radius: 50%;
-}
-
-.status-circle {
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-  background-color: grey;
-  border: 2px solid white;
-  bottom: 0;
-  right: 0;
-  position: absolute;
-}
-.online{
-  background-color: rgb(0, 255, 85);
-}.away{
-  background-color: rgb(255, 230, 0);
-}.offline{
-  background-color: grey;
-}
 .flex {
   display: -webkit-box;
   display: -moz-box;

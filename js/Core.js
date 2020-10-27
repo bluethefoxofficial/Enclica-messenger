@@ -248,10 +248,10 @@ function listgroups() {
           if(data == ""){return;}
           list += `<div class='icon-container' style="clear: left;">
           <img style="float: right;"class="iconimg" src="https://csoftware.cf/api/api1.php?key=grUs07Md3s4o9WIb7fi3vu0AGdjinGP8BvFFSvcNI6viEkXFhNY9ZODlNnNWMXfaapeb20NbVBadZtwH9kFUnOgPXn8oWuPPnqJL&function=pfpget&username=${data}" />
-          <div class='status-circle'>
-          </div>
+          <div class='statusmask'></div>
+          <div class='status-circle'></div>
           <p class="membername">${data}</p>
-          </div>`;
+          </div>`
         });
 
         
