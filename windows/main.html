@@ -8,12 +8,7 @@
   }
 
   var title = `Welcome to Encilica`;
-  var head = `
-  
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i">
-
-  
-  `;
+  var head = `<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i">`;
   var body = `
 <p></p>
 `;
@@ -58,19 +53,17 @@
 
 <div class="main" id="chats" >
   <h2>Chats</h2>
-  <input type="text" required id="serverjoininputbox" placeholder="server invite code" />
-  <button class="btn btn-success" id="joinserverbutton" onclick="joinserver();" height="90px" width="90px">Join server</button>
-  <p>test invite code: pQEpHDpI</p>
-
-    <button id="create_btn" class="btn btn-info">Create server</button>
+  <input style="width: 200px;" type="text" required id="serverjoininputbox" placeholder="server invite code" />
+  <button class="btn btn-success" style="width: 200px;" id="joinserverbutton" onclick="joinserver();" height="90px" width="90px">Join server</button>
+    <button id="create_btn" style="width: 200px;" class="btn btn-info">Create server</button>
 <div class="loading" id="preloader"></div>
 <!-- The Modal -->
 <div id="create" class="modal">
 
   <!-- Modal content -->
-  <div class="modal-content">
+  <div class="modal-content" style="height: 100%;">
     <div class="modal-header bg-primary">
-      <span class="close">&times;</span>
+      <span class="close" onclick="document.getElementById('create').style.display = 'none';">&times;</span>
       <h2>Create Encilica server</h2>
     </div>
     <div class="modal-body">
@@ -149,4 +142,7 @@
   </div>
 
 </div>
-    <script src="../js/Core.js"></script>
+<script src="../js/Core.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+    

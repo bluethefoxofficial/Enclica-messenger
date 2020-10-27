@@ -4,6 +4,8 @@ var username;
 var numberofmessages = 0;
 var call = null;
 var nomessages = "";
+var shell = require('electron').shell;
+var $ = require( "jquery" );
 
 
 var host;
@@ -48,7 +50,7 @@ window.onclick = function (event) {
 };
 
 function logout() {
- //document.getElementById("preloader").style.display = "block";
+ document.getElementById("preloader").style.display = "block";
   var logout = new Audio("../assets/sounds/mp3-converted/logout.mp3");
   logout.play();
 
@@ -56,6 +58,39 @@ function logout() {
     localStorage.clear();
     window.location = "../windows/login.html";
   }, 1000);
+}
+function fileSelected(input){
+  data = new FormData();
+  data.append("serverid",currentserver);
+  data.append("key",api);
+  data.append("function","upload");
+  data.append("token", localStorage.getItem("token"));
+  var attachment = document.getElementById(`attachment_${currentserver}`);
+  data.append("fileToUpload",attachment.files[0]);
+  
+  $.ajax({
+    type:'POST',
+    url: `https://${host}/api/api1.php`,
+    data:data,
+    cache:false,
+    contentType: false,
+    processData: false,
+    success:function(data){
+        console.log("success");
+        console.log(data);
+        silent = 1;
+        getmessages();
+    },
+    error: function(data){
+        console.log("error");
+        console.log(data);
+    }
+});
+  
+ 
+
+  input.value = "";
+  numberofmessages += 1;
 }
 
 document.getElementById("chatoblock").click();
@@ -102,7 +137,7 @@ function refreshprofile() {
     localStorage.getItem("token");
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
-    console.log(stuff);
+
 
     if (this.readyState == 4 && this.status == 200) {
       setTimeout(function () {
@@ -112,7 +147,7 @@ function refreshprofile() {
       }, 1000);
       obj = JSON.parse(this.responseText);
       currentmessages = this.responseText;
-      console.log(obj);
+      
       window.title = "Welcome to Encilica " + obj.username;
       document.getElementById("pfp").src =
         "https://www.gravatar.com/avatar/" + md5(obj.email) + "?s=32";
@@ -161,7 +196,7 @@ function joinserver() {
     document.getElementById("serverjoininputbox").value;
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
-    console.log(stuff);
+
 
     if (this.readyState == 4 && this.status == 200) {
       setTimeout(function () {
@@ -169,7 +204,7 @@ function joinserver() {
         document.getElementById("preloader").style = "display: none;";
       }, 1000);
       obj = JSON.parse(this.responseText);
-      console.log(obj);
+      
       if (obj.code === 568999) {
         var errornoti = new Audio("../assets/sounds/mp3-converted/denied1.mp3");
         error.setAttribute("crossorigin", "anonymous");
@@ -195,14 +230,14 @@ function listgroups() {
   var stuff =
     `https://${host}/api/api1.php?key=${api}&function=listgroups&token=` +
     localStorage.getItem("token");
-  console.log(stuff);
+ 
   var sl = new XMLHttpRequest();
   sl.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
 
       
       obj = JSON.parse(this.responseText);
-      console.log(obj);
+      
       document.getElementById("chatsnav").innerHTML = "";
       document.getElementById("chatsitem").innerHTML = "";
       obj.forEach(function (data, index) {
@@ -211,11 +246,12 @@ function listgroups() {
         members = data.members.split(" ");
         members.forEach(function (data, index){
           if(data == ""){return;}
-          list += `<p class="membername"><div class='icon-container' style="clear: left;">
-          <img style="float: right;"class="iconimg" src="https://cdn2.iconfinder.com/data/icons/flatfaces-everyday-people-square/128/beard_male_man_face_avatar-512.png" />
+          list += `<div class='icon-container' style="clear: left;">
+          <img style="float: right;"class="iconimg" src="https://csoftware.cf/api/api1.php?key=grUs07Md3s4o9WIb7fi3vu0AGdjinGP8BvFFSvcNI6viEkXFhNY9ZODlNnNWMXfaapeb20NbVBadZtwH9kFUnOgPXn8oWuPPnqJL&function=pfpget&username=${data}" />
           <div class='status-circle'>
           </div>
-        </div></p>`;
+          <p class="membername">${data}</p>
+          </div>`;
         });
 
         
@@ -235,6 +271,7 @@ function listgroups() {
         document.getElementById("chatsitem").innerHTML += `
     <div class="main" id="win_${data.ID}">
     <div><h2>${data.name}</h2>
+    <input type="file" class="file" id="attachment_${data.ID}" style="display: none;" onchange="fileSelected(this)"/>
     ${ownermenu}
     </div><p>Server invite code: <input type="text" value="${data.invite}" style="width: 200px;" disabled />
     </p>
@@ -245,9 +282,9 @@ function listgroups() {
             
     </div>
     <br/>
-    <textarea type="text" height="20px" style="width: 58%;" rows="1" class="auto_height" placeholder="Message" id="textbox_${data.ID}" onload="auto_height(this);" onKeyPress="sendmessage(event, this); "></textarea> <button style="height: 40px; width: 40px; inline: block; padding: 0px 0px;" class="btn btn-info"><svg id="i-upload" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+    <div class="flex"><textarea type="text" height="20px" style="width: 58%;" rows="1" class="auto_height" placeholder="Message" id="textbox_${data.ID}" onload="auto_height(this);" onKeyPress="sendmessage(event, this); "></textarea> <button style="height: 40px; width: 40px; inline: block; padding: 0px 0px;" onclick="document.getElementById('attachment_${data.ID}').click();" class="btn btn-info"><svg id="i-upload" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
     <path d="M9 22 C0 23 1 12 9 13 6 2 23 2 22 10 32 7 32 23 23 22 M11 18 L16 14 21 18 M16 14 L16 29" />
-</svg></button>
+</svg></button></div>
     </div>
     
     `;
@@ -263,7 +300,7 @@ listgroups();
 function Encilicadirect() {
   const msg = new Notification(" Encilica Error", {
     body:
-      "Encilica direct requires you to run it seprately from here note from dev build 1.5 Encilica direct will no longer be supported.",
+      "Encilica direct requires you to run it seprately from here note from dev build 1.5 Encilica direct will no longer be supported IN THE CLIENT.",
     silent: false,
     icon: "../assets/images/icons/info.png",
   });
@@ -295,7 +332,7 @@ xhttp.onreadystatechange = function () {
   if (this.readyState == 4 && this.status == 200) {
     document.getElementById("preloader").style = "display: none;";
     obj = JSON.parse(this.responseText);
-    console.log(obj);
+    
     window.title = "Welcome to Encilica " + obj.username;
     username = obj.username;
     document.getElementById("usernametext").innerHTML = obj.username;
@@ -374,7 +411,7 @@ function getmessages() {
     localStorage.getItem("token") +
     "&serverid=" +
     currentserver;
-  console.log(stuff);
+ 
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     var obj = null;
@@ -417,7 +454,43 @@ nomessages = 0;
       currentmessages = this.responseText;
      
       obj.forEach(function (data, index) {
-        // document.getElementById(currentserver + "_container").innerHTML = ""; debug
+        //if it has a file (image only currently)
+          if(data.file !== null){
+            if(data.sender == username){
+              document.getElementById(currentserver + "_container").innerHTML +=
+              "<div class='msg sender'><p style='color: rgba(0,0,0,1); font-size: 12px;'>" +
+              data.sender + " | " + timeConverter(data.time) +
+              `</p><p><img onclick="document.getElementById('${data.file}').style.display = 'block';" src="https://cdn.csoftware.cf/enc/data/${data.sender}/${data.file}" width="30%"/>` +
+                  `<div id="${data.file}" class="img-modal">
+                  <span class="close" onclick="document.getElementById('${data.file}').style.display = 'none';">&times;</span>
+                  <img class="img-modal-content" src="https://cdn.csoftware.cf/enc/data/${data.sender}/${data.file}" id="img01">
+                  <div id="caption"><a onclick='shell.openExternal("https://cdn.csoftware.cf/enc/data/${data.sender}/${data.file}");' href="#">Open Original</a></div>
+                </div>`
+              "</p></div>\n";
+              return;
+            }else{
+            document.getElementById(currentserver + "_container").innerHTML +=
+            "<div class='msg'><p style='color: rgba(0,0,0,1); font-size: 12px;'>" +
+            data.sender + " | " + timeConverter(data.time) +
+            `</p><p><img onclick="document.getElementById('${data.file}').style.display = 'block';" src="https://cdn.csoftware.cf/enc/data/${data.sender}/${data.file}" width="30%"/>` +
+                `<div id="${data.file}" class="img-modal">
+                <span class="close" onclick="document.getElementById('${data.file}').style.display = 'none';">&times;</span>
+                <img class="img-modal-content" src="https://cdn.csoftware.cf/enc/data/${data.sender}/${data.file}" id="img01">
+                <div id="caption"><a onclick='shell.openExternal("https://cdn.csoftware.cf/enc/data/${data.sender}/${data.file}");' href="#">Open Original</a></div>
+              </div>`
+            "</p></div>\n";
+            }
+            document.getElementById(
+              currentserver + "_container"
+            ).scrollTop = document.getElementById(
+              currentserver + "_container"
+            ).scrollHeight;
+            silent = 0;
+            return;
+          }
+
+          //normal text mode (CLASSIC ALPHA)
+
         if(data.sender == username){
           document.getElementById(currentserver + "_container").innerHTML +=
           "<div class='msg sender'><p style='color: rgba(0,0,0,1); font-size: 12px;'>" +
@@ -439,7 +512,7 @@ nomessages = 0;
           currentserver + "_container"
         ).scrollHeight;
         silent = 0;
-        //console.log(index);
+        
       });
     } else {
     }
@@ -447,7 +520,6 @@ nomessages = 0;
 
   xhttp.open("GET", stuff, true);
   xhttp.send();
-  console.log("RECEIVED hopefully");
 }
 
 window.setInterval(function () {
@@ -473,14 +545,6 @@ function sendmessage(e, input) {
       return;
     }
     if(input.value == ""){
-      var newmsg = new Audio(
-        "../assets/sounds/mp3-converted/denied1.mp3"
-      );
-      newmsg.play();
-      document.getElementById(currentserver + "_container").innerHTML +=
-      "<div class='msg'><p style='color: rgba(255,255,0,1); font-size: 12px;'>SYSTEM</p><p>You cant send a blank message. (this message is only viewable by you. This message will hide when someone sends a mesage to the server.)</p></div>\n";
-      input.value = "";
-      input.innerHTML = "";
   
       
       return;
@@ -490,7 +554,7 @@ function sendmessage(e, input) {
 
 
     var stuff = `https://${host}/api/api1.php`;
-    console.log(stuff);
+
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
@@ -526,7 +590,6 @@ function createserver() {
     localStorage.getItem("token") +
     "&name=" +
     input.value;
-  console.log(stuff);
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
@@ -563,7 +626,7 @@ function leave(id){
   localStorage.getItem("token") +
   "&serverid=" +
   id;
-console.log(stuff);
+
 var xhttp = new XMLHttpRequest();
 xhttp.onreadystatechange = function () {
   if (this.readyState == 4 && this.status == 200) {
@@ -597,7 +660,7 @@ function deletegroup(id){
   localStorage.getItem("token") +
   "&serverid=" +
   id;
-console.log(stuff);
+
 var xhttp = new XMLHttpRequest();
 xhttp.onreadystatechange = function () {
   if (this.readyState == 4 && this.status == 200) {
