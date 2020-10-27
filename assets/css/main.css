@@ -6,17 +6,17 @@ body {
 }
 
 #dragbar {
-	top: 0;
-	left: 0;
-	right: 0;
-	margin: 0;
-	border: 0;
-	height:150px;
-	-webkit-user-select: none;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0;
+  border: 0;
+  height:150px;
+  -webkit-user-select: none;
 }
 
 .sidenav {
-	-webkit-app-region: no-drag;
+  -webkit-app-region: no-drag;
   height: 100%;
   width: 220px;
   max-width: 220px;
@@ -86,60 +86,60 @@ body {
   cursor: default;
 }
 #madeby {
-	position: fixed;
-	bottom: 48px;
-	margin-left: 10px;
-	margin-right: 10px;
-	color: #333;
+  position: fixed;
+  bottom: 48px;
+  margin-left: 10px;
+  margin-right: 10px;
+  color: #333;
 }
 #enclica {
-	position: fixed;
-	margin-top: 2px;
-	margin-bottom: 2px;
-	margin-left: 10px;
-	margin-right: 10px;
-	display: block;
+  position: fixed;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  margin-left: 10px;
+  margin-right: 10px;
+  display: block;
 }
 #serverlist {
-	margin-bottom: 5px;
-	text-decoration: none;
-	font-size: 20px;
-	color: #dddada;
-	display: block;
-	cursor: default;
-	margin-left: 10px;
+  margin-bottom: 5px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #dddada;
+  display: block;
+  cursor: default;
+  margin-left: 10px;
 }
 #chatoblock {
-	margin-top: 24px;
+  margin-top: 24px;
 }
 #lighter {
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	position: absolute;
-	/*left: 0px;*/
-	width: 100%;
-	height: 42px;
-	bottom: 0px;
-	display: table-cell;
-	background: rgb(24,24,24);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  position: absolute;
+  /*left: 0px;*/
+  width: 100%;
+  height: 42px;
+  bottom: 0px;
+  display: table-cell;
+  background: rgb(24,24,24);
 }
 #pfp {
-	position: fixed;
-	bottom: 0px;
-	left: -24px;
-	border-radius: 15%;
+  position: fixed;
+  bottom: 0px;
+  left: -24px;
+  border-radius: 15%;
 }
 #name {
-	position: absolute;
-	margin-bottom: 5px;
-	text-decoration: none;
-	font-size: 20px;
-	color: #dddada;
-	display: block;
-	cursor: default;
-	margin-left: 48px;
-	bottom: 5px;
+  position: absolute;
+  margin-bottom: 5px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #dddada;
+  display: block;
+  cursor: default;
+  margin-left: 48px;
+  bottom: 5px;
 }
 
 .sidenav a:hover {
@@ -207,7 +207,7 @@ body {
   color: black;
 }
 .main {
-	-webkit-app-region: no-drag;
+  -webkit-app-region: no-drag;
   margin-left: 220px; /* Same as the width of the sidenav */
   font-size: 28px; /* Increased text to enable scrolling */
   padding: 0px 10px;
