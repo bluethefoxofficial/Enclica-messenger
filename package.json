@@ -16,7 +16,8 @@
   "dependencies": {
     "electron-localstorage": "^1.0.5",
     "jquery": "^3.5.1",
-    "md5": "^2.2.1"
+    "md5": "^2.2.1",
+    "sweetalert": "^2.1.2"
   },
   "devDependencies": {
     "electron": "^8.5.2",

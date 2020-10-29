@@ -15,7 +15,9 @@ api =  localStorage.getItem("ak");
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
+      console.log(this.responseText);
       var obj = JSON.parse(this.responseText);
+      console.log(obj);
       if (obj.error) {
         var error = new Audio("../assets/sounds/mp3-converted/denied2.mp3");
         error.setAttribute("crossorigin", "anonymous");

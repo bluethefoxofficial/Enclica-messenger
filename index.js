@@ -59,6 +59,9 @@ app.whenReady().then(() => {
     event.preventDefault();
     link = data;
   });
+  app.on('window-all-closed', () => {
+    app.quit();
+  })
 
   module.exports.getLink = () => link;
 
