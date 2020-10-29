@@ -127,4 +127,4 @@ window.setInterval((function() {
 }), 1000);
 window.setInterval((function() {
     getmembers();
-}), 1000);
+}), 8000);
