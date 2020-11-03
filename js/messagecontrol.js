@@ -99,7 +99,7 @@ function commandhandler(input, messagecontainer) {
     if (input == "/help") {
         alert("WIP");
     } else if (input == "/shrug") {
-        input = "¯\\_(ツ)_/¯";
+        input.value = `¯|_(ツ)_|¯`;
         console.log("shrug command");
     }
 }

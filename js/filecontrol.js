@@ -60,7 +60,6 @@ function fileSelected(input) {
                     console.log("success");
                     console.log(data);
                     silent = 1;
-                    getmessages();
                     swal("UPLOADED", "Your file has been uploaded to this enclica server.", "success");
                 },
                 error: function(data) {
@@ -78,5 +77,5 @@ function fileSelected(input) {
         }
     
   });
-  
+  getmessages(); 
 }

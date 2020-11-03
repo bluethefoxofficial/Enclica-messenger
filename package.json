@@ -17,7 +17,9 @@
     "electron-localstorage": "^1.0.5",
     "jquery": "^3.5.1",
     "md5": "^2.2.1",
-    "sweetalert": "^2.1.2"
+    "simple-peer": "^9.8.0",
+    "sweetalert": "^2.1.2",
+    "wrtc": "^0.4.6"
   },
   "devDependencies": {
     "electron": "^8.5.2",

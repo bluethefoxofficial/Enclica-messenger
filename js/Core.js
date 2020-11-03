@@ -16,7 +16,8 @@ var username;
 const fs = require("fs");
 var host;
 var api;
-
+var currentlycalling = false;
+document.getElementById("currentcall_btn").style.display = "none";
 if (localStorage.getItem("host")) {
     host = localStorage.getItem("host");
     api = localStorage.getItem("ak");

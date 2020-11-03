@@ -16,13 +16,12 @@
   template.createPage(title, head, body);
 </script>
     <link rel="stylesheet" href="../assets/configurable/custom.css">
-
-<!-- <div id="dragbar" style="-webkit-app-region: drag"></div> --> <!-- should work but doesn't -->
 <div class="sidenav">
   <p class="usernametextblock" id="usernametext"></p>
   <p style="color: white;" id="enclica">Encilica</p>
  
   <a class="activation" id="chatoblock" onclick='sectiondiv(event, "chats","#ec6ead","#3494e6")' >chats</a>
+  <a class="activation" id="currentcall_btn" style="display: block;" onclick='sectiondiv(event, "currentcall","#ec6ead","#3494e6")' >Current Call</a>
   <a class="activation" onclick='sectiondiv(event, "settings","#00a2ff","#ab34e6")' >settings</a>
   <p id="serverlist">Server List</p>
   <div id="chatsnav">
@@ -77,7 +76,11 @@
 
 </div>
 
+<h2>CALLING MEMBERS</h2>
 
+<p>Your RTC ID: <span id="myrtcid"></span></p>
+<input id="rrtcid" style="width:100px;" type="text" placeholder="Recipient RTC ID" />
+<button class="btn btn-info" onclick="makecall();" style="width: 200px; height: 50px;">Call</button>
 </div>
 <!-- community servers-->
 
@@ -112,11 +115,39 @@
   <p>connection Info</p>
   <p>API host: <span id="host"></span></p>
 
+  <p>RTC settings:</p>
+  <a href="#init">RTC INIT</a>
+
+  <p id="rtcid">ID</p>
 
 </div>
 <div class="main" id="games">
   <h2>your games</h2>
 <a onclick="sendfr();">Add a game to lib</a>
+</div>
+
+<!--
+
+RTC CURRENTCALL SCREEN
+
+
+-->
+
+<div class="main" id="currentcall">
+  <h2>your current call</h2>
+  <span>you</span>
+  <video muted id="video" width="400px" height="255px" poster="../assets/images/calling window.png"></video>
+  <span>them</span>
+  <video id="videorec" width="400px" height="255px" poster="../assets/images/calling window.png"></video>
+  <p>
+    <button class="btn btn-danger" style="width: 300px" onclick="endcall();">End call</button>
+    <button class="btn btn-info" style="width: 300px">Mute</button>
+    <button class="btn btn-info" style="width: 300px">Hide video</button>
+    <button class="btn btn-danger" onclick="reportcall();" style="width: 300px">report</button>
+    <p>CALL STATUS: <span id="callstatus">Connecting...</span></p>
+    <p>OUTGOING STATUS: <span id="#outgoing">Connecting...</span></p>
+    
+  </p>
 </div>
 
 
