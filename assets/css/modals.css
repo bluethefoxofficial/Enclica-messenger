@@ -2,6 +2,7 @@
 .modal-content {
     position: fixed;
     bottom: 0;
+    z-index: 700;
     background-color:rgb(54, 54, 54);;
     width: 100%;
     -webkit-animation-name: slideIn;
@@ -59,8 +60,8 @@ image modal for sent images
 .img-modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
+    z-index: 500; /* Sit on top */
+    /* Location of the box */
     left: 0;
     top: 0;
     width: 100%; /* Full width */

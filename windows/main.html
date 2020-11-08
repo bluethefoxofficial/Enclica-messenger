@@ -9,9 +9,7 @@
 
   var title = `Welcome to Encilica`;
   var head = `<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i">`;
-  var body = `
-<p></p>
-`;
+  var body = ``;
 
   template.createPage(title, head, body);
 </script>
@@ -75,12 +73,14 @@
   </div>
 
 </div>
-
+<!--
 <h2>CALLING MEMBERS</h2>
 
 <p>Your RTC ID: <span id="myrtcid"></span></p>
 <input id="rrtcid" style="width:100px;" type="text" placeholder="Recipient RTC ID" />
 <button class="btn btn-info" onclick="makecall();" style="width: 200px; height: 50px;">Call</button>
+
+-->
 </div>
 <!-- community servers-->
 
@@ -115,10 +115,29 @@
   <p>connection Info</p>
   <p>API host: <span id="host"></span></p>
 
-  <p>RTC settings:</p>
-  <a href="#init">RTC INIT</a>
+<button onclick="document.getElementById('about').style.display = 'block';" class="btn btn-success">Developers and contributers.</button>
 
-  <p id="rtcid">ID</p>
+
+<!-- The Modal -->
+<div id="about" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content" style="height: 100%;">
+    <div class="modal-header bg-primary">
+      <span class="close" onclick="document.getElementById('about').style.display = 'none';">&times;</span>
+      <h2>About Enclica development</h2>
+    </div>
+    <div class="modal-body">
+      <p>Project manager and lead developer: Kessan Robertson.</p><br/>
+      <p>Contributer: vistax64 KonradCzerw</p><br/>
+      <p>Contributer: furry dumbass</p><br/>
+      <p>Contributer: Gamerappa</p><br/>
+      <p>Tester: Wilber</p><br/>
+      <!-- insert your name here  <p>role: name</p><br/> -->
+    </div>
+  </div>
+
+</div>
 
 </div>
 <div class="main" id="games">

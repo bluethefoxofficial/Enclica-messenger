@@ -97,6 +97,8 @@ function getmessages() {
                             "../assets/sounds/mp3-converted/message.mp3"
                         );
                         newmsg.play();
+                        
+                        silent = 0;
                     }
                 }
             }
@@ -112,7 +114,9 @@ function getmessages() {
                         document.getElementById(currentserver + "_container").innerHTML +=
                             "<div class='msg sender'><p style='color: rgba(0,0,0,1); font-size: 12px;'>" +
                             data.sender + " | " + timeConverter(data.time) +
-                            `</p><p><img onclick="document.getElementById('${data.file}').style.display = 'block';" src="https://cdn.csoftware.cf/enc/data/${data.sender}/${data.file}" width="30%"/>` +
+                            `</p><p><img onclick="document.getElementById('${data.file}').style.display = 'block';" src="https://cdn.csoftware.cf/enc/data/${data.sender}/${data.file}" width="30%"/>`+ `\n<button class="btn-danger btn btn-loc btn-danger" style="width: 50px; height: 18px; padding:0px 0px;"onclick='deletemessage(${data.ID},"${data.file}");'><svg id="i-trash" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                            <path d="M28 6 L6 6 8 30 24 30 26 6 4 6 M16 12 L16 24 M21 12 L20 24 M11 12 L12 24 M12 6 L13 2 19 2 20 6" />
+                        </svg></button>\n` +
                             `<div id="${data.file}" class="img-modal">
                   <span class="close" onclick="document.getElementById('${data.file}').style.display = 'none';">&times;</span>
                   <img class="img-modal-content" src="https://cdn.csoftware.cf/enc/data/${data.sender}/${data.file}" id="img01">
@@ -132,11 +136,7 @@ function getmessages() {
               </div>`
                         "</p></div>\n";
                     }
-                    document.getElementById(
-                        currentserver + "_container"
-                    ).scrollTop = document.getElementById(
-                        currentserver + "_container"
-                    ).scrollHeight;
+  //                  scrollToBottom(document.getElementById(currentserver + "_container"));
                     silent = 0;
                     return;
                 }
@@ -145,26 +145,24 @@ function getmessages() {
 
                 if (data.sender == username) {
                     document.getElementById(currentserver + "_container").innerHTML +=
-                        "<div class='msg sender'><p style='color: rgba(0,0,0,1); font-size: 12px;'>" +
+                        `<div class='msg sender'><p style='color: rgba(0,0,0,1); font-size: 12px;'>` +
                         data.sender + " | " + timeConverter(data.time) +
                         "</p><p>" +
-                        linkify(data.message) +
+                        linkify(data.message) + `\n<button class="btn-danger btn btn-loc btn-danger" style="width: 50px; height: 18px; padding:0px 0px;"onclick='deletemessage(${data.ID});'><svg id="i-trash" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                        <path d="M28 6 L6 6 8 30 24 30 26 6 4 6 M16 12 L16 24 M21 12 L20 24 M11 12 L12 24 M12 6 L13 2 19 2 20 6" />
+                    </svg></button>\n` +
                         "</p></div>\n";
                 } else {
                     document.getElementById(currentserver + "_container").innerHTML +=
-                        "<div class='msg'><p style='color: rgba(0,0,0,1); font-size: 12px;'>" +
+                        `<div class='msg'><p style='color: rgba(0,0,0,1); font-size: 12px;'>` +
                         data.sender + " | " + timeConverter(data.time) +
                         "</p><p>" +
                         linkify(data.message) +
                         "</p></div>\n";
                 }
-                document.getElementById(
-                    currentserver + "_container"
-                ).scrollTop = document.getElementById(
-                    currentserver + "_container"
-                ).scrollHeight;
-                silent = 0;
-
+               // scrollToBottom(document.getElementById(currentserver + "_container"));
+                
+                scrollToBottom(currentserver + "_scroll");
             }));
         } else {}
     };
@@ -240,37 +238,40 @@ function getmembers() {
 
 
 function leave(id) {
-    var stuff =
-        "https://csoftware.cf/api/api1.php?key=grUs07Md3s4o9WIb7fi3vu0AGdjinGP8BvFFSvcNI6viEkXFhNY9ZODlNnNWMXfaapeb20NbVBadZtwH9kFUnOgPXn8oWuPPnqJL&function=leavegroup&token=" +
-        localStorage.getItem("token") +
-        "&serverid=" +
-        id;
 
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            silent = 1;
-            var leave = new Audio(
-                "../assets/sounds/mp3-converted/noti7.mp3"
-            );
-            leave.play();
-            listgroups();
-            const error = new Notification("Server message", {
-                body: "You just left a server. If this wasnt you check to see if you have a virus.",
-                silent: true,
-                icon: "../assets/images/icons/info_2.png",
-            });
 
-        } else {
-            console.log(this.responseText.toString());
-            console.log("error");
-            console.log(this.readyState.toString());
-            console.log(this.status.toString());
-        }
-    };
+            var stuff =
+            "https://csoftware.cf/api/api1.php?key=grUs07Md3s4o9WIb7fi3vu0AGdjinGP8BvFFSvcNI6viEkXFhNY9ZODlNnNWMXfaapeb20NbVBadZtwH9kFUnOgPXn8oWuPPnqJL&function=leavegroup&token=" +
+            localStorage.getItem("token") +
+            "&serverid=" +
+            id;
+    
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                silent = 1;
+                var leave = new Audio(
+                    "../assets/sounds/mp3-converted/noti7.mp3"
+                );
+                leave.play();
+                listgroups();
+                const error = new Notification("Server message", {
+                    body: "You just left a server. If this wasnt you check to see if you have a virus.",
+                    silent: true,
+                    icon: "../assets/images/icons/info_2.png",
+                });
+    
+            } else {
+                console.log(this.responseText.toString());
+                console.log("error");
+                console.log(this.readyState.toString());
+                console.log(this.status.toString());
+            }
+        };
+    
+        xhttp.open("GET", stuff, true);
+        xhttp.send();
 
-    xhttp.open("GET", stuff, true);
-    xhttp.send();
 }
 
 //
@@ -278,6 +279,7 @@ function leave(id) {
 //
 //
 function deletegroup(id) {
+
     var stuff =
         `https://${host}/api/api1.php?key=${api}&function=deletegroup&token=` +
         localStorage.getItem("token") +
@@ -310,7 +312,6 @@ function deletegroup(id) {
     xhttp.open("GET", stuff, true);
     xhttp.send();
 }
-
 //
 //
 // create server

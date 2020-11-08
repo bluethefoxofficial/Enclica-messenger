@@ -12,17 +12,14 @@ var createPage = function(title, head, body){
     <link href="../assets/css/buttonsandbackgrounds.css" rel="stylesheet">
     <link href="../assets/css/modals.css" rel="stylesheet">
     <link href="../assets/css/sidenav.css" rel="stylesheet">
+    <link href="../assets/css/menubar.css" rel="stylesheet">
     ${head}
     <title id="title">${title}</title>
 </head>
-<body id="body">
-    <div id="container">
-        <main>
+
             ${body}
-        </main>
-    </div>
-</body>
-</html>
+
+
     `;
 
     document.write(page);

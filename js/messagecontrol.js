@@ -14,8 +14,27 @@ function sendmessage(e, input) {
         //insert csoftware send message code here.
 
         if (input.value.startsWith("/")) {
-            commandhandler(input, "");
-            return;
+            console.log("CH");
+
+
+            if(input.value.startsWith("/shrug")){
+                input.value = `¯\\\_\(\ツ\)\_\/\¯`;
+            }else if(input.value.startsWith("/logout")){
+                logout();
+            }else if(input.value.startsWith("/unloadcss")){
+                unloadcss();
+            }else if(input.value.startsWith("/reloadcss")){
+                reloadcss();
+            }else if(input.value.startsWith("/clearcache")){
+                clearcache();
+            }else if(input.value.startsWith("/playsound")){
+                var str = input.value.split(" ");
+
+                var aud = new Audio("../assets/sounds/mp3-converted/" + str[1]);
+                aud.play();
+                console.log("PLAYING TEST");
+            }
+            return commandhandler(input, "");
         }
         if (numberofmessages == 10) {
             document.getElementById("spam").style.display = "block";
@@ -38,6 +57,12 @@ function sendmessage(e, input) {
                 console.log(this.responseText);
                 silent = 1;
                 getmessages();
+                document.getElementById(
+                    currentserver + "_container"
+                ).scrollTop = document.getElementById(
+                    currentserver + "_container"
+                ).scrollHeight;
+                silent = 1;
             } else {}
         };
 
@@ -53,6 +78,8 @@ function sendmessage(e, input) {
         );
         input.value = "";
         numberofmessages += 1;
+        
+        
     }
 }
 
@@ -128,3 +155,37 @@ window.setInterval((function() {
 window.setInterval((function() {
     getmembers();
 }), 8000);
+
+
+
+//
+//
+//delete your message
+//
+//
+
+
+
+function deletemessage(messageid,file){
+    var stuff =
+    `https://${host}/api/api1.php?key=${api}&function=deletemessage&token=` +
+    localStorage.getItem("token") +
+    "&messageid=" +
+    messageid + "&file=" + file;
+
+var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      silent = 1;
+      getmessages();
+    } else {
+        console.log(this.responseText.toString());
+        console.log("error");
+        console.log(this.readyState.toString());
+        console.log(this.status.toString());
+    }
+};
+
+xhttp.open("GET", stuff, true);
+xhttp.send();
+}
