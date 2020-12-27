@@ -19,7 +19,15 @@ function joinserver() {
 
         if (this.readyState == 4 && this.status == 200) {
             obj = JSON.parse(this.responseText);
-
+            if(typeof error == 'undefined'){
+                swal({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'You failed to join the server check to see if you typed it correctly or you might of been banned.',
+                    footer: '<a href>Why do I have this issue?</a>'
+                  });
+                return;
+            }
             if (obj.code === 568999) {
                 var errornoti = new Audio("../assets/sounds/mp3-converted/denied1.mp3");
                 error.setAttribute("crossorigin", "anonymous");
@@ -50,6 +58,7 @@ function joinserver() {
 
 
 function getmessages() {
+    document.getElementById('jerror').style.display = 'none';
     if (currentserver === null) {
         return;
     }
@@ -269,37 +278,46 @@ fetch(stuff)
 //
 function deletegroup(id) {
 
-    var stuff =
-        `https://${host}/api/api1.php?key=${api}&function=deletegroup&token=` +
-        localStorage.getItem("token") +
-        "&serverid=" +
-        id;
-
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            silent = 1;
-            var leave = new Audio(
-                "../assets/sounds/mp3-converted/noti7.mp3"
-            );
-            leave.play();
-            listgroups();
-            const error = new Notification("Server message", {
-                body: "You just deleated a server. If this wasnt you check to see if you have a virus.",
-                silent: true,
-                icon: "../assets/images/icons/info.png",
-            });
-
+      swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this server!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+            var stuff =
+            `https://${host}/api/api1.php?key=${api}&function=deletegroup&token=` +localStorage.getItem("token") + "&serverid=" +id;
+    
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                silent = 1;
+                var leave = new Audio(
+                    "../assets/sounds/mp3-converted/noti7.mp3"
+                );
+                leave.play();
+                listgroups();
+                swal("Deleted!", "Your server has been deleted.", "success");
+    
+            } else {
+                swal("Deletion error.", "An error occured when trying to delete your server.", "warning");
+            }
+        };
+    
+        xhttp.open("GET", stuff, true);
+        xhttp.send();
+        
+          swal("Poof! Your server has been deleted!", {
+            icon: "success",
+          });
+          sectiondiv(event, 'chats',null,null)
         } else {
-            console.log(this.responseText.toString());
-            console.log("error");
-            console.log(this.readyState.toString());
-            console.log(this.status.toString());
+          swal("server deletion was cancelled!");
         }
-    };
-
-    xhttp.open("GET", stuff, true);
-    xhttp.send();
+      });
+ 
 }
 //
 //

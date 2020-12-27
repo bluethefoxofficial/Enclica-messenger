@@ -1,27 +1,26 @@
 
 .sidenav {
-    -webkit-app-region: no-drag;
-    height: 100%;
-    width: 220px;
-    max-width: 220px;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    white-space: nowrap;
-    left: 0;
-    background-color: #111;
-    overflow-x: hidden;
-    padding-top: 20px;
-    -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-    -khtml-user-select: none; /* Konqueror HTML */
-    -moz-user-select: none; /* Old versions of Firefox */
-    -ms-user-select: none; /* Internet Explorer/Edge */
-    user-select: none; /* Non-prefixed version, currently
-    supported by Chrome, Edge, Opera and Firefox */
-    transition: 200ms;
-    text-overflow: ellipsis;
-  }
+  -webkit-app-region: no-drag;
+  height: 100%;
+  width: 220px;
+  max-width: 220px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  white-space: nowrap;
+  left: 0;
+  background-color: #111111c0;
+  overflow-x: hidden;
+  padding-top: 20px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  transition: 200ms;
+  text-overflow: ellipsis;
+}
   .sidenav:hover img {
     text-align: center;
     margin-bottom: 5px;

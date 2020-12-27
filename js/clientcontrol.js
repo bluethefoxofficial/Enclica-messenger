@@ -110,7 +110,7 @@ function listgroups() {
             </div>
             <div class="modal-body">
             
-            <button class="btn btn-danger" onclick="deletegroup(${data.ID}); sectiondiv(event, 'chats',null,null)"  >Delete Server</button>
+            <button class="btn btn-danger" style="width: 100px;" onclick="deletegroup(${data.ID});"  >Delete Server</button>
             <h3>Community</h3>
             <button class="btn btn-info" onclick="return null;"  >Submit for community reviews</button>
             
@@ -141,7 +141,7 @@ function listgroups() {
             </div>
             
             `;
-            document.getElementById('jerror').style.display = 'none';
+            
                 });
               });
             
@@ -263,6 +263,7 @@ function sectiondiv(evt, sectiondiv, colour1, colour2, serverid) {
 
     // Show the current tab, and add an "active" class to the button that opened the tab
     document.getElementById(sectiondiv).style.display = "block";
+    if(evt.currentTarget.className.includes("btn")){ return; }
     evt.currentTarget.className += " active";
     getmessages();
 }
