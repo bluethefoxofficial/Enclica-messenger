@@ -12,6 +12,7 @@ api =  localStorage.getItem("ak");
   var username = document.getElementById("username").value;
   var password = document.getElementById("password").value;
   var stuff = `https://${host}/api/api1.php?key=${api}&function=login&username=${username}&password=${password}`;
+  console.log(stuff);
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {

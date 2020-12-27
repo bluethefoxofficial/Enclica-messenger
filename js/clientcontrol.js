@@ -1,3 +1,6 @@
+const { getJSON } = require("jquery");
+
+var seobj;
 //
 // client logout
 //
@@ -22,106 +25,135 @@ function logout() {
 //
 //
 
+
 function listgroups() {
+
     document.getElementById("chatsnav").innerHTML = "";
     document.getElementById("chatsitem").innerHTML = "";
     var stuff =
         `https://${host}/api/api1.php?key=${api}&function=listgroups&token=` +
         localStorage.getItem("token");
+        console.log(stuff);
 
-    var sl = new XMLHttpRequest();
-    sl.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-
-
-            obj = JSON.parse(this.responseText);
-
-            document.getElementById("chatsnav").innerHTML = "";
-            document.getElementById("chatsitem").innerHTML = "";
-            obj.forEach((function(data, index) {
-                var random = Math.random(1, 99999999999);
-                var list = "";
-                members = data.members.split(" ");
-                members.forEach((function(data, index) {
-                    if (data == "") {
-                        return;
-                    }
-                    list += `<div class='icon-container' style="clear: left;">
-          <img style="float: right;"class="iconimg" src="https://csoftware.cf/api/api1.php?key=grUs07Md3s4o9WIb7fi3vu0AGdjinGP8BvFFSvcNI6viEkXFhNY9ZODlNnNWMXfaapeb20NbVBadZtwH9kFUnOgPXn8oWuPPnqJL&function=pfpget&username=${data}" />
-          <div class='statusmask'></div>
-          <div class='status-circle'></div>
-          <p class="membername">${data}</p>
-          </div>`
-                }));
-
-
-                console.log(data);
-                document.getElementById(
-                    "chatsnav"
-                ).innerHTML += `<a class="font-size: 10vw" id="btn_${data.ID}" class="activation" onclick='sectiondiv(event, "win_${data.ID}","0000","0000", ${data.ID})' >${data.name}</a>`;
-                var ownermenu = `<!-- Not the owner of  ${data.name} sorry you can only leave mate. -->
-<ul>
-  <li><p>${data.name}</p></li>
-  <li><a onclick="leave(${data.ID}); sectiondiv(event, 'chats',null,null); listgroups();" href="#"><b>Leave Server</b></a></li>
-  <li><a href="#"><b>Report server</b></a></li>
-  <li><p>Server invite code: ${data.invite}</p></li>
-</ul>
         
-        `;
-                if (username == data.owner) {
-                    ownermenu = `
-                    <ul>
-                    <li><p>${data.name}</p></li>
-                    <li><a onclick="document.getElementById('${data.ID}').style.display = 'block';" href="#"><b>Server manager</b></a></li>
-                    <li><p>Server invite code: ${data.invite}</p></li>
-                  </ul>
-                  <!-- The Modal for ${data.name} -->
-<div id="${data.ID}" class="modal">
+             
+             $.getJSON(stuff, function(result){
+                $.each(result, function(index, data){
+                    var random = Math.random(1, 99999999999);
+                    var list = "";
+                    members = data.members.split(" ");
+            
+                    members.forEach((function(user, index) {
+                        if (user == "") {
+                            return;
+                        }
+                        if(username == data.owner){
+                            list += `<div class='icon-container' style="clear: left;">
+                            <img style="float: right;"class="iconimg" src="https://csoftware.cf/api/api1.php?key=grUs07Md3s4o9WIb7fi3vu0AGdjinGP8BvFFSvcNI6viEkXFhNY9ZODlNnNWMXfaapeb20NbVBadZtwH9kFUnOgPXn8oWuPPnqJL&function=pfpget&username=${user}" />
+                            <div class='statusmask'></div>
+                            <div class='status-circle'></div>
+                            <p class="membername">${user}</p>
+                            </div>
+                            <!-- context menu -->
+                            <div class="menu">
+            <ul class="menu-options">
+            <li class="menu-option">Back</li>
+            <li class="menu-option">Reload</li>
+            <li class="menu-option">Save</li>
+            <li class="menu-option">Save As</li>
+            <li class="menu-option">Inspect</li>
+            </ul>
+            </div>`;
+                                  
+                  
+                        }else{
+            
+                        
+                        list += `<div class='icon-container' style="clear: left;">
+              <img style="float: right;"class="iconimg" src="https://csoftware.cf/api/api1.php?key=grUs07Md3s4o9WIb7fi3vu0AGdjinGP8BvFFSvcNI6viEkXFhNY9ZODlNnNWMXfaapeb20NbVBadZtwH9kFUnOgPXn8oWuPPnqJL&function=pfpget&username=${user}" />
+              <div class='statusmask'></div>
+              <div class='status-circle'></div>
+              <p class="membername">${user}</p>
+              </div>`;
+                        }
+                    }));
+                
+            
+                    console.log(data);
+                    document.getElementById("chatsnav").innerHTML += `<a class="font-size: 10vw" id="btn_${data.ID}" class="activation" onclick='sectiondiv(event, "win_${data.ID}","0000","0000", ${data.ID})' >${data.name}</a>`;
+                    var ownermenu = `<!-- Not the owner of  ${data.name} sorry you can only leave mate. -->
+            <ul>
+            <li><p>${data.name}</p></li>
+            <li><a href="call.html" target="_blank"><b>Call group</b></a></li>
+            <li><a onclick="leave(${data.ID}); sectiondiv(event, 'chats',null,null); listgroups();" href="#"><b>Leave Server</b></a></li>
+            <li><a href="#"><b>Report server</b></a></li>
+            <li><p>Server invite code: ${data.invite}</p></li>
+            </ul>
+            
+            `;
+                    if (username == data.owner) {
+                        ownermenu = `
+                        <ul>
+                        <li><p>${data.name}</p></li>
+                        <li><a onclick="document.getElementById('${data.ID}').style.display = 'block';" href="#"><b>Server manager</b></a></li>
+                        <li><a href="call.html" target="_blank"><b>Call group</b></a></li>
+                        <li><p>Server invite code: ${data.invite}</p></li>
+                      </ul>
+                      <!-- The Modal for ${data.name} -->
+            <div id="${data.ID}" class="modal">
+            
+            <!-- Modal content -->
+            <div class="modal-content" style="height: 100%;">
+            <div class="modal-header bg-primary">
+            <span class="close" onclick="document.getElementById('${data.ID}').style.display = 'none';">&times;</span>
+            <h2>${data.name}</h2>
+            </div>
+            <div class="modal-body">
+            
+            <button class="btn btn-danger" onclick="deletegroup(${data.ID}); sectiondiv(event, 'chats',null,null)"  >Delete Server</button>
+            <h3>Community</h3>
+            <button class="btn btn-info" onclick="return null;"  >Submit for community reviews</button>
+            
+            </div>
+            </div>
+            
+            </div>
+              `;
+                    }
+                    document.getElementById("chatsitem").innerHTML += `
+            <div class="main" id="win_${data.ID}">
+            <div>
+            <input type="file" class="file" id="attachment_${data.ID}" style="display: none;" onchange="fileSelected(this)"/>
+            ${ownermenu}
+            </div>
+            </p>
+            <div class="members" id="${data.ID}_members">
+            ${list}
+            </div>
+            <div class="msg-container" id="${data.ID}_scroll">
+            <div id="${data.ID}_container">
+            </div>
+            </div>
+            <div class="flex" style="  bottom: 0; margin-top: auto; position: sticky;"><textarea type="text" height="20px" style="width: 58%;" rows="1" class="auto_height" placeholder="Message" id="textbox_${data.ID}" onload="auto_height(this);" onKeyPress="sendmessage(event, this); "></textarea> <button style="height: 40px; width: 40px; inline: block; padding: 0px 0px;" onclick="document.getElementById('attachment_${data.ID}').click();" class="btn btn-info"><svg id="i-upload" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+            <path d="M9 22 C0 23 1 12 9 13 6 2 23 2 22 10 32 7 32 23 23 22 M11 18 L16 14 21 18 M16 14 L16 29" />
+            </svg></button></div>
+            <br/>
+            </div>
+            
+            `;
+            document.getElementById('jerror').style.display = 'none';
+                });
+              });
+            
+           
 
-  <!-- Modal content -->
-  <div class="modal-content" style="height: 100%;">
-    <div class="modal-header bg-primary">
-      <span class="close" onclick="document.getElementById('${data.ID}').style.display = 'none';">&times;</span>
-      <h2>${data.name}</h2>
-    </div>
-    <div class="modal-body">
 
-    <button class="btn btn-danger" onclick="deletegroup(${data.ID}); sectiondiv(event, 'chats',null,null)"  >Delete Server</button>
+         
 
-    </div>
-  </div>
 
-</div>
-          `;
-                }
-                document.getElementById("chatsitem").innerHTML += `
-    <div class="main" id="win_${data.ID}">
-    <div>
-    <input type="file" class="file" id="attachment_${data.ID}" style="display: none;" onchange="fileSelected(this)"/>
-    ${ownermenu}
-    </div>
-    </p>
-    <div class="members" id="${data.ID}_members">
-    ${list}
-    </div>
-    <div class="msg-container" id="${data.ID}_scroll">
-    <div id="${data.ID}_container">
-    </div>
-    </div>
-    <div class="flex" style="  bottom: 0; margin-top: auto; position: sticky;"><textarea type="text" height="20px" style="width: 58%;" rows="1" class="auto_height" placeholder="Message" id="textbox_${data.ID}" onload="auto_height(this);" onKeyPress="sendmessage(event, this); "></textarea> <button style="height: 40px; width: 40px; inline: block; padding: 0px 0px;" onclick="document.getElementById('attachment_${data.ID}').click();" class="btn btn-info"><svg id="i-upload" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-    <path d="M9 22 C0 23 1 12 9 13 6 2 23 2 22 10 32 7 32 23 23 22 M11 18 L16 14 21 18 M16 14 L16 29" />
-</svg></button></div>
-    <br/>
-    </div>
-    
-    `;
-                console.log(index);
-            }));
-        }
-    };
 
-    sl.open("GET", stuff, true);
-    sl.send();
+
+
 }
 //
 // SAVE CSS
@@ -152,7 +184,6 @@ function savecss() {
         }
     );
 }
-
 
 
 
@@ -243,8 +274,12 @@ sectiondiv(event, "chats","#ec6ead","#3494e6")
 //scroll to bottom
 
 function scrollToBottom (id) {
+    try{
     var div = document.getElementById(id);
     div.scrollTop = div.scrollHeight - div.clientHeight;
+    }catch(e){
+        
+    }
  }
 
 //dev command

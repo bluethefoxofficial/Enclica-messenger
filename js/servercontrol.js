@@ -18,24 +18,19 @@ function joinserver() {
 
 
         if (this.readyState == 4 && this.status == 200) {
-            setTimeout((function() {
-                document.getElementById("l1-968b").style.display = "none";
-                document.getElementById("preloader").style = "display: none;";
-            }), 1000);
             obj = JSON.parse(this.responseText);
 
             if (obj.code === 568999) {
                 var errornoti = new Audio("../assets/sounds/mp3-converted/denied1.mp3");
                 error.setAttribute("crossorigin", "anonymous");
                 error.play();
+                document.getElementById('jerror').style.display = 'block';
 
-                const error = new Notification(" Encilica Error", {
-                    body: obj.error,
-                    silent: true,
-                    icon: "../assets/images/icons/warning.png",
-                });
             } else {
                 listgroups();
+                var noti = new Audio("../assets/sounds/mp3-converted/noti3.mp3");
+                noti.setAttribute("crossorigin", "anonymous");
+                noti.play();
             }
         }
     };
@@ -64,7 +59,7 @@ function getmessages() {
         localStorage.getItem("token") +
         "&serverid=" +
         currentserver;
-
+    console.log(stuff);
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         var obj = null;
@@ -102,7 +97,7 @@ function getmessages() {
                     }
                 }
             }
-            //console.log(this.responseText);
+            console.log(this.responseText);
             document.getElementById(currentserver + "_container").innerHTML = "";
             document.getElementById(currentserver + "_container").innerHTML = "";
             currentmessages = this.responseText;
@@ -136,7 +131,7 @@ function getmessages() {
               </div>`
                         "</p></div>\n";
                     }
-  //                  scrollToBottom(document.getElementById(currentserver + "_container"));
+                    scrollToBottom(document.getElementById(currentserver + "_container"));
                     silent = 0;
                     return;
                 }
@@ -216,10 +211,17 @@ function getmembers() {
             //console.log(this.responseText);
             document.getElementById(currentserver + "_members").innerHTML = "";
             memberslist = this.responseText;
-
-            obj.forEach((function(data, index) {
-
+            var list = [""];
+             obj.forEach((function(data, index) {
+                 if(data == ""){return; }
+                list += `<div class='icon-container' style="clear: left;">
+                <img style="float: right;"class="iconimg" src="https://csoftware.cf/api/api1.php?key=grUs07Md3s4o9WIb7fi3vu0AGdjinGP8BvFFSvcNI6viEkXFhNY9ZODlNnNWMXfaapeb20NbVBadZtwH9kFUnOgPXn8oWuPPnqJL&function=pfpget&username=${data}" />
+                <div class='statusmask'></div>
+                <div class='status-circle'></div>
+                <p class="membername">${data}</p>
+                </div>`
             }));
+            document.getElementById(currentserver + "_members").innerHTML = list;
         } else {}
     };
 
@@ -238,39 +240,26 @@ function getmembers() {
 
 
 function leave(id) {
-
-
             var stuff =
             "https://csoftware.cf/api/api1.php?key=grUs07Md3s4o9WIb7fi3vu0AGdjinGP8BvFFSvcNI6viEkXFhNY9ZODlNnNWMXfaapeb20NbVBadZtwH9kFUnOgPXn8oWuPPnqJL&function=leavegroup&token=" +
             localStorage.getItem("token") +
             "&serverid=" +
             id;
-    
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                silent = 1;
-                var leave = new Audio(
-                    "../assets/sounds/mp3-converted/noti7.mp3"
-                );
-                leave.play();
-                listgroups();
-                const error = new Notification("Server message", {
-                    body: "You just left a server. If this wasnt you check to see if you have a virus.",
-                    silent: true,
-                    icon: "../assets/images/icons/info_2.png",
-                });
-    
-            } else {
-                console.log(this.responseText.toString());
-                console.log("error");
-                console.log(this.readyState.toString());
-                console.log(this.status.toString());
-            }
-        };
-    
-        xhttp.open("GET", stuff, true);
-        xhttp.send();
+    console.warn(stuff);
+
+fetch(stuff)
+  .then(function (data){
+
+    silent = 1;
+    var leave = new Audio(
+        "../assets/sounds/mp3-converted/noti7.mp3"
+    );
+    leave.play();
+    listgroups();
+
+  }).catch(function(data){
+      console.log("FATAL ERROR");
+  });
 
 }
 

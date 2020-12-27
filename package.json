@@ -1,11 +1,12 @@
 {
   "name": "enclica",
-  "version": "1.2.1",
+  "version": "2.0.3",
   "description": "A messaging application for artists and you",
   "main": "index.js",
   "scripts": {
     "test": "electron .",
-    "compile": "electron-builder"
+    "compile": "electron-builder",
+    "start": ".\\node_modules\\electron\\dist\\electron.exe index.js --enable-logging"
   },
   "keywords": [
     "messaging",
@@ -14,16 +15,18 @@
   "author": "Csoftware",
   "license": "ISC",
   "dependencies": {
+    "electron-is": "^3.0.0",
     "electron-localstorage": "^1.0.5",
     "jquery": "^3.5.1",
-    "md5": "^2.2.1",
-    "simple-peer": "^9.8.0",
+    "md5": "^2.3.0",
+    "simple-peer": "^9.9.3",
     "sweetalert": "^2.1.2",
+    "v8-compile-cache": "^2.2.0",
     "wrtc": "^0.4.6"
   },
   "devDependencies": {
-    "electron": "^8.5.2",
-    "electron-builder": "^22.8.0"
+    "electron": "^11.1.1",
+    "electron-builder": "^22.9.1"
   },
   "build": {
     "productName": "enclica",

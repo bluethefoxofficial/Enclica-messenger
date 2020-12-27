@@ -2,8 +2,6 @@ const { app, BrowserWindow, Menu, Tray } = require("electron");
 var hide = 0;
 let appIcon = null;
 let win = null;
-
-
 const menu = Menu.buildFromTemplate([
   {
     label: 'Quit',
@@ -15,25 +13,27 @@ const menu = Menu.buildFromTemplate([
   },
 ]);
 
-
-
 app.whenReady().then(() => {
   win = new BrowserWindow({
     titleBarStyle: 'hidden',
     width: 1080,
     height: 720,
-    icon: __dirname + "/assets/images/Enclica logo.png",
+
     webPreferences: {
       nodeIntegration: true,
       allowRunningInsecureContent: true,
-      webSecurity: false
+      "page-visibility": true,
+      webSecurity: true
     },
+    icon: __dirname + "/assets/images/Enclica logo.png"
   });
   win.loadFile("./windows/login.html");
   win.on('minimize',function(event){
-    event.preventDefault();
-    win.hide();
-    hide = 1;
+
+    
+   // win.hide();
+   // hide = 1;
+   // event.preventDefault();
   });
   
   win.on('close', function (event) {
@@ -63,6 +63,4 @@ app.whenReady().then(() => {
     app.quit();
   })
 
-  module.exports.getLink = () => link;
-
-  app.setAsDefaultProtocolClient("enclica");
+  

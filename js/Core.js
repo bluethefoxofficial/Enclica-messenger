@@ -1,4 +1,5 @@
 var currentmessages = null;
+var log = false;
 var silent = 1;
 var username;
 var numberofmessages = 0;
@@ -8,9 +9,9 @@ var shell = require('electron').shell;
 var $ = require("jquery");
 var memberslist = null;
 var swal = require( 'sweetalert' );
-var md5 = require("md5");
 var os = require("os");
 var obj;
+var sevmax = 1000000000000000000;
 var email;
 var username;
 const fs = require("fs");
@@ -38,3 +39,4 @@ function timeConverter(UNIX_timestamp) {
     var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec;
     return time;
 }
+var version = "2.0.1";

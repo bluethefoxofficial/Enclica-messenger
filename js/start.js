@@ -38,7 +38,7 @@ xhttp.onreadystatechange = function() {
     }
 
 
-    function readFile(filepath) {
+   /* function readFile(filepath) {
         fs.readFile(filepath, "utf-8", (function(err, data) {
             if (err) {
                 alert("An error ocurred reading the file :" + err.message);
@@ -47,7 +47,7 @@ xhttp.onreadystatechange = function() {
             document.getElementById("customcss").innerHTML = data;
         }));
     }
-    readFile(__dirname + "/../assets/configurable/custom.css");
+    readFile(__dirname + "/../assets/configurable/custom.css"); */
 };
 xhttp.open("GET", stuff, true);
 xhttp.send();

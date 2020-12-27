@@ -13,14 +13,17 @@
 
   template.createPage(title, head, body);
 </script>
-    <link rel="stylesheet" href="../assets/configurable/custom.css">
+<link rel="stylesheet" href="../assets/configurable/custom.css">
+<link rel="stylesheet" href="../assets/css/contextmenu.css">
+    
 <div class="sidenav">
   <p class="usernametextblock" id="usernametext"></p>
   <p style="color: white;" id="enclica">Encilica</p>
- 
   <a class="activation" id="chatoblock" onclick='sectiondiv(event, "chats","#ec6ead","#3494e6")' >chats</a>
   <a class="activation" id="currentcall_btn" style="display: block;" onclick='sectiondiv(event, "currentcall","#ec6ead","#3494e6")' >Current Call</a>
   <a class="activation" onclick='sectiondiv(event, "settings","#00a2ff","#ab34e6")' >settings</a>
+  <a class="activation" onclick='sectiondiv(event, "games","#00a2ff","#ab34e6")' >Library</a>
+  <a class="activation pulsate" onclick='update()' style="color: rgb(0, 117, 6); display: none;">UPDATE enclica</a>
   <p id="serverlist">Server List</p>
   <div id="chatsnav">
 
@@ -48,9 +51,9 @@
   </div>
   </div>
 
-<div class="main" id="chats" >
+<div class="main" id="chats">
   <h2>Chats</h2>
-  <input style="width: 200px;" type="text" required id="serverjoininputbox" placeholder="server invite code" />
+  <input style="width: 200px;" type="text" required id="serverjoininputbox" placeholder="server invite code" /><p id="jerror" style="color: red; display: none;">failed to join server please try again.</p>
   <button class="btn btn-success" style="width: 200px;" id="joinserverbutton" onclick="joinserver();" height="90px" width="90px">Join server</button>
     <button id="create_btn" style="width: 200px;" class="btn btn-info">Create server</button>
 <div class="loading" id="preloader"></div>
@@ -74,15 +77,20 @@
 
 </div>
 <!--
-<h2>CALLING MEMBERS</h2>
-
-<p>Your RTC ID: <span id="myrtcid"></span></p>
-<input id="rrtcid" style="width:100px;" type="text" placeholder="Recipient RTC ID" />
-<button class="btn btn-info" onclick="makecall();" style="width: 200px; height: 50px;">Call</button>
-
+calling members has been moved to call.html
 -->
+
+
+
+<h2>Communities.</h2>
+<div id="com">
+
 </div>
-<!-- community servers-->
+
+
+
+</div>
+
 
 
 </div>
@@ -130,9 +138,10 @@
     <div class="modal-body">
       <p>Project manager and lead developer: Kessan Robertson.</p><br/>
       <p>Contributer: vistax64 KonradCzerw</p><br/>
-      <p>Contributer: furry dumbass</p><br/>
+      <p>Contributer: furry</p><br/>
       <p>Contributer: Gamerappa</p><br/>
       <p>Tester: Wilber</p><br/>
+      <p>Tester: Aruna the fluffy wolfie </p><br/>
       <!-- insert your name here  <p>role: name</p><br/> -->
     </div>
   </div>
@@ -151,23 +160,6 @@ RTC CURRENTCALL SCREEN
 
 
 -->
-
-<div class="main" id="currentcall">
-  <h2>your current call</h2>
-  <span>you</span>
-  <video muted id="video" width="400px" height="255px" poster="../assets/images/calling window.png"></video>
-  <span>them</span>
-  <video id="videorec" width="400px" height="255px" poster="../assets/images/calling window.png"></video>
-  <p>
-    <button class="btn btn-danger" style="width: 300px" onclick="endcall();">End call</button>
-    <button class="btn btn-info" style="width: 300px">Mute</button>
-    <button class="btn btn-info" style="width: 300px">Hide video</button>
-    <button class="btn btn-danger" onclick="reportcall();" style="width: 300px">report</button>
-    <p>CALL STATUS: <span id="callstatus">Connecting...</span></p>
-    <p>OUTGOING STATUS: <span id="#outgoing">Connecting...</span></p>
-    
-  </p>
-</div>
 
 
 <div id="chatsitem">
@@ -197,6 +189,8 @@ RTC CURRENTCALL SCREEN
 <script src="../js/filecontrol.js"></script>
 <script src="../js/clientcontrol.js"></script>
 <script src="../js/modal.js"></script>
+<script src="../js/contextmenu.js"></script>
+<script src="../js/update.js"></script>
 <script src="../js/messagecontrol.js"></script>
 <script src="../js/RTC.js"></script>
 <script src="../js/servercontrol.js"></script>

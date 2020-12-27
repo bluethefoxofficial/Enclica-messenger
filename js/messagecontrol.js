@@ -37,7 +37,7 @@ function sendmessage(e, input) {
             return commandhandler(input, "");
         }
         if (numberofmessages == 10) {
-            document.getElementById("spam").style.display = "block";
+            document.querySelector("#spam").style.display = "block";
             return;
         }
         if (input.value == "") {
@@ -57,9 +57,9 @@ function sendmessage(e, input) {
                 console.log(this.responseText);
                 silent = 1;
                 getmessages();
-                document.getElementById(
+                document.querySelector("#" +
                     currentserver + "_container"
-                ).scrollTop = document.getElementById(
+                ).scrollTop = document.querySelector("#" +
                     currentserver + "_container"
                 ).scrollHeight;
                 silent = 1;
@@ -109,7 +109,7 @@ function linkify(inputText) {
     replacePattern3 = /(([a-zA-Z0-9\-\_\.])+@[a-zA-Z\_]+?(\.[a-zA-Z]{2,6})+)/gim;
     replacedText = replacedText.replace(
         replacePattern3,
-        '<a href="mailto:$1">$1</a>'
+        '<a href="mailto:$1" target="_blank">$1</a>'
     );
 
     return replacedText;
@@ -138,22 +138,27 @@ function commandhandler(input, messagecontainer) {
 //
 
 function spamprevention() {
-
+    if(log == true){
+        console.warn("CONSOLE LOGGING IS ENABLED THIS WILL REVEAL DATA THAT SHOULDNT BE SHARED!");
+        console.warn("spam timer cleared.");
+    }
     numberofmessages = 0;
 
     
 }
-setTimeout(spamprevention, 5000);
+setInterval(spamprevention, 5000);
 spamprevention();
 
+
 function dismissspam() {
-    document.getElementById("spam").style.display = "none";
+    document.querySelector("#spam").style.display = "none";
 }
 window.setInterval((function() {
     getmessages();
 }), 1000);
 window.setInterval((function() {
     getmembers();
+    
 }), 8000);
 
 
@@ -172,20 +177,8 @@ function deletemessage(messageid,file){
     localStorage.getItem("token") +
     "&messageid=" +
     messageid + "&file=" + file;
-
-var xhttp = new XMLHttpRequest();
-xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      silent = 1;
-      getmessages();
-    } else {
-        console.log(this.responseText.toString());
-        console.log("error");
-        console.log(this.readyState.toString());
-        console.log(this.status.toString());
-    }
-};
-
-xhttp.open("GET", stuff, true);
-xhttp.send();
+fetch(stuff).then(function(){
+    silent = 1;
+    getmessages();
+});
 }
