@@ -68,7 +68,7 @@ function getmessages() {
         localStorage.getItem("token") +
         "&serverid=" +
         currentserver;
-    console.log(stuff);
+    //console.log(stuff);
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         var obj = null;
@@ -106,7 +106,7 @@ function getmessages() {
                     }
                 }
             }
-            console.log(this.responseText);
+           // console.log(this.responseText);
             document.getElementById(currentserver + "_container").innerHTML = "";
             document.getElementById(currentserver + "_container").innerHTML = "";
             currentmessages = this.responseText;
@@ -254,7 +254,7 @@ function leave(id) {
             localStorage.getItem("token") +
             "&serverid=" +
             id;
-    console.warn(stuff);
+    //console.warn(stuff);
 
 fetch(stuff)
   .then(function (data){
@@ -267,7 +267,7 @@ fetch(stuff)
     listgroups();
 
   }).catch(function(data){
-      console.log("FATAL ERROR");
+     // console.log("FATAL ERROR");
   });
 
 }

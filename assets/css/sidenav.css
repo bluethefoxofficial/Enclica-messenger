@@ -10,6 +10,7 @@
   white-space: nowrap;
   left: 0;
   background-color: #111111c0;
+  backdrop-filter: blur(5px);
   overflow-x: hidden;
   padding-top: 20px;
   -webkit-touch-callout: none;
@@ -30,6 +31,7 @@
   .sidenav:hover {
     width: 400px;
     max-width: 400px;
+    backdrop-filter: blur(50px);
   }
   .sidenav .usernametextblock {
     display: none;

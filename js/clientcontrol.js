@@ -33,7 +33,7 @@ function listgroups() {
     var stuff =
         `https://${host}/api/api1.php?key=${api}&function=listgroups&token=` +
         localStorage.getItem("token");
-        console.log(stuff);
+      //  console.log(stuff);
 
         
              
@@ -79,7 +79,7 @@ function listgroups() {
                     }));
                 
             
-                    console.log(data);
+                  //  console.log(data);
                     document.getElementById("chatsnav").innerHTML += `<a class="font-size: 10vw" id="btn_${data.ID}" class="activation" onclick='sectiondiv(event, "win_${data.ID}","0000","0000", ${data.ID})' >${data.name}</a>`;
                     var ownermenu = `<!-- Not the owner of  ${data.name} sorry you can only leave mate. -->
             <ul>
@@ -167,7 +167,7 @@ function savecss() {
     var refresh = new Audio("../assets/sounds/mp3-converted/noti3.mp3");
     refresh.play();
     document.getElementById("l1-968c").style.display = "block";
-    console.log();
+   // console.log();
     const data = new Uint8Array(
         Buffer.from(document.getElementById("customcss").value)
     );

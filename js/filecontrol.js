@@ -63,7 +63,7 @@ function fileSelected(input) {
                     swal("UPLOADED", "Your file has been uploaded to this enclica server.", "success");
                 },
                 error: function(data) {
-                    swal("UPLOAD ERROR", "Your file has had an error when trying to upload. Please try again.", "error");
+                    swal(`UPLOAD ERROR", "Your file has had an error when trying to upload. Please try again. <p>${data.responseText}</p>`, "error");
                     console.log(data);
                 }
             });

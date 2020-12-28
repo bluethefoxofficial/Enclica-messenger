@@ -9,7 +9,7 @@ function setup(){
     var ak = document.getElementById("ak").value
     var stuff =
     `https://${host}/api/api1.php?key=${ak}&function=test`;
-  console.log(stuff);
+  //console.log(stuff);
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     
