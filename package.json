@@ -1,8 +1,8 @@
 {
   "name": "enclica",
   "version": "2.0.5",
-  "description": "A messaging application for artists and you",
-  "main": "index.js",
+  "description": "The easy opensource messaging solution for you.",
+  "main": "app.js",
   "scripts": {
     "test": "electron .",
     "compile": "electron-builder",
@@ -21,6 +21,7 @@
     "md5": "^2.3.0",
     "simple-peer": "^9.9.3",
     "sweetalert": "^2.1.2",
+    "sweetalert2": "^10.12.6",
     "v8-compile-cache": "^2.2.0",
     "wrtc": "^0.4.6"
   },

@@ -35,13 +35,22 @@ function fileSelected(input) {
                     } else {
                         jqXHR = new window.XMLHttpRequest();
                     }
-        
+                    swal({
+                        title: 'Uploading....',
+                        allowEscapeKey: false,
+                        allowOutsideClick: false,
+                        buttons: false,
+                        onOpen: () => {
+                          swal.showLoading();
+                        }
+                      });
                     //Upload progress
                     jqXHR.upload.addEventListener("progress", (function(evt) {
                         if (evt.lengthComputable) {
                             var percentComplete = Math.round((evt.loaded * 100) / evt.total);
                             //Do something with upload progress
                             console.log('Uploaded percent', percentComplete);
+                            document.getElementById('fileprogress').value=percentComplete;
                         }
                     }), false);
         
@@ -51,6 +60,7 @@ function fileSelected(input) {
                             var percentComplete = Math.round((evt.loaded * 100) / evt.total);
                             //Do something with download progress
                             console.log('Downloaded percent', percentComplete);
+                            
                         }
                     }), false);
         

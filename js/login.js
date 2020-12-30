@@ -1,3 +1,4 @@
+var swal = require( 'sweetalert' );
 function login(e) {
   e.preventDefault();
 var host;
@@ -20,11 +21,15 @@ api =  localStorage.getItem("ak");
       var obj = JSON.parse(this.responseText);
       console.log(obj);
       if (obj.error) {
-        var error = new Audio("../assets/sounds/mp3-converted/denied2.mp3");
+        var error = new Audio("../assets/sounds/mp3-converted/noti7.mp3");
         error.setAttribute("crossorigin", "anonymous");
         error.play();
         document.getElementById("errortext").innerHTML = obj.error;
-        document.getElementById("error").style.display = "inline";
+        swal({
+          title: "Login error",
+          text: obj.error,
+          icon: "error",
+        });
       }
       if (obj.login_token) {
         localStorage.setItem("token", obj.login_token);
