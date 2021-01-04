@@ -1,32 +1,64 @@
-const { app, BrowserWindow } = require('electron');
-const path = require('path');
-app.commandLine.appendSwitch('auto-detect', 'false');
-app.commandLine.appendSwitch('no-proxy-server');
-let win;
+const { app, BrowserWindow, Menu, Tray } = require("electron");
+var hide = 0;
+let appIcon = null;
+let win = null;
+const menu = Menu.buildFromTemplate([
+  {
+    label: 'Quit',
+    click() { app.quit(); process.exit();}
+  },
+  {
+    label: 'Hide/show',
+    click() {if(hide == 0){win.hide(); hide=1;}else{win.show();hide=0;}}
+  },
+]);
 
-var IMG_DIR = '/assets/images/';
-var APP_DIR = '/windows/';
-
-app.on('ready',createwin);
-
-
-
-function createwin(){
+app.whenReady().then(() => {
   win = new BrowserWindow({
+    titleBarStyle: 'hidden',
     width: 1080,
     height: 720,
-    icon: path.join(__dirname, IMG_DIR, 'enclica_logo_small.png')
+
+    webPreferences: {
+      nodeIntegration: true,
+      allowRunningInsecureContent: true,
+      "page-visibility": true,
+      webSecurity: true
+    },
+    icon: __dirname + "/assets/images/Enclica_logo_small.png"
+  });
+  win.loadFile("./windows/login.html");
+  win.on('minimize',function(event){
+
+    
+   // win.hide();
+   // hide = 1;
+   // event.preventDefault();
+  });
+  
+  win.on('close', function (event) {
+    
+        event.preventDefault();
+        win.hide();
+        hide = 1;
+    
+  });
+  win.on('new-window', function(event, url){
+    event.preventDefault();
+    open(url);
+  });
+  appIcon = new Tray('assets/images/Enclica_logo_small.png');
+  appIcon.setContextMenu(menu);
+  appIcon.on('click', function (){
+    win.show();
+  });
+  
   });
 
-
-
-}
-
-
-
-app.on('window-all-closed',() => {
-
-  if(process.platform !== 'darwin'){
+  app.on('open-url', function (event, data) {
+    event.preventDefault();
+    link = data;
+  });
+  app.on('window-all-closed', () => {
     app.quit();
-  }
-});
+  })
