@@ -84,7 +84,7 @@ function listgroups() {
                     var ownermenu = `<!-- Not the owner of  ${data.name} sorry you can only leave mate. -->
             <ul>
             <li><p>${data.name}</p></li>
-            <li><a href="call.html" target="_blank"><b>Call group</b></a></li>
+            <li><a href="call.html" target="_blank"><b>start voice session</b></a></li>
             <li><a onclick="leave(${data.ID}); sectiondiv(event, 'chats',null,null); listgroups();" href="#"><b>Leave Server</b></a></li>
             <li><a href="#"><b>Report server</b></a></li>
             <li><p>Server invite code: ${data.invite}</p></li>
@@ -96,7 +96,7 @@ function listgroups() {
                         <ul>
                         <li><p>${data.name}</p></li>
                         <li><a onclick="document.getElementById('${data.ID}').style.display = 'block';" href="#"><b>Server manager</b></a></li>
-                        <li><a href="call.html" target="_blank"><b>Call group</b></a></li>
+                        <li><a href="call.html" target="_blank"><b>start voice session</b></a></li>
                         <li><p>Server invite code: ${data.invite}</p></li>
                       </ul>
                       <!-- The Modal for ${data.name} -->

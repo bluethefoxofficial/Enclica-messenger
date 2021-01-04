@@ -39,4 +39,5 @@ function timeConverter(UNIX_timestamp) {
     var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec;
     return time;
 }
-var version = "2.0.5";
+var version = "2.0.6";
+var versionname = "The performance update";
