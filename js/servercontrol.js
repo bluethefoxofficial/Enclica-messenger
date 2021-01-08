@@ -4,7 +4,7 @@
 //
 //
 //
-
+var delbtn = "";
 function joinserver() {
     if (sevmax == 100) return;
     var server = currentserver;
@@ -112,58 +112,90 @@ function getmessages() {
             currentmessages = this.responseText;
 
             obj.forEach((function(data, index) {
-                //if it has a file (image only currently)
-                if (data.file !== null) {
-                    if (data.sender == username) {
-                        document.getElementById(currentserver + "_container").innerHTML +=
-                            "<div class='msg sender'><p style='color: rgba(0,0,0,1); font-size: 12px;'>" +
-                            data.sender + " | " + timeConverter(data.time) +
-                            `</p><p><img onclick="document.getElementById('${data.file}').style.display = 'block';" src="https://cdn.csoftware.cf/enc/data/${data.sender}/${data.file}" width="30%"/>`+ `\n<button class="btn-danger btn btn-loc btn-danger" style="width: 50px; height: 18px; padding:0px 0px;"onclick='deletemessage(${data.ID},"${data.file}");'><svg id="i-trash" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                if(data.sender == username){
+                   delbtn = `<button class="btn btn-danger" style="width: 50px; height: 18px; padding:0px 0px;"onclick='deletemessage(${data.ID},"${data.file}");'><svg id="i-trash" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
                             <path d="M28 6 L6 6 8 30 24 30 26 6 4 6 M16 12 L16 24 M21 12 L20 24 M11 12 L12 24 M12 6 L13 2 19 2 20 6" />
-                        </svg></button>\n` +
-                            `<div id="${data.file}" class="img-modal">
-                  <span class="close" onclick="document.getElementById('${data.file}').style.display = 'none';">&times;</span>
-                  <img class="img-modal-content" src="https://cdn.csoftware.cf/enc/data/${data.sender}/${data.file}" id="img01">
-                  <div id="caption"><a onclick='shell.openExternal("https://cdn.csoftware.cf/enc/data/${data.sender}/${data.file}");' href="#">Open Original</a></div>
-                </div>`
-                        "</p></div>\n";
-                        return;
-                    } else {
-                        document.getElementById(currentserver + "_container").innerHTML +=
-                            "<div class='msg'><p style='color: rgba(0,0,0,1); font-size: 12px;'>" +
-                            data.sender + " | " + timeConverter(data.time) +
-                            `</p><p><img onclick="document.getElementById('${data.file}').style.display = 'block';" src="https://cdn.csoftware.cf/enc/data/${data.sender}/${data.file}" width="30%"/>` +
-                            `<div id="${data.file}" class="img-modal">
-                <span class="close" onclick="document.getElementById('${data.file}').style.display = 'none';">&times;</span>
-                <img class="img-modal-content" src="https://cdn.csoftware.cf/enc/data/${data.sender}/${data.file}" id="img01">
-                <div id="caption"><a onclick='shell.openExternal("https://cdn.csoftware.cf/enc/data/${data.sender}/${data.file}");' href="#">Open Original</a></div>
-              </div>`
-                        "</p></div>\n";
+                        </svg></button>`;
+                }
+                if (data.file !== null) {
+                    console.log(`${data.file} FILE EXTENTION FOR ` + getExtension(data.file));
+                    if(getExtension(data.file) === "png" || getExtension(data.file) === "jpg" || getExtension(data.file) === "gif" || getExtension(data.file) == "tiff" ){
+                    document.getElementById(currentserver + "_container").innerHTML += `<div id="${data.file}" class="img-modal">
+                    <span class="close" onclick="document.getElementById('${data.file}').style.display = 'none';">&times;</span>
+                    <img class="img-modal-content" src="https://cdn.csoftware.cf/enc/data/${data.sender}/${data.file}" id="img01">
+                    <div id="caption"><a onclick='shell.openExternal("https://cdn.csoftware.cf/enc/data/${data.sender}/${data.file}");' href="#">Open Original</a></div>
+                    </div>`;
                     }
+
+                       
+                        //
+                        //message based off file type
+                        //
+              /* IMAGES  */     if(getExtension(data.file) === "png" || getExtension(data.file) === "jpg" || getExtension(data.file) === "gif" || getExtension(data.file) == "tiff" ){
+                            document.getElementById(currentserver + "_container").innerHTML += 
+                            `<div class="ccontainer darker">
+                            <span class="sender">${data.sender}</span>
+                            <img class="avi" src="https://csoftware.cf/api/api1.php?key=grUs07Md3s4o9WIb7fi3vu0AGdjinGP8BvFFSvcNI6viEkXFhNY9ZODlNnNWMXfaapeb20NbVBadZtwH9kFUnOgPXn8oWuPPnqJL&function=pfpget&username=${data.sender}" alt="Avatar" style="width:100%;">
+                            <p>
+                           
+                            <img class="img" onclick="document.getElementById('${data.file}').style.display = 'block';" src="https://cdn.csoftware.cf/enc/data/${data.sender}/${data.file}" width="30%" />
+                            ${data.file}<br/>
+                            </p>
+                            <span class="time-right">${timeConverter(data.time)}</span>
+                            ${delbtn}
+                            </div>`;
+             /* AUDIO  */       }else if(getExtension(data.file) === "mp3" || getExtension(data.file) === "wav"){
+                            document.getElementById(currentserver + "_container").innerHTML += 
+                            `<div class="ccontainer darker">
+                            <span class="sender">${data.sender}</span>
+                            <img class="avi" src="https://csoftware.cf/api/api1.php?key=grUs07Md3s4o9WIb7fi3vu0AGdjinGP8BvFFSvcNI6viEkXFhNY9ZODlNnNWMXfaapeb20NbVBadZtwH9kFUnOgPXn8oWuPPnqJL&function=pfpget&username=${data.sender}" alt="Avatar" style="width:100%;">
+                            <p>
+                            ${data.file}<br/>
+                            <button class="btn btn-info" onclick="play('https://cdn.csoftware.cf/enc/data/${data.sender}/${data.file}')">play audio</button>
+                            </p>
+                            <span class="time-right">${timeConverter(data.time)}</span>
+                            ${delbtn}
+                            </div>`;
+             /* VIDEO  */      }else if(getExtension(data.file) === "avi" || getExtension(data.file) === "mp4"){
+                            document.getElementById(currentserver + "_container").innerHTML += 
+                            `<div class="ccontainer darker">
+                            <span class="sender">${data.sender}</span>
+                            <img class="avi" src="https://csoftware.cf/api/api1.php?key=grUs07Md3s4o9WIb7fi3vu0AGdjinGP8BvFFSvcNI6viEkXFhNY9ZODlNnNWMXfaapeb20NbVBadZtwH9kFUnOgPXn8oWuPPnqJL&function=pfpget&username=${data.sender}" alt="Avatar" style="width:100%;">
+                            <p>
+                            ${data.file}<br/>
+                            <button class="btn btn-info" onclick="play('https://cdn.csoftware.cf/enc/data/${data.sender}/${data.file}', 'video')">play video</button>
+                            </p>
+                            <span class="time-right">${timeConverter(data.time)}</span>
+                            ${delbtn}
+                            </div>`;
+             /* OTHERS */      }else{
+                document.getElementById(currentserver + "_container").innerHTML += 
+                `<div class="ccontainer darker">
+                <span class="sender">${data.sender}</span>
+                <img class="avi" src="https://csoftware.cf/api/api1.php?key=grUs07Md3s4o9WIb7fi3vu0AGdjinGP8BvFFSvcNI6viEkXFhNY9ZODlNnNWMXfaapeb20NbVBadZtwH9kFUnOgPXn8oWuPPnqJL&function=pfpget&username=${data.sender}" alt="Avatar" style="width:100%;">
+                <p>
+                <a onclick='shell.openExternal("https://cdn.csoftware.cf/enc/data/${data.sender}/${data.file}");' href="#">Open ${data.file} in browser </a><br/><span style="color:red">UNTRUSTED FILE THIS HASNT BEEN SCANNED FOR VIRUSES</span>
+                </p>
+                <span class="time-right">${timeConverter(data.time)}</span>
+                ${delbtn}
+                </div>`;
+                               }
+                        return;
                     scrollToBottom(document.getElementById(currentserver + "_container"));
                     silent = 0;
                     return;
                 }
 
-                //normal text mode (CLASSIC ALPHA)
-
-                if (data.sender == username) {
-                    document.getElementById(currentserver + "_container").innerHTML +=
-                        `<div class='msg sender'><p style='color: rgba(0,0,0,1); font-size: 12px;'>` +
-                        data.sender + " | " + timeConverter(data.time) +
-                        "</p><p>" +
-                        linkify(data.message) + `\n<button class="btn-danger btn btn-loc btn-danger" style="width: 50px; height: 18px; padding:0px 0px;"onclick='deletemessage(${data.ID});'><svg id="i-trash" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-                        <path d="M28 6 L6 6 8 30 24 30 26 6 4 6 M16 12 L16 24 M21 12 L20 24 M11 12 L12 24 M12 6 L13 2 19 2 20 6" />
-                    </svg></button>\n` +
-                        "</p></div>\n";
-                } else {
-                    document.getElementById(currentserver + "_container").innerHTML +=
-                        `<div class='msg'><p style='color: rgba(0,0,0,1); font-size: 12px;'>` +
-                        data.sender + " | " + timeConverter(data.time) +
-                        "</p><p>" +
-                        linkify(data.message) +
-                        "</p></div>\n";
-                }
+                //normal text
+                        document.getElementById(currentserver + "_container").innerHTML += 
+                            `<div class="ccontainer darker">
+                            <span class="sender">${data.sender}</span>
+                            <img  class="avi" src="https://csoftware.cf/api/api1.php?key=grUs07Md3s4o9WIb7fi3vu0AGdjinGP8BvFFSvcNI6viEkXFhNY9ZODlNnNWMXfaapeb20NbVBadZtwH9kFUnOgPXn8oWuPPnqJL&function=pfpget&username=${data.sender}" alt="Avatar" style="width:100%;">
+                            <p>${linkify(data.message)}</p>
+                            <span class="time-right">${timeConverter(data.time)}</span>
+                            ${delbtn}
+                            </div>`;
+                
                // scrollToBottom(document.getElementById(currentserver + "_container"));
                 
                 scrollToBottom(currentserver + "_scroll");

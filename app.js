@@ -2,6 +2,7 @@ const { app, BrowserWindow, Menu, Tray } = require("electron");
 var hide = 0;
 let appIcon = null;
 let win = null;
+
 const menu = Menu.buildFromTemplate([
   {
     label: 'Quit',
@@ -15,15 +16,17 @@ const menu = Menu.buildFromTemplate([
 
 app.whenReady().then(() => {
   win = new BrowserWindow({
-    titleBarStyle: 'hidden',
+   // preload: path.join(__dirname, 'preload.js'),
     width: 1080,
     height: 720,
-
+    titleBarStyle: "hidden",
+    frame: false,
     webPreferences: {
       nodeIntegration: true,
       allowRunningInsecureContent: true,
       "page-visibility": true,
-      webSecurity: true
+      webSecurity: true,
+      enableRemoteModule: true
     },
     icon: __dirname + "/assets/images/Enclica_logo_small.png"
   });

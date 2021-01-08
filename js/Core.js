@@ -2,12 +2,14 @@ var currentmessages = null;
 var log = false;
 var silent = 1;
 var username;
+var resstring = "";
 var numberofmessages = 0;
 //var call = null;
 var nomessages = "";
 //var shell = require('electron').shell;
 var $ = require("jquery");
 var memberslist = null;
+const { shell } = require('electron')
 var swal = require( 'sweetalert' );
 var os = require("os");
 var obj;
@@ -39,5 +41,19 @@ function timeConverter(UNIX_timestamp) {
     var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec;
     return time;
 }
-var version = "2.0.6";
-var versionname = "The performance update";
+function getExtension(path) {
+    var basename = path.split(/[\\/]/).pop(),  // extract file name from full path ...
+                                               // (supports `\\` and `/` separators)
+        pos = basename.lastIndexOf(".");       // get last position of `.`
+
+    if (basename === "" || pos < 1)            // if file name is empty or ...
+        return "";                             //  `.` not found (-1) or comes first (0)
+
+    return basename.slice(pos + 1);            // extract extension ignoring `.`
+}
+
+//version and version name.
+var version = "2.0.7";
+var versionname = "The style and file update";
+
+

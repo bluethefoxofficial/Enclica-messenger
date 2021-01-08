@@ -1,0 +1,47 @@
+
+  
+  .ccontainer {
+    border: 2px solid #dedede;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    word-wrap: break-word;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: small;
+    color: #646464;
+  }
+  
+  .ccontainer::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  
+  .ccontainer .avi {
+    float: left;
+    max-width: 60px;
+    width: 100%;
+    margin-right: 20px;
+    border-radius: 50%;
+  }
+  
+  .ccontainer .avi.right {
+    float: right;
+    margin-left: 20px;
+    margin-right:0;
+  }
+  
+  .time-right {
+    float: right;
+    color: #aaa;
+    font-size: small;
+  }
+  .sender{
+          color: #999;
+  }
+  
+  .time-left {
+    float: left;
+    color: #999;
+    font-size: small;
+  }

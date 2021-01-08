@@ -1,10 +1,10 @@
 var Peer = require('simple-peer')
-var declined = new Audio("../assets/sounds/mp3-converted/declined_call.mp3");
+//var declined = new Audio("../assets/sounds/mp3-converted/declined_call.mp3");
 var connecting = new Audio("../assets/sounds/mp3-converted/connecting_call.mp3");
 var globalstream = null
 var Peer = require('simple-peer');
 
-const p = new SimplePeer({
+const p = new Peer({
   initiator: location.hash === '#1',
   trickle: false
 })
@@ -12,6 +12,7 @@ const p = new SimplePeer({
 p.on('error', err => console.log('error', err))
 
 p.on('signal', data => {
+  document.getElementById('status').innerHTML = "connecting...";
   console.log('SIGNAL', JSON.stringify(data))
   document.querySelector('#outgoing').textContent = JSON.stringify(data)
 })
@@ -20,7 +21,7 @@ p.on('signal', data => {
 
 p.on('connect', () => {
   console.log('CONNECT')
-  p.send('whatever' + Math.random())
+  p.send('whatever' + Math.random());
 })
 
 p.on('data', data => {

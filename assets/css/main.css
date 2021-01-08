@@ -5,6 +5,7 @@ body {
   position:fixed;
   z-index: 6;
   width:100%;
+
   height:100%;
   background-color:#1f1f1f;
   background-image:url(https://picsum.photos/1920/1080);
@@ -76,6 +77,7 @@ body {
   
   .main {
   margin-left:228px;
+  margin-right: 8px;
   /* Same as the width of the sidenav */
   font-size:28px;
   /* Increased text to enable scrolling */
@@ -518,4 +520,33 @@ body {
   display:-ms-flexbox;
   display:-webkit-flex;
   display:flex;
+  }
+
+
+
+
+
+  /* video and audio */
+  .video-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%; 
+    overflow: hidden;
+  }
+  .video-container video {
+    /* Make video to at least 100% wide and tall */
+    min-width: 100%; 
+    min-height: 100%; 
+  
+    /* Setting width & height to auto prevents the browser from stretching or squishing the video */
+    width: auto;
+    height: auto;
+  
+    /* Center the video */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
   }

@@ -1,3 +1,4 @@
+
 document.getElementById("host").innerHTML = host;
 
 document.getElementById("chatoblock").click();
