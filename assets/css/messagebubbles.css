@@ -1,14 +1,15 @@
 
   
   .ccontainer {
-    border: 2px solid #dedede;
-    background-color: #f1f1f1;
+    background-color: #505050;
     border-radius: 5px;
     word-wrap: break-word;
     padding: 10px;
     margin: 10px 0;
     font-size: small;
-    color: #646464;
+    left: 4px;
+    right: 4px;
+    color: #b1b1b1;
   }
   
   .ccontainer::after {
@@ -37,7 +38,7 @@
     font-size: small;
   }
   .sender{
-          color: #999;
+          color: rgb(110, 110, 110);
   }
   
   .time-left {

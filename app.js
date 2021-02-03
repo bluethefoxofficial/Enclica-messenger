@@ -2,6 +2,8 @@ const { app, BrowserWindow, Menu, Tray } = require("electron");
 var hide = 0;
 let appIcon = null;
 let win = null;
+const path = require('path');
+//const url = require('url')
 
 const menu = Menu.buildFromTemplate([
   {
@@ -14,9 +16,8 @@ const menu = Menu.buildFromTemplate([
   },
 ]);
 
-app.whenReady().then(() => {
+app.on('ready',() =>  {
   win = new BrowserWindow({
-   // preload: path.join(__dirname, 'preload.js'),
     width: 1080,
     height: 720,
     titleBarStyle: "hidden",
@@ -28,17 +29,21 @@ app.whenReady().then(() => {
       webSecurity: true,
       enableRemoteModule: true
     },
-    icon: __dirname + "/assets/images/Enclica_logo_small.png"
+    icon: __dirname + "/assets/images/Enclica_logo_small.png",
+    show: false
   });
-  win.loadFile("./windows/login.html");
-  win.on('minimize',function(event){
 
-    
-   // win.hide();
-   // hide = 1;
-   // event.preventDefault();
-  });
+  splash = new BrowserWindow({width: 500, height: 300, transparent: true, frame: false, alwaysOnTop: false});
   
+  splash.loadFile("./windows/preload.html");
+  win.loadFile("./windows/login.html");
+  win.once('ready-to-show', () => {
+    splash.destroy();
+    win.show();
+  });
+
+  win.on('minimize',function(event){
+ 
   win.on('close', function (event) {
     
         event.preventDefault();
@@ -50,13 +55,15 @@ app.whenReady().then(() => {
     event.preventDefault();
     open(url);
   });
-  appIcon = new Tray('assets/images/Enclica_logo_small.png');
+});
+const path = require('path');
+  appIcon = new Tray(path.join(__dirname,'assets','images','Enclica_logo_small.png') );
   appIcon.setContextMenu(menu);
   appIcon.on('click', function (){
     win.show();
   });
-  
-  });
+
+});
 
   app.on('open-url', function (event, data) {
     event.preventDefault();

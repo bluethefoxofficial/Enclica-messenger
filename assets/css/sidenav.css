@@ -32,7 +32,6 @@
   .sidenav:hover {
     width: 400px;
     max-width: 400px;
-    backdrop-filter: blur(10px) !important;
   }
   .sidenav .usernametextblock {
     display: none;

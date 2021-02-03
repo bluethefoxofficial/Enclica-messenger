@@ -20,6 +20,7 @@
     "electron-localstorage": "^1.0.5",
     "jquery": "^3.5.1",
     "md5": "^2.3.0",
+    "path": "^0.12.7",
     "simple-peer": "^9.9.3",
     "sweetalert": "^2.1.2",
     "sweetalert2": "^10.12.6",

@@ -1,4 +1,5 @@
-var swal = require( 'sweetalert' );
+//var swal = require( 'sweetalert' );
+console.log("LOGIN SCREEN LOGIN.JS ACTIVE");
 function login(e) {
   e.preventDefault();
 var host;

@@ -24,7 +24,7 @@ window.addEventListener("contextmenu", e => {
     var targetElement = event.target
     if (targetElement.nodeName === "TD") {
         e.preventDefault();
-       // console.log(targetElement)
+       // console.log(targetElement) fuck you.
         setPosition(origin);
     }
 

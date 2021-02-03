@@ -18,7 +18,7 @@ console.log("%cWARNING!!!", "font-size: 40px; color: RED");
 console.log(
     "%cnever tell anyone your password or token,\nwe would never message you asking for your password or token.",
     "font-size: 20px; color: #FA34B5"
-);
+); //they cant see this why do we still have this.
 var stuff =
     `https://${host}/api/api1.php?key=${api}&function=UAC&token=` +
     localStorage.getItem("token");
@@ -32,7 +32,7 @@ xhttp.onreadystatechange = function() {
         username = obj.username;
         document.getElementById("usernametext").innerHTML = obj.username;
         document.getElementById("pfp").src =
-            "https://www.gravatar.com/avatar/" + md5(obj.email) + "?s=32";
+            "https://www.gravatar.com/avatar/" + md5(obj.email) + "?s=32"; //this is bad
         document.getElementById("name").innerHTML = username;
         document.getElementById("bio").innerHTML = obj.bio;
         document.getElementById("l1-968b").style = "display: none;";
@@ -48,7 +48,7 @@ xhttp.onreadystatechange = function() {
             document.getElementById("customcss").innerHTML = data;
         }));
     }
-    readFile(__dirname + "/../assets/configurable/custom.css"); */
+    readFile(__dirname + "/../assets/configurable/custom.css"); */ // DEPREACHED because we need something bloddy new.
 };
 xhttp.open("GET", stuff, true);
 xhttp.send();

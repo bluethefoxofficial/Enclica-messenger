@@ -11,7 +11,7 @@ function fileSelected(input) {
         dangerMode: true,
       }).then(function(isConfirm) {
         if (isConfirm) {
-
+            //no security checks, yes this will cause issues.
             data = new FormData();
             data.append("serverid", currentserver);
             data.append("key", api);

@@ -388,5 +388,7 @@ function createserver() {
 }
 
 
+
+
 //initial innitilazation of the servers grouplist
 listgroups();

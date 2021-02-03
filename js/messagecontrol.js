@@ -1,8 +1,11 @@
+var aud;
+
 //
 // send message
 //
 //
 //
+
 function sendmessage(e, input) {
 
 
@@ -14,23 +17,16 @@ function sendmessage(e, input) {
         //insert csoftware send message code here.
 
         if (input.value.startsWith("/")) {
-            console.log("CH");
-
-
             if(input.value.startsWith("/shrug")){
                 input.value = `¯\\\_\(\ツ\)\_\/\¯`;
             }else if(input.value.startsWith("/logout")){
                 logout();
-            }else if(input.value.startsWith("/unloadcss")){
-                unloadcss();
-            }else if(input.value.startsWith("/reloadcss")){
-                reloadcss();
             }else if(input.value.startsWith("/clearcache")){
                 clearcache();
             }else if(input.value.startsWith("/playsound")){
                 var str = input.value.split(" ");
 
-                var aud = new Audio("../assets/sounds/mp3-converted/" + str[1]);
+                aud = new Audio("../assets/sounds/mp3-converted/" + str[1]);
                 aud.play();
                 console.log("PLAYING TEST");
             }
@@ -144,10 +140,10 @@ function spamprevention() {
     }
     numberofmessages = 0;
 
-    
 }
-setInterval(spamprevention, 5000);
-spamprevention();
+//WHY DO WE NEED TO CALL THIS TWICE
+setInterval(spamprevention, 5000); //I wrote this when i was drunk.
+spamprevention(); //
 
 
 function dismissspam() {

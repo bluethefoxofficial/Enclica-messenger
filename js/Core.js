@@ -9,11 +9,11 @@ var nomessages = "";
 //var shell = require('electron').shell;
 var $ = require("jquery");
 var memberslist = null;
-const { shell } = require('electron')
+const { shell,session } = require('electron');
 var swal = require( 'sweetalert' );
 var os = require("os");
 var obj;
-var sevmax = 1000000000000000000;
+var sevmax = 1000000000000000000; //well we say unlimited but here is the fucking maximum.
 var email;
 var username;
 //const fs = require("fs");
@@ -26,7 +26,7 @@ if (localStorage.getItem("host")) {
     api = localStorage.getItem("ak");
 } else {
     host = "csoftware.cf";
-    api = "grUs07Md3s4o9WIb7fi3vu0AGdjinGP8BvFFSvcNI6viEkXFhNY9ZODlNnNWMXfaapeb20NbVBadZtwH9kFUnOgPXn8oWuPPnqJL";
+    api = "grUs07Md3s4o9WIb7fi3vu0AGdjinGP8BvFFSvcNI6viEkXFhNY9ZODlNnNWMXfaapeb20NbVBadZtwH9kFUnOgPXn8oWuPPnqJL"; //can someone make this invalid, thanks.
 }
 
 function timeConverter(UNIX_timestamp) {
@@ -52,8 +52,45 @@ function getExtension(path) {
     return basename.slice(pos + 1);            // extract extension ignoring `.`
 }
 
+
+function clearcache(){
+    session.defaultSession.clearStorageData(); //this code creates errors, WTF! ErRoR CrEaToR 7000
+}
+
+//why do we need this is this for some calculations relating to circles because if so, why??
+function calculatecirclearea(r = 0){
+    //the default value is 0 because otherwise it will return NaN;
+
+    var result = 3.142 * r * r;
+
+    return result;
+}
+function calculatecircleareawithdiameter(d = 0){
+    //the default value is 0 because otherwise it will return NaN;
+
+    var result = 3.142 * d * d;
+
+    return result;
+}
+
+
+
+
+//WHY DO WE NEED THIS IN ENCLICA.
+
+
+
+
+
+
+
+
+
+
+
+
 //version and version name.
-var version = "2.0.7";
-var versionname = "The style and file update";
+var version = "2.0.7"; //this is used in about but not the splash screen??????
+var versionname = "The style and file update"; //this is used in about also under changelog, why?
 
 

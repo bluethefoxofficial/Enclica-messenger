@@ -1,3 +1,6 @@
+//what the fuck
+//TODO: make this apply to ALL modals because otherwise it is retarded.
+
 // Get the modal
 
 var modal = document.getElementById("create");

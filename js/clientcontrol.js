@@ -1,5 +1,8 @@
 const { getJSON } = require("jquery");
 
+//fixed audio spamming when someone spams shit.
+var refresh = new Audio("../assets/sounds/mp3-converted/noti2.mp3");
+var logout = new Audio("../assets/sounds/mp3-converted/logout.mp3");
 var seobj;
 //
 // client logout
@@ -7,7 +10,6 @@ var seobj;
 //
 function logout() {
     document.getElementById("preloader").style.display = "block";
-    var logout = new Audio("../assets/sounds/mp3-converted/logout.mp3");
     logout.play();
 
     setTimeout((function() {
@@ -86,7 +88,7 @@ function listgroups() {
             <li><p>${data.name}</p></li>
             <li><a href="call.html" target="_blank"><b>start voice session</b></a></li>
             <li><a onclick="leave(${data.ID}); sectiondiv(event, 'chats',null,null); listgroups();" href="#"><b>Leave Server</b></a></li>
-            <li><a href="#"><b>Report server</b></a></li>
+            <li><a href="#" onclick="report(${data.ID});"><b>Report server</b></a></li>
             <li><p>Server invite code: ${data.invite}</p></li>
             </ul>
             
@@ -164,7 +166,6 @@ function listgroups() {
 
 function savecss() {
     document.getElementById("cbtn").disabled = true;
-    var refresh = new Audio("../assets/sounds/mp3-converted/noti3.mp3");
     refresh.play();
     document.getElementById("l1-968c").style.display = "block";
    // console.log();
@@ -200,7 +201,6 @@ function refreshprofile() {
     document.getElementById("rbtn").disabled = true;
     var silent = 0;
     if (silent != 1) {
-        var refresh = new Audio("../assets/sounds/mp3-converted/noti2.mp3"); // shoutout to josephpham494 for spamming this down our fragile ears ;) even me a guy with ADD thinks this sounds is utterly fucking annoying to spam
         refresh.play();
     }
     silent = 1;
@@ -263,6 +263,7 @@ function sectiondiv(evt, sectiondiv, colour1, colour2, serverid) {
 
     // Show the current tab, and add an "active" class to the button that opened the tab
     document.getElementById(sectiondiv).style.display = "block";
+    if(!evt) return;
     if(evt.currentTarget.className.includes("btn")){ return; }
     evt.currentTarget.className += " active";
     getmessages();

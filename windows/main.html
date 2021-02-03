@@ -117,7 +117,11 @@ calling members has been moved to call.html
   <p>connection Info</p>
   <p>API host: <span id="host"></span></p>
 
-<button onclick="document.getElementById('about').style.display = 'block';" class="btn btn-success">Developers and contributers.</button>
+  <button onclick="document.getElementById('about').style.display = 'block';" class="btn btn-success">Developers and contributers.</button>
+  
+  <h3>Cache</h3>
+  <p style="font-size: small;">NOTE: clearing your cache will cause Enclica to restart or things may not work correctly. Only clear if needed.</p>
+  <button onclick="clearcache();" class="btn btn-warning">Clear cache</button>
 
 
 <!-- The Modal -->
@@ -150,14 +154,18 @@ calling members has been moved to call.html
 <div class="main" id="currentlyplaying">
   <button class="btn btn-danger" onclick="apclose();">Stop and Close</button><br/>
   <h2>currently playing: <span id="cupl"></span></h2>
-  <audio controls style="width:100%" id="playing">
-    Your browser does not support the audio element.
-    </audio>
 
+  <div id="ap">
+  <audio controls style="width:100%" id="playing">
+    Huh you using enclica or managed to port this to some obscure browser.
+    </audio>
+  </div>
+    <div id="vp">
     <video controls style="width: 100%    !important;
     height: 500px   !important;" id="videoplayer">
-      Your browser does not support the audio element.
+      Huh you using enclica or managed to port this to some obscure browser.
     </video>
+    </div>
 
 </div>
 
@@ -197,9 +205,8 @@ RTC CURRENTCALL SCREEN
 <script src="../js/clientcontrol.js"></script>
 <script src="../js/modal.js"></script>
 <script src="../js/contextmenu.js"></script>
-<script src="../js/update.js"></script>
 <script src="../js/messagecontrol.js"></script>
 <script src="../js/audio.js"></script>
 <script src="../js/RTC.js"></script>
 <script src="../js/servercontrol.js"></script>
-<script>require('../renderer.js')</script>
+<script>require('../renderer.js'); </script>
