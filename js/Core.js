@@ -90,7 +90,7 @@ function calculatecircleareawithdiameter(d = 0){
 
 
 //version and version name.
-var version = "2.0.7"; //this is used in about but not the splash screen??????
-var versionname = "The style and file update"; //this is used in about also under changelog, why?
+var version = "2.0.8"; //this is used in about but not the splash screen??????
+var versionname = "Newton"; //this is used in about also under changelog, why?
 
 

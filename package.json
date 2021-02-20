@@ -1,12 +1,13 @@
 {
   "name": "enclica",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "description": "The easy opensource messaging solution for you.",
   "main": "app.js",
   "scripts": {
     "test": "electron .",
-    "compile": "electron-builder",
-    "defug": ".\\node_modules\\electron\\dist\\electron.exe index.js --enable-logging"
+    "winbuild": "electron-packager . Enclica --platform win32 --arch x64 --asar --icon=assets/images/Global.ico --out release/",
+    "build": "electron-packager . Enclica --overwrite --platform=all --arch=x64 --asar --icon=assets/images/Global.ico --prune=true --out=release",
+    "debug": ".\\node_modules\\electron\\dist\\electron.exe index.js --enable-logging"
   },
   "keywords": [
     "messaging",
@@ -16,6 +17,7 @@
   "license": "ISC",
   "dependencies": {
     "custom-electron-titlebar": "^3.2.5",
+    "electron-installer-windows": "^3.0.0",
     "electron-is": "^3.0.0",
     "electron-localstorage": "^1.0.5",
     "jquery": "^3.5.1",
@@ -32,7 +34,7 @@
     "electron-builder": "^22.9.1"
   },
   "build": {
-    "productName": "enclica",
+    "productName": "Enclica",
     "appId": "org.csoftware.enclica",
     "directories": {
       "buildResources": "resources",

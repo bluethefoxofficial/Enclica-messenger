@@ -24,12 +24,11 @@ app.on('ready',() =>  {
     frame: false,
     webPreferences: {
       nodeIntegration: true,
-      allowRunningInsecureContent: true,
       "page-visibility": true,
       webSecurity: true,
       enableRemoteModule: true
     },
-    icon: __dirname + "/assets/images/Enclica_logo_small.png",
+    icon: __dirname + "/assets/images/Global.ico",
     show: false
   });
 
@@ -57,7 +56,9 @@ app.on('ready',() =>  {
   });
 });
 const path = require('path');
-  appIcon = new Tray(path.join(__dirname,'assets','images','Enclica_logo_small.png') );
+  appIcon = new Tray(path.resolve('assets','images','Global.ico'));
+  //appIcon=new Tray("assets/images/Global.ico"); Invalid
+  //appIcon.setHighlightMode('always'); THIS CAUSES A ERROR FOR SOME REASON.
   appIcon.setContextMenu(menu);
   appIcon.on('click', function (){
     win.show();

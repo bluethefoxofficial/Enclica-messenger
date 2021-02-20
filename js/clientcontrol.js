@@ -4,6 +4,7 @@ const { getJSON } = require("jquery");
 var refresh = new Audio("../assets/sounds/mp3-converted/noti2.mp3");
 var logout = new Audio("../assets/sounds/mp3-converted/logout.mp3");
 var seobj;
+var log = false;
 //
 // client logout
 //
@@ -22,7 +23,7 @@ function logout() {
 //
 //
 // list groups
-// grupy list
+// grupy list SPELLING ERROR
 //
 //
 //
@@ -35,7 +36,9 @@ function listgroups() {
     var stuff =
         `https://${host}/api/api1.php?key=${api}&function=listgroups&token=` +
         localStorage.getItem("token");
-      //  console.log(stuff);
+        if(log == true){
+        console.log(stuff);
+        }
 
         
              
