@@ -76,7 +76,7 @@ function calculatecircleareawithdiameter(d = 0){
 
 
 
-//WHY DO WE NEED THIS IN ENCLICA.
+//WHY DO WE NEED THIS IN ENCLICA. We dont thats why i removed it.
 
 
 
