@@ -5,19 +5,7 @@ var refresh = new Audio("../assets/sounds/mp3-converted/noti2.mp3");
 var logout = new Audio("../assets/sounds/mp3-converted/logout.mp3");
 var seobj;
 var log = false;
-//
-// client logout
-//
-//
-function logout() {
-    document.getElementById("preloader").style.display = "block";
-    logout.play();
 
-    setTimeout((function() {
-        localStorage.clear();
-        window.location = "../windows/login.html";
-    }), 1000);
-}
 
 //
 //
@@ -138,12 +126,14 @@ function listgroups() {
             <div class="msg-container" id="${data.ID}_scroll">
             <div id="${data.ID}_container">
             </div>
-            </div>
-            <div class="flex" style="  bottom: 0; margin-top: auto; position: sticky;"><textarea type="text" height="20px" style="width: 58%;" rows="1" class="auto_height" placeholder="Message" id="textbox_${data.ID}" onload="auto_height(this);" onKeyPress="sendmessage(event, this); "></textarea> <button style="height: 40px; width: 40px; inline: block; padding: 0px 0px;" onclick="document.getElementById('attachment_${data.ID}').click();" class="btn btn-info"><svg id="i-upload" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+            <div class="flex" style="bottom: 0; position: absolute; bottom: 1px; width: 60%;"><textarea type="text" height="20px" style="width: 100%;" rows="1" class="auto_height" placeholder="Message" id="textbox_${data.ID}" onload="auto_height(this);" onKeyPress="sendmessage(event, this); "></textarea> 
+            <button style="height: 40px; width: 40px; inline: block; padding: 0px 0px;" onclick="document.getElementById('attachment_${data.ID}').click();" class="btn btn-info"><svg id="i-upload" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
             <path d="M9 22 C0 23 1 12 9 13 6 2 23 2 22 10 32 7 32 23 23 22 M11 18 L16 14 21 18 M16 14 L16 29" />
-            </svg></button></div>
-            <br/>
+            </svg></button>
             </div>
+            </div>
+            </div>
+
             
             `;
             
@@ -305,3 +295,17 @@ function unloadcss(){
     document.getElementsByTagName('link')[4].disabled = false; 
     document.getElementsByTagName('link')[5].disabled = false; 
  }
+ //
+// client logout
+//
+//
+function logout() {
+    document.getElementById("preloader").style.display = "block";
+    logout.play();
+
+    setTimeout((function() {
+        localStorage.clear();
+        window.location = "../windows/login.html";
+    }), 1000);
+}
+reloadcss();

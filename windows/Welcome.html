@@ -3,11 +3,14 @@
     const template = require("../js/template.js");
     const electron = require("electron");
   
-    if (localStorage.getItem("welcome")) {
+    if (!localStorage.getItem("welcome")) {
+    }else{
       window.location = "../windows/login.html";
     }
-  
-    var title = `session.`;
+    
+
+    localStorage.setItem("welcome", "1");
+    var title = `Welcome to enclica please read out terms`;
     var head = `<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i">`;
     var body = ``;
   

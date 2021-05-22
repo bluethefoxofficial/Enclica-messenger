@@ -6,6 +6,26 @@
 //
 var delbtn = "";
 function joinserver() {
+
+
+
+    if(document.getElementById("serverjoininputbox").value == "dogecoin"){
+        var woof = new Audio(
+            "../assets/sounds/mp3-converted/woof.mp3"
+        );
+        woof.play();
+        swal("Donate with doge: DQiA2o9Qi9HqcgFicUoSxMvV2hm6FutVzV",{
+            content: {
+              element: "img",
+              attributes: {
+                src: "../assets/images/dogecoin.webp",
+                width: 100
+              },
+            },
+          });
+
+        return;
+    }
     if (sevmax == 100) return;
     var server = currentserver;
     var stuff =

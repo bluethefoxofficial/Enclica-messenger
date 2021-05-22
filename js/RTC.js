@@ -1,7 +1,7 @@
 var Peer = require('simple-peer')
 //var declined = new Audio("../assets/sounds/mp3-converted/declined_call.mp3"); depreached because we are not making a stupid calling system like this.
 var connecting = new Audio("../assets/sounds/mp3-converted/connecting_call.mp3");
-var globalstream = null
+var globalstream = null;
 var Peer = require('simple-peer');
 
 const p = new Peer({

@@ -7,7 +7,6 @@ const customTitlebar = require('custom-electron-titlebar');
 
 const tb = new customTitlebar.Titlebar({
     icon: "../assets/images/Enclica_logo_small.png",
-    menu: false,
     backgroundColor: Color.BLUE,
 });
 //customTitlebar.updateBackground(new Color(new RGBA(0, 0, 0, .3))); //rgba is not working here, what the fuck.
