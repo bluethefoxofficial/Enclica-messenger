@@ -18,7 +18,8 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    transition: 200ms;
+    transition: 200ms cubic-bezier(0, 1.35, 1, 1);
+    ;
     text-overflow: ellipsis;
 }
 
@@ -44,7 +45,6 @@
 }
 
 .sidenav a {
-    margin-left: 30px;
     margin-bottom: 5px;
     height: 24px;
     overflow: hidden;
@@ -54,14 +54,15 @@
     color: rgb(100, 100, 100);
     transition: 0.3s;
     display: block;
-    text-align: left;
     text-overflow: ellipsis;
+    text-align: center;
 }
 
 .sidenav .normaltext {
     margin-left: 30px;
     margin-bottom: 5px;
     text-decoration: none;
+    text-align: center;
     font-size: 20px;
     color: #dddada;
     margin-left: 0px;
@@ -85,7 +86,8 @@
     margin-bottom: 2px;
     margin-left: 10px;
     margin-right: 10px;
-    display: block;
+    text-align: center;
+    display: none;
 }
 
 #serverlist {
@@ -95,6 +97,7 @@
     color: #dddada;
     display: block;
     cursor: default;
+    text-align: center;
     margin-left: 10px;
 }
 
@@ -135,20 +138,23 @@
     cursor: default;
     margin-left: 48px;
     bottom: 5px;
+    text-align: center;
 }
 
 .sidenav a:hover {
     color: #f1f1f1;
     text-overflow: ellipsis;
     cursor: pointer;
-    background: linear-gradient( to right, rgba(0, 0, 0, 0), rgba(153, 153, 164, 1));
+    background: rgb(83, 83, 83);
     margin-left: 10px;
-    font-size: 22px;
+    margin-right: 10px;
+    text-align: center;
+    border-radius: 4px;
 }
 
 .sidenav a:active {
     color: #f1f1f1;
+    text-align: center;
     cursor: pointer;
-    text-overflow: ellipsis;
-    background-image: linear-gradient( to right, rgba(0, 162, 255, 0.5), rgba(0, 0, 0, 0));
+    background: rgb(59, 59, 59);
 }
