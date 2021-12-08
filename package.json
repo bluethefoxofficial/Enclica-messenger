@@ -16,24 +16,24 @@
   "author": "Csoftware",
   "license": "ISC",
   "dependencies": {
-    "custom-electron-titlebar": "^3.2.5",
+    "custom-electron-titlebar": "^3.2.7",
     "electron-installer-windows": "^3.0.0",
     "electron-is": "^3.0.0",
     "electron-localstorage": "^1.0.5",
-    "electron-packager": "^15.2.0",
+    "electron-packager": "^15.4.0",
     "electron-winstaller": "^5.0.0",
-    "jquery": "^3.5.1",
+    "jquery": "^3.6.0",
     "md5": "^2.3.0",
     "path": "^0.12.7",
-    "simple-peer": "^9.9.3",
+    "simple-peer": "^9.11.0",
     "sweetalert": "^2.1.2",
-    "sweetalert2": "^10.12.6",
-    "v8-compile-cache": "^2.2.0",
-    "wrtc": "^0.4.6"
+    "sweetalert2": "^10.16.9",
+    "v8-compile-cache": "^2.3.0",
+    "wrtc": "^0.4.7"
   },
   "devDependencies": {
-    "electron": "^11.1.1",
-    "electron-builder": "^22.9.1"
+    "electron": "^11.5.0",
+    "electron-builder": "^22.14.5"
   },
   "build": {
     "productName": "Enclica",

@@ -24,25 +24,26 @@ function listgroups() {
     var stuff =
         `https://${host}/api/api1.php?key=${api}&function=listgroups&token=` +
         localStorage.getItem("token");
-        if(log == true){
+    if (log == true) {
         console.log(stuff);
-        }
 
-        
-             
-             $.getJSON(stuff, function(result){
-                $.each(result, function(index, data){
-                    var random = Math.random(1, 99999999999);
-                    var list = "";
-                    members = data.members.split(" ");
-            
-                    members.forEach((function(user, index) {
-                        if (user == "") {
-                            return;
-                        }
-                        if(username == data.owner){
-                            list += `<div class='icon-container' style="clear: left;">
-                            <img style="float: right;"class="iconimg" src="https://csoftware.cf/api/api1.php?key=grUs07Md3s4o9WIb7fi3vu0AGdjinGP8BvFFSvcNI6viEkXFhNY9ZODlNnNWMXfaapeb20NbVBadZtwH9kFUnOgPXn8oWuPPnqJL&function=pfpget&username=${user}" />
+    }
+
+
+
+    $.getJSON(stuff, function(result) {
+        $.each(result, function(index, data) {
+            var random = Math.random(1, 99999999999);
+            var list = "";
+            members = data.members.split(" ");
+
+            members.forEach((function(user, index) {
+                if (user == "") {
+                    return;
+                }
+                if (username == data.owner) {
+                    list += `<div class='icon-container' style="clear: left;">
+                            <img style="float: right;"class="iconimg" src="https://enclica.com/api/api1.php?key=grUs07Md3s4o9WIb7fi3vu0AGdjinGP8BvFFSvcNI6viEkXFhNY9ZODlNnNWMXfaapeb20NbVBadZtwH9kFUnOgPXn8oWuPPnqJL&function=pfpget&username=${user}" />
                             <div class='statusmask'></div>
                             <div class='status-circle'></div>
                             <p class="membername">${user}</p>
@@ -57,24 +58,24 @@ function listgroups() {
             <li class="menu-option">Inspect</li>
             </ul>
             </div>`;
-                                  
-                  
-                        }else{
-            
-                        
-                        list += `<div class='icon-container' style="clear: left;">
-              <img style="float: right;"class="iconimg" src="https://csoftware.cf/api/api1.php?key=grUs07Md3s4o9WIb7fi3vu0AGdjinGP8BvFFSvcNI6viEkXFhNY9ZODlNnNWMXfaapeb20NbVBadZtwH9kFUnOgPXn8oWuPPnqJL&function=pfpget&username=${user}" />
+
+
+                } else {
+
+
+                    list += `<div class='icon-container' style="clear: left;">
+              <img style="float: right;"class="iconimg" src="https://enclica.com/api/api1.php?key=grUs07Md3s4o9WIb7fi3vu0AGdjinGP8BvFFSvcNI6viEkXFhNY9ZODlNnNWMXfaapeb20NbVBadZtwH9kFUnOgPXn8oWuPPnqJL&function=pfpget&username=${user}" />
               <div class='statusmask'></div>
               <div class='status-circle'></div>
               <p class="membername">${user}</p>
               </div>`;
-                        }
-                    }));
-                
-            
-                  //  console.log(data);
-                    document.getElementById("chatsnav").innerHTML += `<a class="font-size: 10vw" id="btn_${data.ID}" class="activation" onclick='sectiondiv(event, "win_${data.ID}","0000","0000", ${data.ID})' >${data.name}</a>`;
-                    var ownermenu = `<!-- Not the owner of  ${data.name} sorry you can only leave mate. -->
+                }
+            }));
+
+
+            //  console.log(data);
+            document.getElementById("chatsnav").innerHTML += `<a class="font-size: 10vw" id="btn_${data.ID}" class="activation" onclick='sectiondiv(event, "win_${data.ID}","0000","0000", ${data.ID})' >${data.name}</a>`;
+            var ownermenu = `<!-- Not the owner of  ${data.name} sorry you can only leave mate. -->
             <ul>
             <li><p>${data.name}</p></li>
             <li><a href="call.html" target="_blank"><b>start voice session</b></a></li>
@@ -84,8 +85,8 @@ function listgroups() {
             </ul>
             
             `;
-                    if (username == data.owner) {
-                        ownermenu = `
+            if (username == data.owner) {
+                ownermenu = `
                         <ul>
                         <li><p>${data.name}</p></li>
                         <li><a onclick="document.getElementById('${data.ID}').style.display = 'block';" href="#"><b>Server manager</b></a></li>
@@ -112,8 +113,8 @@ function listgroups() {
             
             </div>
               `;
-                    }
-                    document.getElementById("chatsitem").innerHTML += `
+            }
+            document.getElementById("chatsitem").innerHTML += `
             <div class="main" id="win_${data.ID}">
             <div>
             <input type="file" class="file" id="attachment_${data.ID}" style="display: none;" onchange="fileSelected(this)"/>
@@ -136,14 +137,14 @@ function listgroups() {
 
             
             `;
-            
-                });
-              });
-            
-           
+
+        });
+    });
 
 
-         
+
+
+
 
 
 
@@ -161,7 +162,7 @@ function savecss() {
     document.getElementById("cbtn").disabled = true;
     refresh.play();
     document.getElementById("l1-968c").style.display = "block";
-   // console.log();
+    // console.log();
     const data = new Uint8Array(
         Buffer.from(document.getElementById("customcss").value)
     );
@@ -256,46 +257,46 @@ function sectiondiv(evt, sectiondiv, colour1, colour2, serverid) {
 
     // Show the current tab, and add an "active" class to the button that opened the tab
     document.getElementById(sectiondiv).style.display = "block";
-    if(!evt) return;
-    if(evt.currentTarget.className.includes("btn")){ return; }
+    if (!evt) return;
+    if (evt.currentTarget.className.includes("btn")) { return; }
     evt.currentTarget.className += " active";
     getmessages();
 }
 
 //inital to the chats tab
-sectiondiv(event, "chats","#ec6ead","#3494e6")
+sectiondiv(event, "chats", "#ec6ead", "#3494e6")
 
 
 //scroll to bottom
 
-function scrollToBottom (id) {
-    try{
-    var div = document.getElementById(id);
-    div.scrollTop = div.scrollHeight - div.clientHeight;
-    }catch(e){
-        
+function scrollToBottom(id) {
+    try {
+        var div = document.getElementById(id);
+        div.scrollTop = div.scrollHeight - div.clientHeight;
+    } catch (e) {
+
     }
- }
+}
 
 //dev command
-function unloadcss(){
-    document.getElementsByTagName('link')[0].disabled = true; 
-    document.getElementsByTagName('link')[1].disabled = true; 
-    document.getElementsByTagName('link')[2].disabled = true; 
-    document.getElementsByTagName('link')[3].disabled = true; 
-    document.getElementsByTagName('link')[4].disabled = true; 
-    document.getElementsByTagName('link')[5].disabled = true; 
- }
- //dev command
- function reloadcss(){
-    document.getElementsByTagName('link')[0].disabled = false; 
-    document.getElementsByTagName('link')[1].disabled = false; 
-    document.getElementsByTagName('link')[2].disabled = false; 
-    document.getElementsByTagName('link')[3].disabled = false; 
-    document.getElementsByTagName('link')[4].disabled = false; 
-    document.getElementsByTagName('link')[5].disabled = false; 
- }
- //
+function unloadcss() {
+    document.getElementsByTagName('link')[0].disabled = true;
+    document.getElementsByTagName('link')[1].disabled = true;
+    document.getElementsByTagName('link')[2].disabled = true;
+    document.getElementsByTagName('link')[3].disabled = true;
+    document.getElementsByTagName('link')[4].disabled = true;
+    document.getElementsByTagName('link')[5].disabled = true;
+}
+//dev command
+function reloadcss() {
+    document.getElementsByTagName('link')[0].disabled = false;
+    document.getElementsByTagName('link')[1].disabled = false;
+    document.getElementsByTagName('link')[2].disabled = false;
+    document.getElementsByTagName('link')[3].disabled = false;
+    document.getElementsByTagName('link')[4].disabled = false;
+    document.getElementsByTagName('link')[5].disabled = false;
+}
+//
 // client logout
 //
 //

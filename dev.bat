@@ -1,4 +1,4 @@
 @echo off
-echo "csoftware dev loader"
+echo "enclica dev loader"
 
 npm test

@@ -17,13 +17,13 @@ function sendmessage(e, input) {
         //insert csoftware send message code here.
 
         if (input.value.startsWith("/")) {
-            if(input.value.startsWith("/shrug")){
+            if (input.value.startsWith("/shrug")) {
                 input.value = `¯\\\_\(\ツ\)\_\/\¯`;
-            }else if(input.value.startsWith("/logout")){
+            } else if (input.value.startsWith("/logout")) {
                 logout();
-            }else if(input.value.startsWith("/clearcache")){
+            } else if (input.value.startsWith("/clearcache")) {
                 clearcache();
-            }else if(input.value.startsWith("/playsound")){
+            } else if (input.value.startsWith("/playsound")) {
                 var str = input.value.split(" ");
 
                 aud = new Audio("../assets/sounds/mp3-converted/" + str[1]);
@@ -74,8 +74,8 @@ function sendmessage(e, input) {
         );
         input.value = "";
         numberofmessages += 1;
-        
-        
+
+
     }
 }
 
@@ -134,16 +134,14 @@ function commandhandler(input, messagecontainer) {
 //
 
 function spamprevention() {
-    if(log == true){
+    if (log == true) {
         console.warn("CONSOLE LOGGING IS ENABLED THIS WILL REVEAL DATA THAT SHOULDNT BE SHARED!");
         console.warn("spam timer cleared.");
     }
     numberofmessages = 0;
 
 }
-//WHY DO WE NEED TO CALL THIS TWICE
-setInterval(spamprevention, 5000); //I wrote this when i was drunk.
-spamprevention(); //
+setInterval(spamprevention, 5000);
 
 
 function dismissspam() {
@@ -151,10 +149,10 @@ function dismissspam() {
 }
 window.setInterval((function() {
     getmessages();
-}), 1000);
+}), 1600);
 window.setInterval((function() {
     getmembers();
-    
+
 }), 8000);
 
 
@@ -167,14 +165,14 @@ window.setInterval((function() {
 
 
 
-function deletemessage(messageid,file){
+function deletemessage(messageid, file) {
     var stuff =
-    `https://${host}/api/api1.php?key=${api}&function=deletemessage&token=` +
-    localStorage.getItem("token") +
-    "&messageid=" +
-    messageid + "&file=" + file;
-fetch(stuff).then(function(){
-    silent = 1;
-    getmessages();
-});
+        `https://${host}/api/api1.php?key=${api}&function=deletemessage&token=` +
+        localStorage.getItem("token") +
+        "&messageid=" +
+        messageid + "&file=" + file;
+    fetch(stuff).then(function() {
+        silent = 1;
+        getmessages();
+    });
 }

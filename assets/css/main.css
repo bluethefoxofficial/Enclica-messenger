@@ -1,552 +1,587 @@
 /* CSSPortal Optimiser: Mon, 04 Jan 2021 20:36:36 +0000 */
+
 body {
-  font-family:"Montserrat";
-  /* Chrome 10-25, Safari 5.1-6 */
-  position:fixed;
-  z-index: 6;
-  width:100%;
+    font-family: "Montserrat";
+    /* Chrome 10-25, Safari 5.1-6 */
+    position: fixed;
+    z-index: 6;
+    width: 100%;
+    height: 100%;
+    background-color: #1f1f1f;
+    background-image: url(https://picsum.photos/1920/1080);
+    background-repeat: no-repeat;
+    backdrop-filter: blur(10px);
+    background-size: auto;
+}
 
-  height:100%;
-  background-color:#1f1f1f;
-  background-image:url(https://picsum.photos/1920/1080);
-  background-repeat:no-repeat;
-  backdrop-filter: blur(10px);
-  background-size:auto;
-  }
-  
-  * {
-  margin:0;
-  padding:0;
-  }
-  
-  ::selection {
-  background:#a618e7;
-  }
-  
-  #dragbar {
-  top:0;
-  left:0;
-  right:0;
-  margin:0;
-  border:0;
-  height:150px;
-  }
-  
-  .alert {
-  padding:30px;
-  background-color:#ff2213;
-  color:#fff;
-  position:block;
-  height:30px;
-  z-index:10;
-  display:block;
-  margin-top:16px;
-  margin-bottom:16px;
-  padding:10px;
-  }
-  
-  .closebtn {
-  margin-left:15px;
-  color:#fff;
-  font-weight:700;
-  float:right;
-  font-size:22px;
-  line-height:20px;
-  cursor:pointer;
-  transition:.3s;
-  }
-  
-  .closebtn:hover {
-  color:#000;
-  }
-  
-  .closebtn {
-  margin-left:15px;
-  color:#fff;
-  font-weight:700;
-  float:right;
-  font-size:22px;
-  line-height:20px;
-  cursor:pointer;
-  transition:.3s;
-  }
-  
-  .closebtn:hover {
-  color:#000;
-  }
-  
-  .main {
-  margin-left:228px;
-  margin-right: 8px;
-  /* Same as the width of the sidenav */
-  font-size:28px;
-  /* Increased text to enable scrolling */
-  padding:0;
-  display:none;
-  transition:.3s;
-  background-color:rgba(0,0,0,0);
-  color:#fff;
-  }
-  
-  .main .active {
-  display:block;
-  width:100%;
-  height:100%;
-  transition:.3s;
-  }
-  
+* {
+    margin: 0;
+    padding: 0;
+}
 
-  
-  input[type="text"],input[type="password"] {
-  width:100%;
-  padding:12px 20px;
-  border-radius:0;
-  margin:8px 0;
-  display:inline-block;
-  border:1px solid #000;
-  box-sizing:border-box;
-  }
-  
-  h1 h2 h3 h4 h5 {
-  margin:auto;
-  }
-  
-  p {
-  margin:auto;
-  }
-  
-  /* Center the image and position the close button */
-  .imgcontainer {
-  text-align:center;
-  margin:24px 2px 12px;
-  position:relative;
-  }
-  
-  img.avatar {
-  width:40%;
-  border-radius:50%;
-  }
-  
-  .container {
-  padding:16px;
-  }
-  
-  span.psw {
-  float:right;
-  padding-top:16px;
-  }
-  
-  /* Add Zoom Animation */
-  .animate {
-  animation:animatezoom .6s;
-  }
-  
-  @-webkit-keyframes animatezoom {
-  from {
-  }
-  
-  to {
-  }
-  }
-  
-  @keyframes animatezoom {
-  from {
-  transform:scale(0);
-  }
-  
-  to {
-  transform:scale(1);
-  }
-  }
-  
-  /* Change styles for span and cancel button on extra small screens */
-  @media screen and (max-width: 300px) {
-  span.psw {
-  display:block;
-  float:none;
-  }
-  
-  .cancelbtn {
-  width:100%;
-  }
-  }
-  
+ ::selection {
+    background: #a618e7;
+}
 
-  
-  /* Add Animation */
-  @-webkit-keyframes animatetop {
-  from {
-  top:-300px;
-  opacity:0;
-  }
-  
-  to {
-  top:0;
-  opacity:1;
-  }
-  }
-  
-  @keyframes animatetop {
-  from {
-  top:-300px;
-  opacity:0;
-  }
-  
-  to {
-  top:0;
-  opacity:1;
-  }
-  }
-  
-  /* The Close Button */
-  .close {
-  color:#fff;
-  float:right;
-  font-size:28px;
-  font-weight:700;
-  }
-  
-  .close:hover,.close:focus {
-  color:#000;
-  text-decoration:none;
-  cursor:pointer;
-  }
-  
-  textarea {
-  width:100%;
-  padding:12px 20px;
-  border-radius:0;
-  margin:8px 0;
-  display:inline-block;
-  border:1px solid #000;
-  box-sizing:border-box;
-  }
-  
-  .center {
-  display:block;
-  margin-left:auto;
-  margin-right:auto;
-  width:50%;
-  }
-  
-  /* Style the tab */
-  /* Style the tab */
-  .tab {
-  overflow:hidden;
-  border:1px solid #ccc;
-  background-color:#f1f1f1;
-  }
-  
-  /* Style the buttons inside the tab */
-  .tab button {
-  background-color:inherit;
-  float:left;
-  border:none;
-  outline:none;
-  cursor:pointer;
-  padding:14px 16px;
-  transition:.3s;
-  font-size:17px;
-  }
-  
-  /* Change background color of buttons on hover */
-  .tab button:hover {
-  background-color:#ddd;
-  }
-  
-  .name{
+#dragbar {
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 0;
+    border: 0;
+    height: 150px;
+}
+
+.alert {
+    padding: 30px;
+    background-color: #ff2213;
+    color: #fff;
+    position: block;
+    height: 30px;
+    z-index: 10;
+    display: block;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    padding: 10px;
+}
+
+.closebtn {
+    margin-left: 15px;
+    color: #fff;
+    font-weight: 700;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.closebtn:hover {
+    color: #000;
+}
+
+.closebtn {
+    margin-left: 15px;
+    color: #fff;
+    font-weight: 700;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.closebtn:hover {
+    color: #000;
+}
+
+.main {
+    margin-left: 228px;
+    margin-right: 8px;
+    /* Same as the width of the sidenav */
+    font-size: 28px;
+    /* Increased text to enable scrolling */
+    padding: 0;
+    display: none;
+    transition: .3s;
+    background-color: rgba(0, 0, 0, 0);
+    color: #fff;
+}
+
+.main .active {
+    display: block;
+    width: 100%;
+    height: 100%;
+    transition: .3s;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 12px 20px;
+    border-radius: 0;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #000;
+    box-sizing: border-box;
+}
+
+h1 h2 h3 h4 h5 {
+    margin: auto;
+}
+
+p {
+    margin: auto;
+}
+
+
+/* Center the image and position the close button */
+
+.imgcontainer {
+    text-align: center;
+    margin: 24px 2px 12px;
+    position: relative;
+}
+
+img.avatar {
+    width: 40%;
+    border-radius: 50%;
+}
+
+.container {
+    padding: 16px;
+}
+
+span.psw {
+    float: right;
+    padding-top: 16px;
+}
+
+
+/* Add Zoom Animation */
+
+.animate {
+    animation: animatezoom .6s;
+}
+
+@-webkit-keyframes animatezoom {
+    from {}
+    to {}
+}
+
+@keyframes animatezoom {
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+
+/* Change styles for span and cancel button on extra small screens */
+
+@media screen and (max-width: 300px) {
+    span.psw {
+        display: block;
+        float: none;
+    }
+    .cancelbtn {
+        width: 100%;
+    }
+}
+
+
+/* Add Animation */
+
+@-webkit-keyframes animatetop {
+    from {
+        top: -300px;
+        opacity: 0;
+    }
+    to {
+        top: 0;
+        opacity: 1;
+    }
+}
+
+@keyframes animatetop {
+    from {
+        top: -300px;
+        opacity: 0;
+    }
+    to {
+        top: 0;
+        opacity: 1;
+    }
+}
+
+
+/* The Close Button */
+
+.close {
+    color: #fff;
+    float: right;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+textarea {
+    width: 100%;
+    padding: 12px 20px;
+    border-radius: 0;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #000;
+    box-sizing: border-box;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+
+/* Style the tab */
+
+
+/* Style the tab */
+
+.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+
+/* Style the buttons inside the tab */
+
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: .3s;
+    font-size: 17px;
+}
+
+
+/* Change background color of buttons on hover */
+
+.tab button:hover {
+    background-color: #ddd;
+}
+
+.name {
     color: white;
     transition: 10s;
-  }
-  .name:hover{
-    background: linear-gradient(to right, #6666ff, #0099ff , #00ff00, #ff3399, #6666ff);
+}
+
+.name:hover {
+    background: linear-gradient(to right, #6666ff, #0099ff, #00ff00, #ff3399, #6666ff);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
     animation: rainbow_animation 6s ease-in-out infinite;
     background-size: 400% 100%;
-  }
-  
-  #madeby:hover {
-  color:#fff;
-  transition:3s;
-  }
-  
-  @keyframes rainbow_animation {
-  0%,100% {
-  background-position:0 0;
-  }
-  
-  50% {
-  background-position:100% 0;
-  }
-  }
-  
-  /* Create an active/current tablink class */
-  .tab button.active {
-  background-color:#ccc;
-  }
-  
-  /* Style the tab content */
-  .tabcontent {
-  display:none;
-  padding:6px 12px;
-  border:1px solid #ccc;
-  border-top:none;
-  }
-  
-  /* Create two equal columns that floats next to each other */
-  .column {
-  float:left;
-  width:50%;
-  padding:10px;
-  height:300px;
-  /* Should be removed. Only for demonstration */
-  }
-  
-  /* Clear floats after the columns */
-  .row:after {
-  content:"";
-  display:table;
-  clear:both;
-  }
-  
-  /* width */
-  ::-webkit-scrollbar {
-  width:10px;
-  transition:1s;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
-  background:#f1f1f1;
-  }
-  
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-  background:#888;
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-  background:#555;
-  }
-  
-  /* MESSAGE CONTAINER AND MESSAGE */
-  .msg-container {
-  background-color:rgba(78,78,78,0.7);
-  height:stretch;
-  overflow:auto;
-  height:84%;
-  overflow-x:hidden;
-  }
-  
-  .icon-container {
-  width:100%;
-  height:64px;
-  position:relative;
-  margin-bottom:12px;
-  }
-  
-  .icon-container:hover {
-  color:#969696;
-  transition:.2s;
-  background-color:var(--back);
-  border-radius:8px;
-  }
-  
-  .membername {
-  color:#fff;
-  font-size:small;
-  margin-left:8px;
-  position:absolute;
-  top:50%;
-  transform:translateY(-50%);
-  font-weight:700;
-  }
-  
-  .iconimg {
-  position:absolute;
-  top:50%;
-  margin-top:-24px;
-  right:8px;
-  height:48px;
-  width:48px;
-  border-radius:50%;
-  }
-  
-  .status-circle {
-  width:16px;
-  height:16px;
-  border-radius:50%;
-  background-color:grey;
-  /*border: 1px solid white;*/
-  bottom:6px;
-  right:6px;
-  position:absolute;
-  }
-  
-  .online {
-  background-color:#0f5;
-  }
-  
-  .away {
-  background-color:#ffe600;
-  }
-  
-  .offline {
-  background-color:grey;
-  }
-  
-  .statusmask {
-  position:absolute;
-  border-radius:50%;
-  width:24px;
-  height:24px;
-  bottom:2px;
-  right:2px;
-  background-color:var(--back);
-  transition:.05s;
-  }
-  
-  .members {
-  float:right;
-  padding-top:10px;
-  padding-left:5px;
-  padding-right:5px;
-  background-color:rgba(78,78,78,0.7);
-  height:84%;
-  width:30%;
-  overflow:auto;
-  overflow-x:hidden;
-  }
-  
-  .msg-container a {
-  color:#00a2ff;
-  }
-  
-  .msg-container a:hover {
-  color:#0059ff;
-  }
-  
-  .sender {
-  text-align:right;
-  padding-right:6px;
-  }
-  
-  .msg {
-  white-space:pre-wrap;
-  width:100%;
-  background-color:rgba(80,80,80,0.6);
-  padding-bottom:9px;
-  transition:.2s;
-  }
-  
-  .msg .sender {
-  width:100%;
-  background-color:rgba(80,80,80,0.6);
-  padding-bottom:9px;
-  transition:.2s;
-  text-align:right!important;
-  }
-  
-  .msg:hover {
-  width:100%;
-  background-color:#222;
-  padding-bottom:9px;
-  }
-  
-  .msg p {
-  font-size:18px;
-  margin-left:5px;
-  width:100%;
-  color:#fff;
-  }
-  
-  /* Add Animation */
-  @-webkit-keyframes slideIn {
-  from {
-  bottom:-300px;
-  opacity:0;
-  }
-  
-  to {
-  bottom:0;
-  opacity:1;
-  }
-  }
-  
-  @keyframes slideIn {
-  from {
-  bottom:-300px;
-  opacity:0;
-  }
-  
-  to {
-  bottom:0;
-  opacity:1;
-  }
-  }
-  
-  @-webkit-keyframes fadeIn {
-  from {
-  opacity:0;
-  }
-  
-  to {
-  opacity:1;
-  }
-  }
-  
-  @keyframes fadeIn {
-  from {
-  opacity:0;
-  }
-  
-  to {
-  opacity:1;
-  }
-  }
-  
-  .auto_height {
-  /* CSS */
-  width:100%;
-  height:auto;
-  }
-  
-  .flex {
-  display:-webkit-box;
-  display:-moz-box;
-  display:-ms-flexbox;
-  display:-webkit-flex;
-  display:flex;
-  }
+}
+
+#madeby:hover {
+    color: #fff;
+    transition: 3s;
+}
+
+@keyframes rainbow_animation {
+    0%,
+    100% {
+        background-position: 0 0;
+    }
+    50% {
+        background-position: 100% 0;
+    }
+}
 
 
+/* Create an active/current tablink class */
+
+.tab button.active {
+    background-color: #ccc;
+}
 
 
+/* Style the tab content */
 
-  /* video and audio */
-  .video-container {
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+
+
+/* Create two equal columns that floats next to each other */
+
+.column {
+    float: left;
+    width: 50%;
+    padding: 10px;
+    height: 300px;
+    /* Should be removed. Only for demonstration */
+}
+
+
+/* Clear floats after the columns */
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+
+/* width */
+
+ ::-webkit-scrollbar {
+    width: 10px;
+    transition: 1s;
+}
+
+
+/* Track */
+
+ ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+
+/* Handle */
+
+ ::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+
+/* Handle on hover */
+
+ ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+
+/* MESSAGE CONTAINER AND MESSAGE */
+
+.msg-container {
+    background-color: rgba(78, 78, 78, 0.7);
+    height: stretch;
+    overflow: auto;
+    height: 84%;
+    overflow-x: hidden;
+}
+
+.icon-container {
+    width: 100%;
+    height: 64px;
+    position: relative;
+    margin-bottom: 12px;
+}
+
+.icon-container:hover {
+    color: #969696;
+    transition: .2s;
+    background-color: var(--back);
+    border-radius: 8px;
+}
+
+.membername {
+    color: #fff;
+    font-size: small;
+    margin-left: 8px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: 700;
+}
+
+.iconimg {
+    position: absolute;
+    top: 50%;
+    margin-top: -24px;
+    right: 8px;
+    height: 48px;
+    width: 48px;
+    border-radius: 50%;
+}
+
+.status-circle {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: grey;
+    /*border: 1px solid white;*/
+    bottom: 6px;
+    right: 6px;
+    position: absolute;
+}
+
+.online {
+    background-color: #0f5;
+}
+
+.away {
+    background-color: #ffe600;
+}
+
+.dnd {
+    background-color: #f33933;
+}
+
+.stream {
+    background-color: #ff00aa;
+}
+
+.gaming {
+    background-color: #7401a1;
+}
+
+.offline {
+    background-color: grey;
+}
+
+.statusmask {
+    position: absolute;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    bottom: 2px;
+    right: 2px;
+    background-color: var(--back);
+    transition: .05s;
+}
+
+.members {
+    float: right;
+    padding-top: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    background-color: rgba(78, 78, 78, 0.7);
+    height: 84%;
+    width: 30%;
+    overflow: auto;
+    overflow-x: hidden;
+}
+
+.msg-container a {
+    color: #00a2ff;
+}
+
+.msg-container a:hover {
+    color: #0059ff;
+}
+
+.sender {
+    text-align: right;
+    padding-right: 6px;
+}
+
+.msg {
+    white-space: pre-wrap;
+    width: 100%;
+    background-color: rgba(80, 80, 80, 0.6);
+    padding-bottom: 9px;
+    transition: .2s;
+}
+
+.msg .sender {
+    width: 100%;
+    background-color: rgba(80, 80, 80, 0.6);
+    padding-bottom: 9px;
+    transition: .2s;
+    text-align: right!important;
+}
+
+.msg:hover {
+    width: 100%;
+    background-color: #222;
+    padding-bottom: 9px;
+}
+
+.msg p {
+    font-size: 18px;
+    margin-left: 5px;
+    width: 100%;
+    color: #fff;
+}
+
+
+/* Add Animation */
+
+@-webkit-keyframes slideIn {
+    from {
+        bottom: -300px;
+        opacity: 0;
+    }
+    to {
+        bottom: 0;
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        bottom: -300px;
+        opacity: 0;
+    }
+    to {
+        bottom: 0;
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.auto_height {
+    /* CSS */
+    width: 100%;
+    height: auto;
+}
+
+.flex {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+}
+
+
+/* video and audio */
+
+.video-container {
     position: absolute;
     top: 0;
     bottom: 0;
     width: 100%;
-    height: 100%; 
+    height: 100%;
     overflow: hidden;
-  }
-  .video-container video {
+}
+
+.video-container video {
     /* Make video to at least 100% wide and tall */
-    min-width: 100%; 
-    min-height: 100%; 
-  
+    min-width: 100%;
+    min-height: 100%;
     /* Setting width & height to auto prevents the browser from stretching or squishing the video */
     width: auto;
     height: auto;
-  
     /* Center the video */
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
-  }
+    transform: translate(-50%, -50%);
+}
