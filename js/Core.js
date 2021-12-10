@@ -5,6 +5,7 @@ var username;
 var resstring = "";
 var numberofmessages = 0;
 //var call = null;
+
 var nomessages = "";
 //var shell = require('electron').shell;
 var $ = require("jquery");

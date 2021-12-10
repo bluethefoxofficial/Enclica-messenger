@@ -147,13 +147,16 @@ setInterval(spamprevention, 5000);
 function dismissspam() {
     document.querySelector("#spam").style.display = "none";
 }
-window.setInterval((function() {
-    getmessages();
-}), 1600);
-window.setInterval((function() {
-    getmembers();
+async function loader() {
+    return await new Promise(resolve => {
+        const interval = setInterval(() => {
+            getmessages();
+            getmembers();
+        }, 1000);
+    });
+}
 
-}), 8000);
+loader();
 
 
 

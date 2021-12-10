@@ -1,57 +1,58 @@
 {
-  "name": "enclica",
-  "version": "2.0.8",
-  "description": "The easy opensource messaging solution for you.",
-  "main": "app.js",
-  "scripts": {
-    "test": "electron .",
-    "winbuild": "electron-packager . Enclica --platform win32 --arch x64 --asar --icon=assets/images/Global.ico --out release/",
-    "build": "electron-packager . Enclica --overwrite --platform=all --arch=x64 --asar --icon=assets/images/Global.ico --prune=true --out=release",
-    "debug": ".\\node_modules\\electron\\dist\\electron.exe index.js --enable-logging"
-  },
-  "keywords": [
-    "messaging",
-    "msn"
-  ],
-  "author": "Csoftware",
-  "license": "ISC",
-  "dependencies": {
-    "custom-electron-titlebar": "^3.2.7",
-    "electron-installer-windows": "^3.0.0",
-    "electron-is": "^3.0.0",
-    "electron-localstorage": "^1.0.5",
-    "electron-packager": "^15.4.0",
-    "electron-winstaller": "^5.0.0",
-    "jquery": "^3.6.0",
-    "md5": "^2.3.0",
-    "path": "^0.12.7",
-    "simple-peer": "^9.11.0",
-    "sweetalert": "^2.1.2",
-    "sweetalert2": "^10.16.9",
-    "v8-compile-cache": "^2.3.0",
-    "wrtc": "^0.4.7"
-  },
-  "devDependencies": {
-    "electron": "^11.5.0",
-    "electron-builder": "^22.14.5"
-  },
-  "build": {
-    "productName": "Enclica",
-    "appId": "org.csoftware.enclica",
-    "directories": {
-      "buildResources": "resources",
-      "output": "release"
+    "name": "enclica",
+    "version": "2.0.8",
+    "description": "The easy opensource messaging solution for you.",
+    "main": "app.js",
+
+    "scripts": {
+        "test": "electron .",
+        "winbuild": "electron-packager . Enclica --platform win32 --arch x64 --asar --icon=assets/images/Global.ico --out release/",
+        "build": "electron-packager . Enclica --overwrite --platform=all --arch=x64 --asar --icon=assets/images/Global.ico --prune=true --out=release",
+        "debug": ".\\node_modules\\electron\\dist\\electron.exe index.js --enable-logging"
     },
-    "win": {
-      "asar": true,
-      "target": "nsis",
-      "icon": "resources/icon.png"
+    "keywords": [
+        "messaging",
+        "msn"
+    ],
+    "author": "Csoftware",
+    "license": "ISC",
+    "dependencies": {
+        "custom-electron-titlebar": "^3.2.7",
+        "electron-installer-windows": "^3.0.0",
+        "electron-is": "^3.0.0",
+        "electron-localstorage": "^1.0.5",
+        "electron-packager": "^15.4.0",
+        "electron-winstaller": "^5.0.0",
+        "jquery": "^3.6.0",
+        "md5": "^2.3.0",
+        "path": "^0.12.7",
+        "simple-peer": "^9.11.0",
+        "sweetalert": "^2.1.2",
+        "sweetalert2": "^10.16.9",
+        "v8-compile-cache": "^2.3.0",
+        "wrtc": "^0.4.7"
     },
-    "nsis": {
-      "installerIcon": "resources/icons/icon.ico",
-      "installerHeaderIcon": "resources/icons/icon.ico",
-      "deleteAppDataOnUninstall": true,
-      "oneClick": false
+    "devDependencies": {
+        "electron": "^11.5.0",
+        "electron-builder": "^22.14.5"
+    },
+    "build": {
+        "productName": "Enclica",
+        "appId": "org.csoftware.enclica",
+        "directories": {
+            "buildResources": "resources",
+            "output": "release"
+        },
+        "win": {
+            "asar": true,
+            "target": "nsis",
+            "icon": "resources/icon.png"
+        },
+        "nsis": {
+            "installerIcon": "resources/icons/icon.ico",
+            "installerHeaderIcon": "resources/icons/icon.ico",
+            "deleteAppDataOnUninstall": true,
+            "oneClick": false
+        }
     }
-  }
 }

@@ -8,9 +8,8 @@ body {
     width: 100%;
     height: 100%;
     background-color: #1f1f1f;
-    background-image: url(https://picsum.photos/1920/1080);
+    background-image: url(https://picsum.photos/1920/1080?blur=2);
     background-repeat: no-repeat;
-    backdrop-filter: blur(10px);
     background-size: auto;
 }
 
@@ -43,6 +42,11 @@ body {
     margin-top: 16px;
     margin-bottom: 16px;
     padding: 10px;
+}
+
+progress::-webkit-progress-bar-value {
+    -webkit-appearance: none;
+    background: orangered;
 }
 
 .closebtn {
@@ -82,7 +86,6 @@ body {
     font-size: 28px;
     /* Increased text to enable scrolling */
     padding: 0;
-    display: none;
     transition: .3s;
     background-color: rgba(0, 0, 0, 0);
     color: #fff;
@@ -99,10 +102,12 @@ input[type="text"],
 input[type="password"] {
     width: 100%;
     padding: 12px 20px;
-    border-radius: 0;
+    border-radius: 30px;
     margin: 8px 0;
+    font-family: Arial, Helvetica, sans-serif;
     display: inline-block;
     border: 1px solid #000;
+    outline: none;
     box-sizing: border-box;
 }
 
@@ -216,10 +221,11 @@ span.psw {
 textarea {
     width: 100%;
     padding: 12px 20px;
-    border-radius: 0;
+    border-radius: 40px;
     margin: 8px 0;
     display: inline-block;
     border: 1px solid #000;
+    outline: none;
     box-sizing: border-box;
 }
 

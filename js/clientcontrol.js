@@ -76,22 +76,22 @@ function listgroups() {
             //  console.log(data);
             document.getElementById("chatsnav").innerHTML += `<a class="font-size: 10vw" id="btn_${data.ID}" class="activation" onclick='sectiondiv(event, "win_${data.ID}","0000","0000", ${data.ID})' >${data.name}</a>`;
             var ownermenu = `<!-- Not the owner of  ${data.name} sorry you can only leave mate. -->
-            <ul>
-            <li><p>${data.name}</p></li>
-            <li><a href="call.html" target="_blank"><b>start voice session</b></a></li>
-            <li><a onclick="leave(${data.ID}); sectiondiv(event, 'chats',null,null); listgroups();" href="#"><b>Leave Server</b></a></li>
-            <li><a href="#" onclick="report(${data.ID});"><b>Report server</b></a></li>
-            <li><p>Server invite code: ${data.invite}</p></li>
+            <ul class="ul">
+            <li class="li"><p>${data.name}</p></li>
+            <li class="li"><a href="call.html" target="_blank"><b>start voice session</b></a></li>
+            <li class="li"><a onclick="leave(${data.ID}); sectiondiv(event, 'chats',null,null); listgroups();" href="#"><b>Leave Server</b></a></li>
+            <li class="li"><a href="#" onclick="report(${data.ID});"><b>Report server</b></a></li>
+            <li class="li"><p>Server invite code: ${data.invite}</p></li>
             </ul>
             
             `;
             if (username == data.owner) {
                 ownermenu = `
-                        <ul>
-                        <li><p>${data.name}</p></li>
-                        <li><a onclick="document.getElementById('${data.ID}').style.display = 'block';" href="#"><b>Server manager</b></a></li>
-                        <li><a href="call.html" target="_blank"><b>start voice session</b></a></li>
-                        <li><p>Server invite code: ${data.invite}</p></li>
+                        <ul class="ul">
+                        <li class="li"><p>${data.name}</p></li>
+                        <li class="li"><a onclick="document.getElementById('${data.ID}').style.display = 'block';" href="#"><b>Server manager</b></a></li>
+                        <li class="li"><a href="call.html" target="_blank"><b>start voice session</b></a></li>
+                        <li class="li"><p>Server invite code: ${data.invite}</p></li>
                       </ul>
                       <!-- The Modal for ${data.name} -->
             <div id="${data.ID}" class="modal">
@@ -115,7 +115,7 @@ function listgroups() {
               `;
             }
             document.getElementById("chatsitem").innerHTML += `
-            <div class="main" id="win_${data.ID}">
+            <div class="main " style="display:none;" id="win_${data.ID}">
             <div>
             <input type="file" class="file" id="attachment_${data.ID}" style="display: none;" onchange="fileSelected(this)"/>
             ${ownermenu}
@@ -179,6 +179,8 @@ function savecss() {
         }
     );
 }
+
+
 
 
 

@@ -18,6 +18,7 @@ if (is.windows() == true) {
     process.exit();
 
 
+
 } else if (is.macOS() == true) {
     console.log("get mac download package");
     shell.openExternal("https://enclica.com/msg/download.php?p=darwin");

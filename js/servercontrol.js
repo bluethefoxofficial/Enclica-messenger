@@ -412,3 +412,8 @@ function createserver() {
 
 //initial innitilazation of the servers grouplist
 listgroups();
+
+function logout() {
+    localStorage.removeItem("token");
+    location.reload();
+}

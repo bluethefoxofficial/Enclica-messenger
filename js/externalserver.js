@@ -1,6 +1,7 @@
 document.getElementById('msg').src = '../assets/images/sysload.gif';
 document.getElementById("txt").innerHTML = "Awaiting input.";
 
+
 function setup() {
     document.getElementById('msg').src = '../assets/images/sysload.gif';
     document.getElementById("txt").innerHTML = "connecting...";

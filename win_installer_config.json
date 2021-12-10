@@ -1,0 +1,13 @@
+{
+    "options.productName": "enclica",
+    "options.exe": "Enclica.exe",
+    "options.noMsi": false,
+    "options.autostart": true,
+
+    "options.tags": [
+        "messaging",
+        "IM"
+    ],
+    "options.icon": "resources\\icons\\icon.ico"
+
+}

@@ -1,5 +1,5 @@
-var createPage = function(title, head, body){
-//this code is bad for porting to standard web.
+var createPage = function(title, head, body) {
+    //this code is bad for porting to standard web.
     var page = `
         <!DOCTYPE html>
 <html lang="en">

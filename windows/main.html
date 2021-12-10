@@ -25,10 +25,7 @@
   <p  id="enclica" class="name">enclica</p>
   <a class="activation" id="chatoblock" onclick='sectiondiv(event, "chats","#ec6ead","#3494e6")' >chats</a>
   <a class="activation" id="currentcall_btn" style="display: block;" onclick='sectiondiv(event, "currentcall","#ec6ead","#3494e6")' >Current Call</a>
-  <a class="activation" onclick='sectiondiv(event, "settings","#00a2ff","#ab34e6")' ><svg id="i-settings" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="20" height="20" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-    <path d="M13 2 L13 6 11 7 8 4 4 8 7 11 6 13 2 13 2 19 6 19 7 21 4 24 8 28 11 25 13 26 13 30 19 30 19 26 21 25 24 28 28 24 25 21 26 19 30 19 30 13 26 13 25 11 28 8 24 4 21 7 19 6 19 2 Z" />
-    <circle cx="16" cy="16" r="4" />
-</svg></a>
+ 
  <!-- <a class="activation" onclick='sectiondiv(event, "games","#00a2ff","#ab34e6")' >Library</a> -->
   <a class="activation" id="cup" onclick='sectiondiv(event, "currentlyplaying","#00a2ff","#ab34e6")' >Currently playing</a>
   <a class="activation pulsate" onclick='update()' style="color: rgb(0, 117, 6); display: none;">UPDATE enclica</a>
@@ -36,10 +33,13 @@
   <div id="chatsnav">
 
   </div>
-  <p class="normaltext" id="madeby">Made by enclica software.</p>
-  <div id="lighter"></div>
-  <img id="pfp"></img>
-  <p id="name"></p>
+
+  <div id="lighter"><a class="activation settings" onclick="sectiondiv(event, &quot;settings&quot;,&quot;#00a2ff&quot;,&quot;#ab34e6&quot;)"><svg id="i-settings" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="20" height="20" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+    <path d="M13 2 L13 6 11 7 8 4 4 8 7 11 6 13 2 13 2 19 6 19 7 21 4 24 8 28 11 25 13 26 13 30 19 30 19 26 21 25 24 28 28 24 25 21 26 19 30 19 30 13 26 13 25 11 28 8 24 4 21 7 19 6 19 2 Z"></path>
+    <circle cx="16" cy="16" r="4"></circle>
+</svg></a>  <img id="pfp"></img>
+<p id="name"></p></div>
+
 </div>
 <link rel="stylesheet" href="../assets/configurable/custom.css">
 <link rel="stylesheet" href="../assets/css/contextmenu.css">
@@ -100,8 +100,6 @@
 calling members has been moved to call.html
 -->
 
-
-
 <h2>Communities.</h2>
 <div id="com">
 
@@ -125,6 +123,7 @@ calling members has been moved to call.html
 
   <p>Client settings:</p>
 
+
   <button class="btn btn-danger" style="width: 200px;" onclick="logout();">Logout</button>
   <button onclick="listgroups();"  style="width: 200px;" class="btn">Refresh server list</button>
 
@@ -137,6 +136,8 @@ calling members has been moved to call.html
   <h3>Cache</h3>
   <p style="font-size: small;">NOTE: clearing your cache will cause Enclica to restart or things may not work correctly. Only clear if needed.</p>
   <button onclick="clearcache();" class="btn btn-warning">Clear cache</button>
+
+  <p class="normaltext" id="madeby">Made by enclica software.</p>
 
 
 <!-- The Modal -->
