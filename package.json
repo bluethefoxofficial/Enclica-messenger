@@ -3,7 +3,6 @@
     "version": "2.0.8",
     "description": "The easy opensource messaging solution for you.",
     "main": "app.js",
-
     "scripts": {
         "test": "electron .",
         "winbuild": "electron-packager . Enclica --platform win32 --arch x64 --asar --icon=assets/images/Global.ico --out release/",
@@ -14,7 +13,7 @@
         "messaging",
         "msn"
     ],
-    "author": "Csoftware",
+    "author": "Enclica Software UK",
     "license": "ISC",
     "dependencies": {
         "custom-electron-titlebar": "^3.2.7",
@@ -22,7 +21,6 @@
         "electron-is": "^3.0.0",
         "electron-localstorage": "^1.0.5",
         "electron-packager": "^15.4.0",
-        "electron-winstaller": "^5.0.0",
         "jquery": "^3.6.0",
         "md5": "^2.3.0",
         "path": "^0.12.7",
@@ -34,11 +32,12 @@
     },
     "devDependencies": {
         "electron": "^11.5.0",
-        "electron-builder": "^22.14.5"
+        "electron-builder": "^22.14.5",
+        "electron-winstaller": "^5.0.0"
     },
     "build": {
         "productName": "Enclica",
-        "appId": "org.csoftware.enclica",
+        "appId": "org.enclicasoftware.enclica",
         "directories": {
             "buildResources": "resources",
             "output": "release"

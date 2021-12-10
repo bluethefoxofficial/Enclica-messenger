@@ -1,5 +1,7 @@
 const { app, BrowserWindow, Menu, Tray } = require("electron");
 
+
+
 function handleSquirrelEvent(application) {
     if (process.argv.length === 1) {
         return false;
@@ -79,14 +81,22 @@ const path = require('path');
 
 const menu = Menu.buildFromTemplate([{
         label: 'Quit',
-        click() { app.quit();
-            process.exit(); }
+        click() {
+            app.quit();
+            process.exit();
+        }
     },
     {
         label: 'Hide/show',
-        click() { if (hide == 0) { win.hide();
-                hide = 1; } else { win.show();
-                hide = 0; } }
+        click() {
+            if (hide == 0) {
+                win.hide();
+                hide = 1;
+            } else {
+                win.show();
+                hide = 0;
+            }
+        }
     },
 ]);
 
