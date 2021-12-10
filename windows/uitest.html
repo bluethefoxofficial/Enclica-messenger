@@ -1,36 +1,7 @@
 <script>
   const template = require("../js/template.js");
   const electron = require("electron");
-
-  function login(e) {
-    e.preventDefault();
-    var stuff =
-      "https://csoftware.cf/api/api1.php?key=grUs07Md3s4o9WIb7fi3vu0AGdjinGP8BvFFSvcNI6viEkXFhNY9ZODlNnNWMXfaapeb20NbVBadZtwH9kFUnOgPXn8oWuPPnqJL&function=login&username=" +
-      document.getElementById("username").value +
-      "&password=" +
-      document.getElementById("password").value;
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-      if (this.readyState == 4 && this.status == 200) {
-        var obj = JSON.parse(this.responseText);
-        if (obj.error) {
-          document.getElementById("errortext").innerHTML = obj.error;
-          document.getElementById("error").style.display = "inline";
-        }
-        if (obj.login_token) {
-          localStorage.setItem("token", obj.login_token);
-          window.location = "../windows/main.html";
-          alert(
-            "Lets not leak our hard work.\nleaking this software can result in your contract being terminated."
-          );
-        }
-      }
-    };
-    xhttp.open("GET", stuff, true);
-    xhttp.send();
-  }
-
-  var title = "CPM login ";
+  var title = "hewwo uwu";
   var head = "";
   var body = `
     <h1 style='position: center; text-align: center;'> JANE DOE, JOHN DOE</h3>
@@ -60,9 +31,21 @@ Donec a dapibus ex. Phasellus vel sem volutpat, accumsan nisi sit amet, imperdie
 <button class="btn btn-primary">Jane doe</button>
 <button class="btn btn-alert">Jane doe</button>
 
+
+<div class="sidenav" id="sn">
+  <a class="activation" onclick="document.getElementById('sn').style.display='none';">hide sidenav</a>
+  <a class="activation settings" onclick="alert('settings triggered!')">settings button</a>
+</div>
+
+<ul class="ul">
+  <li class="li"><p>inline text</p></li>
+  <li class="li"><a onclick="" href="#"><b>Button</b></a></li>
+</ul>
+
     
     
     `;
 
   template.createPage(title, head, body);
 </script>
+<script>require('../renderer.js'); </script>
