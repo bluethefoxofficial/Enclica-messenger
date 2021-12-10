@@ -2,10 +2,10 @@ const { Color } = require('custom-electron-titlebar');
 //titlebar code it kind of works but not.
 const customTitlebar = require('custom-electron-titlebar');
 
-
+const path = require('path');
 const tb = new customTitlebar.Titlebar({
-    icon: "../assets/images/Enclica_logo_small.png",
-    backgroundColor: Color.BLUE,
+    icon: '../resources/icons/icon.png',
+    backgroundColor: Color.BLACK,
 });
 //customTitlebar.updateBackground(new Color(new RGBA(0, 0, 0, .3))); //rgba is not working here, what the fuck.
 tb.backgroundColor = Color.RED;

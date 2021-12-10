@@ -1,6 +1,8 @@
 const createWindowsInstaller = require('electron-winstaller').createWindowsInstaller
 const path = require('path')
 
+if (require('electron-squirrel-startup')) return;
+
 getInstallerConfig()
     .then(createWindowsInstaller)
     .catch((error) => {

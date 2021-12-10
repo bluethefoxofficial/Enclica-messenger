@@ -1,11 +1,11 @@
 {
     "name": "enclica",
-    "version": "2.0.8",
+    "version": "2.0.9",
     "description": "The easy opensource messaging solution for you.",
     "main": "app.js",
     "scripts": {
         "test": "electron .",
-        "winbuild": "electron-packager . Enclica --platform win32 --arch x64 --asar --icon=assets/images/Global.ico --out release/",
+        "winbuild": "electron-packager . Enclica --overwrite --platform win32 --arch x64 --asar --icon=assets/images/Global.ico --out release/",
         "build": "electron-packager . Enclica --overwrite --platform=all --arch=x64 --asar --icon=assets/images/Global.ico --prune=true --out=release",
         "debug": ".\\node_modules\\electron\\dist\\electron.exe index.js --enable-logging"
     },
@@ -13,6 +13,7 @@
         "messaging",
         "msn"
     ],
+
     "author": "Enclica Software UK",
     "license": "ISC",
     "dependencies": {
@@ -21,6 +22,7 @@
         "electron-is": "^3.0.0",
         "electron-localstorage": "^1.0.5",
         "electron-packager": "^15.4.0",
+        "electron-squirrel-startup": "^1.0.0",
         "jquery": "^3.6.0",
         "md5": "^2.3.0",
         "path": "^0.12.7",
@@ -36,6 +38,13 @@
         "electron-winstaller": "^5.0.0"
     },
     "build": {
+        "extraResources": [{
+            "from": "./assets/images/",
+            "to": "imgassets",
+            "filter": [
+                "**/*"
+            ]
+        }],
         "productName": "Enclica",
         "appId": "org.enclicasoftware.enclica",
         "directories": {

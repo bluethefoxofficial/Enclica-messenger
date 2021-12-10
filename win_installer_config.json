@@ -3,7 +3,10 @@
     "options.exe": "Enclica.exe",
     "options.noMsi": false,
     "options.autostart": true,
-
+    "extraResources": [
+        "assets",
+        "assets/images/enclica_small_icon.png"
+    ],
     "options.tags": [
         "messaging",
         "IM"

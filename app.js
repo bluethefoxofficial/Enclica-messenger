@@ -141,7 +141,8 @@ app.on('ready', () => {
         });
     });
     const path = require('path');
-    appIcon = new Tray(path.resolve('assets', 'images', 'Global.ico'));
+
+    appIcon = new Tray(path.join(__dirname, '/resources/icons/icon.png'));
     //appIcon=new Tray("assets/images/Global.ico"); Invalid
     //appIcon.setHighlightMode('always'); THIS CAUSES A ERROR FOR SOME REASON.
     appIcon.setContextMenu(menu);

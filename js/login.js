@@ -9,7 +9,7 @@ function login(e) {
         host = localStorage.getItem("host");
         api = localStorage.getItem("ak");
     } else {
-        host = "csoftware.cf";
+        host = "enclica.com";
         api = "grUs07Md3s4o9WIb7fi3vu0AGdjinGP8BvFFSvcNI6viEkXFhNY9ZODlNnNWMXfaapeb20NbVBadZtwH9kFUnOgPXn8oWuPPnqJL";
     }
     var username = document.getElementById("username").value;
