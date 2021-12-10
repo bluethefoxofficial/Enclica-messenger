@@ -31,4 +31,4 @@ Removing legacy code and replacing with async scripts.
 ## Build enclica
 
 1. build the unbundled package by typing `npm winbuild` for windows or `npm build` for all platforms
-2. create the bundled installer for your version of enclica type `node installers/<platform eg. darwin / win32 / deb >/createinstaller.js`.
+2. create the bundled installer for your version of enclica type `node installers/<platform eg. darwin / windows / deb >/createinstaller.js`.
