@@ -2,7 +2,7 @@
 
 You need NodeJS and Visual Studio Code for this to work.
 
-To start CPM, Type ``npm install *`` in the Visual Studio Code terminal or try ``npm install``.
+To start working on enclica, Type ``npm install *`` in the Visual Studio Code terminal or try ``npm install``.
 
 
 
@@ -26,3 +26,16 @@ Quicker and smoother animations.
 Complete rebrand.
 
 Removing legacy code and replacing with async scripts.
+
+
+## Build enclica
+
+1. build the unbundled package by typing `npm winbuild` for windows or `npm build` for all platforms
+2. create the bundled installer for your version of enclica type `node installers/<platform eg. darwin / windows / deb >/createinstaller.js`.
+
+
+`node installers/windows/createinstaller.js`
+
+`node installers/darwin/createinstaller.js`
+
+`node installers/linux/createinstaller.js`
