@@ -10,6 +10,10 @@ function handleSquirrelEvent(application) {
     const ChildProcess = require('child_process');
     const path = require('path');
 
+
+
+    if (require('electron-squirrel-startup')) return;
+
     const appFolder = path.resolve(process.execPath, '..');
     const rootAtomFolder = path.resolve(appFolder, '..');
     const updateDotExe = path.resolve(path.join(rootAtomFolder, 'Update.exe'));

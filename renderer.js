@@ -3,10 +3,22 @@ const { Color } = require('custom-electron-titlebar');
 const customTitlebar = require('custom-electron-titlebar');
 
 const path = require('path');
+
+
+
+
+
+
+
+
+
 const tb = new customTitlebar.Titlebar({
     icon: '../resources/icons/icon.png',
     backgroundColor: Color.BLACK,
+
 });
+
+tb.updateMenu(null);
 //customTitlebar.updateBackground(new Color(new RGBA(0, 0, 0, .3))); //rgba is not working here, what the fuck.
 tb.backgroundColor = Color.RED;
 
