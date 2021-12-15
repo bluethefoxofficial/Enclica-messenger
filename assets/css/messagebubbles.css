@@ -1,6 +1,4 @@
-
-  
-  .ccontainer {
+.ccontainer {
     background-color: #505050;
     border-radius: 5px;
     word-wrap: break-word;
@@ -10,39 +8,40 @@
     left: 4px;
     right: 4px;
     color: #b1b1b1;
-  }
-  
-  .ccontainer::after {
+}
+
+.ccontainer::after {
     content: "";
     clear: both;
     display: table;
-  }
-  
-  .ccontainer .avi {
+}
+
+.ccontainer .avi {
     float: left;
     max-width: 60px;
     width: 100%;
     margin-right: 20px;
     border-radius: 50%;
-  }
-  
-  .ccontainer .avi.right {
+}
+
+.ccontainer .avi.right {
     float: right;
     margin-left: 20px;
-    margin-right:0;
-  }
-  
-  .time-right {
+    margin-right: 0;
+}
+
+.time-right {
     float: right;
     color: #aaa;
     font-size: small;
-  }
-  .sender{
-          color: rgb(110, 110, 110);
-  }
-  
-  .time-left {
+}
+
+.sender {
+    color: rgb(138, 136, 136);
+}
+
+.time-left {
     float: left;
     color: #999;
     font-size: small;
-  }
+}

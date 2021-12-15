@@ -114,6 +114,7 @@ function listgroups() {
             </div>
               `;
             }
+
             document.getElementById("chatsitem").innerHTML += `
             <div class="main " style="display:none;" id="win_${data.ID}">
             <div>
@@ -302,13 +303,4 @@ function reloadcss() {
 // client logout
 //
 //
-function logout() {
-    document.getElementById("preloader").style.display = "block";
-    logout.play();
-
-    setTimeout((function() {
-        localStorage.clear();
-        window.location = "../windows/login.html";
-    }), 1000);
-}
 reloadcss();

@@ -12,7 +12,24 @@
     user-select: none;
 }
 
+.btn-sm {
+    background-color: #686868;
+    color: white;
+    padding: 5px 5px;
+    margin: 8px 0;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+    user-select: none;
+}
+
 .btn:hover {
+    opacity: 0.6;
+    border-radius: 5px;
+}
+
+.btn-sm:hover {
     opacity: 0.6;
     border-radius: 5px;
 }
@@ -23,7 +40,7 @@
 .cancelbtn {
     width: auto;
     padding: 10px 18px;
-    background-color: #f44336;
+    background-color: #80221c;
 }
 
 .btn-danger {
@@ -88,4 +105,10 @@
 .btn-loc {
     display: none;
     transition: 200ms;
+}
+
+.btn:disabled,
+.btn[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
 }

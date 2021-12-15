@@ -1,0 +1,28 @@
+.myview {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 200px;
+    height: 100px;
+}
+
+.controls {}
+
+.bottom {
+    position: fixed;
+    bottom: 0px;
+    height: 105px;
+    width: 100%;
+    background-color: rgba(100, 100, 100, 0.431);
+    padding: 10px;
+    border-top: 3px solid rgba(204, 204, 204, 0.37);
+}
+
+.main-view {
+    margin: 10px;
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    transition: 0.4s;
+}

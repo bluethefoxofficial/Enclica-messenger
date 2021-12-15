@@ -1,34 +1,55 @@
-var Peer = require('simple-peer')
-//var declined = new Audio("../assets/sounds/mp3-converted/declined_call.mp3"); depreached because we are not making a stupid calling system like this.
-var connecting = new Audio("../assets/sounds/mp3-converted/connecting_call.mp3");
-var globalstream = null;
-var Peer = require('simple-peer');
+var peer = new SimplePeer({
+    initiator: location.hash === '#init',
+    trickle: false,
+    stream: stream
+});
 
-const p = new Peer({
-  initiator: location.hash === '#1',
-  trickle: false
-})
+peer.on('signal', function(data) {
+    //console.log(JSON.stringify(data));
+    document.getElementById('yourId').value = JSON.stringify(data);
+});
 
-p.on('error', err => console.log('error', err))
+peer.on('stream', function(stream) {
+    // got remote video stream, now let's show it in a video tag
+    var video = document.createElement('video');
+    video.srcObject = stream;
+    video.classList.add("remote-video");
+    document.getElementById('remote-video-container').appendChild(video);
+    video.play();
+});
 
-p.on('signal', data => {
-  document.getElementById('status').innerHTML = "connecting...";
-  console.log('SIGNAL', JSON.stringify(data))
-  document.querySelector('#outgoing').textContent = JSON.stringify(data)
-})
+document.getElementById('connect').addEventListener('click', function() {
+    var otherId = JSON.parse(document.getElementById('otherId').value);
+    peer.signal(otherId);
+});
 
+document.getElementById('send').addEventListener('click', function() {
+    var yourMessage = document.getElementById('yourMessage').value;
+    peer.send(yourMessage);
+});
 
+peer.on('data', function(data) {
+    document.getElementById('messages').textContent += data + '\n';
+});
 
-p.on('connect', () => {
-  console.log('CONNECT')
-  p.send('whatever' + Math.random());
-})
+// Language: javascript
+// Path: js\RTC.js
+simple - peer group video chat
 
-p.on('data', data => {
-  console.log('data: ' + data)
-})
+var peer = new SimplePeer({
+    initiator: location.hash === '#init',
+    trickle: false,
+    stream: stream
+});
 
-function call(){
-  console.log("NO RTC")
-  return false;
-}
+peer.on('signal', function(data) {
+    //console.log(JSON.stringify(data));
+    document.getElementById('yourId').value = JSON.stringify(data);
+});
+
+peer.on('stream', function(stream) {
+            // got remote video stream, now let's show it in a video tag
+            var video = document.createElement('video');
+            video.srcObject = stream;
+            video.classList.add("remote-video");
+            document.getElementById('remote-video-container').append

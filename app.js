@@ -83,6 +83,11 @@ let win = null;
 const path = require('path');
 //const url = require('url')
 
+
+try {
+    require('electron-reloader')(module)
+} catch (_) {}
+
 const menu = Menu.buildFromTemplate([{
         label: 'Quit',
         click() {
@@ -124,7 +129,7 @@ app.on('ready', () => {
     splash = new BrowserWindow({ width: 500, height: 300, transparent: true, frame: false, alwaysOnTop: false });
 
     splash.loadFile("./windows/preload.html");
-    win.loadFile("./windows/Welcome.html");
+    win.loadFile("./windows/login.html");
     win.once('ready-to-show', () => {
         splash.destroy();
         win.show();

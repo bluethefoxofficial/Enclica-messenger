@@ -152,7 +152,7 @@ async function loader() {
         const interval = setInterval(() => {
             getmessages();
             getmembers();
-        }, 1000);
+        }, 1600);
     });
 }
 

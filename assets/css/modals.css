@@ -36,6 +36,7 @@
 /* The Modal (background) */
 
 .modal {
+    transition: 0.4s;
     display: none;
     /* Hidden by default */
     position: fixed;
