@@ -1,0 +1,51 @@
+* {
+    color: white;
+}
+
+body {
+    background-image: url("https://picsum.photos/1920/1080");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+input {
+    color: rgb(255, 255, 255) !important;
+}
+
+@keyframes intial {
+    from {
+        background-color: rgba(0, 0, 0, 1);
+        margin: 0px;
+        margin: auto;
+        padding: 10px;
+        width: 100%;
+        border-radius: 10px;
+        backdrop-filter: blur(10px);
+    }
+    to {
+        width: 30%;
+        background-color: rgba(0, 0, 0, 0.2);
+        padding: 10px;
+        backdrop-filter: blur(10px);
+        margin: auto;
+        border-radius: 10px;
+    }
+}
+
+.loginbox {
+    animation-name: intial;
+    animation-duration: 1s;
+    animation-delay: 0.3s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+#preloader {
+    transition: 1s;
+}
+
+#fixedbutton {
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
+}

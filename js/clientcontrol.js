@@ -22,7 +22,7 @@ function listgroups() {
     document.getElementById("chatsnav").innerHTML = "";
     document.getElementById("chatsitem").innerHTML = "";
     var stuff =
-        `https://${host}/api/api1.php?key=${api}&function=listgroups&token=` +
+        `https://enclica.com/api/?&function=listgroups&token=` +
         localStorage.getItem("token");
     if (log == true) {
         console.log(stuff);
@@ -78,7 +78,7 @@ function listgroups() {
             var ownermenu = `<!-- Not the owner of  ${data.name} sorry you can only leave mate. -->
             <ul class="ul">
             <li class="li"><p>${data.name}</p></li>
-            <li class="li"><a href="call.html" target="_blank"><b>start voice session</b></a></li>
+           
             <li class="li"><a onclick="leave(${data.ID}); sectiondiv(event, 'chats',null,null); listgroups();" href="#"><b>Leave Server</b></a></li>
             <li class="li"><a href="#" onclick="report(${data.ID});"><b>Report server</b></a></li>
             <li class="li"><p>Server invite code: ${data.invite}</p></li>
@@ -90,7 +90,7 @@ function listgroups() {
                         <ul class="ul">
                         <li class="li"><p>${data.name}</p></li>
                         <li class="li"><a onclick="document.getElementById('${data.ID}').style.display = 'block';" href="#"><b>Server manager</b></a></li>
-                        <li class="li"><a href="call.html" target="_blank"><b>start voice session</b></a></li>
+                     
                         <li class="li"><p>Server invite code: ${data.invite}</p></li>
                       </ul>
                       <!-- The Modal for ${data.name} -->
@@ -203,7 +203,7 @@ function refreshprofile() {
     silent = 1;
     document.getElementById("l1-968b").style.display = "block";
     var stuff =
-        `https://${host}/api/api1.php?key=${api}&function=UAC&token=` +
+        `https://enclica.com/api/api1.php?key=${api}&function=UAC&token=` +
         localStorage.getItem("token");
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {

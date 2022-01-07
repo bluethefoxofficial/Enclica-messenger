@@ -1,8 +1,9 @@
 //var swal = require( 'sweetalert' );
 console.log("LOGIN SCREEN LOGIN.JS ACTIVE");
+var $ = require('jquery');
+var swal = require('sweetalert');
 
 function login(e) {
-    e.preventDefault();
     var host;
     var api;
     if (localStorage.getItem("host")) {
@@ -10,45 +11,53 @@ function login(e) {
         api = localStorage.getItem("ak");
     } else {
         host = "enclica.com";
-        api = "grUs07Md3s4o9WIb7fi3vu0AGdjinGP8BvFFSvcNI6viEkXFhNY9ZODlNnNWMXfaapeb20NbVBadZtwH9kFUnOgPXn8oWuPPnqJL";
+
     }
     var username = document.getElementById("username").value;
     var password = document.getElementById("password").value;
-    var stuff = `https://${host}/api/api1.php?key=${api}&function=login&username=${username}&password=${password}`;
+    var stuff = `https://${host}/api/user/login/`;
     console.log(stuff);
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            console.log(this.responseText);
-            var obj = JSON.parse(this.responseText);
-            console.log(obj);
-            if (obj.error) {
-                var error = new Audio("../assets/sounds/mp3-converted/noti7.mp3");
-                error.setAttribute("crossorigin", "anonymous");
-                error.play();
-                document.getElementById("errortext").innerHTML = obj.error;
-                swal({
-                    title: "Login error",
-                    text: obj.error,
-                    icon: "error",
-                });
-            }
-            if (obj.login_token) {
-                localStorage.setItem("token", obj.login_token);
 
-                //    var success = new Audio("../assets/sounds/mp3-converted/welcome.mp3");
-                document.getElementById("preloader").style.display = "inline";
+    //jquery login request
 
+    $.ajax({
+        url: stuff,
+        type: "POST",
+        data: {
+            username: username,
+            password: password
+        },
+        success: function(data) {
+            console.log(data);
+            if (data.error == "") {
+                localStorage.setItem("token", data.token);
+                localStorage.setItem("host", host);
+                localStorage.setItem("ak", api);
                 window.location = "../windows/main.html";
-
+            } else {
+                swal("Error", "Invalid username or password", "error");
             }
+        },
+        error: function(data) {
+            console.log(data);
         }
-    };
-    xhttp.open("GET", stuff, true);
-    xhttp.send();
+    });
 }
 
-document.getElementById("error").style.display = "none";
-document.getElementById("login").addEventListener("submit", function(e) {
-    login(e);
+
+
+//jquery on submit login request
+
+$("#login").on('submit', function(e) {
+    e.preventDefault();
+    login();
+    return false;
+});
+
+//login button pressed
+
+$("#login-btn").on('click', function(e) {
+    e.preventDefault();
+    login();
+    return false;
 });

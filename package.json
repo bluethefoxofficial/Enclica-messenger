@@ -1,13 +1,14 @@
 {
     "name": "enclica",
-    "version": "2.0.9",
+    "version": "2.2.0",
     "description": "The easy opensource messaging solution for you.",
     "main": "app.js",
     "scripts": {
         "test": "electron .",
         "winbuild": "electron-packager . Enclica --overwrite --platform win32 --arch x64 --asar --icon=assets/images/Global.ico --out release/",
         "build": "electron-packager . Enclica --overwrite --platform=all --arch=x64 --asar --icon=assets/images/Global.ico --prune=true --out=release",
-        "debug": ".\\node_modules\\electron\\dist\\electron.exe index.js --enable-logging"
+        "debug": ".\\node_modules\\electron\\dist\\electron.exe index.js --enable-logging",
+        "winstallerbuild": "node ./installers/windows/createinstaller.js"
     },
     "keywords": [
         "messaging",
@@ -17,15 +18,19 @@
     "license": "ISC",
     "dependencies": {
         "custom-electron-titlebar": "^3.2.7",
+        "electron-installer-dmg": "^3.0.0",
         "electron-installer-windows": "^3.0.0",
         "electron-is": "^3.0.0",
         "electron-localstorage": "^1.0.5",
         "electron-packager": "^15.4.0",
         "electron-squirrel-startup": "^1.0.0",
+        "express": "^4.17.2",
         "jquery": "^3.6.0",
         "md5": "^2.3.0",
+        "node-ip": "^0.1.2",
         "path": "^0.12.7",
         "simple-peer": "^9.11.0",
+        "socket.io": "^4.4.1",
         "sweetalert": "^2.1.2",
         "sweetalert2": "^10.16.9",
         "v8-compile-cache": "^2.3.0",
@@ -38,15 +43,13 @@
         "electron-winstaller": "^5.0.0"
     },
     "build": {
-        "extraResources": [
-            {
-                "from": "./assets/images/",
-                "to": "imgassets",
-                "filter": [
-                    "**/*"
-                ]
-            }
-        ],
+        "extraResources": [{
+            "from": "./assets/images/",
+            "to": "imgassets",
+            "filter": [
+                "**/*"
+            ]
+        }],
         "productName": "Enclica",
         "appId": "org.enclicasoftware.enclica",
         "directories": {

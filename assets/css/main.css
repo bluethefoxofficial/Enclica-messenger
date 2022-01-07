@@ -99,16 +99,36 @@ progress::-webkit-progress-bar-value {
 }
 
 input[type="text"],
-input[type="password"] {
+textarea,
+input[type="password"],
+input[type="email"] {
     width: 100%;
     padding: 12px 20px;
-    border-radius: 30px;
     margin: 8px 0;
     font-family: Arial, Helvetica, sans-serif;
     display: inline-block;
-    border: 1px solid #000;
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(44, 44, 44, 0.171);
     outline: none;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.4);
     box-sizing: border-box;
+    transition: all 0.2s;
+}
+
+::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: rgb(224, 224, 224);
+    opacity: 1;
+    /* Firefox */
+}
+
+input,
+textarea:focus {
+    color: white;
+    border: 40px solid rbga(255, 255, 255, 1);
+    backdrop-filter: blur(30px);
+    transition: all 0.2s;
 }
 
 h1 h2 h3 h4 h5 {
@@ -216,17 +236,6 @@ span.psw {
     color: #000;
     text-decoration: none;
     cursor: pointer;
-}
-
-textarea {
-    width: 100%;
-    padding: 12px 20px;
-    border-radius: 40px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #000;
-    outline: none;
-    box-sizing: border-box;
 }
 
 .center {

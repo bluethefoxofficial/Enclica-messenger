@@ -4,18 +4,16 @@ var silent = 1;
 var username;
 var resstring = "";
 var numberofmessages = 0;
-//var call = null;
 
-var nomessages = "";
-//var shell = require('electron').shell;
 var $ = require("jquery");
+
+require('../../renderer.js');
 var memberslist = null;
 const { shell, session } = require('electron');
+require("sweetalert");
 var swal = require('sweetalert');
 var os = require("os");
-var obj;
-var sevmax = 1000000000000000000; //well we say unlimited but here is the fucking maximum.
-var email;
+
 var username;
 //const fs = require("fs");
 var host;
@@ -27,8 +25,14 @@ if (localStorage.getItem("host")) {
     api = localStorage.getItem("ak");
 } else {
     host = "enclica.com";
-    api = "NaN"; //can someone make this invalid, thanks.
+    api = ""; //can someone make this invalid, thanks.
 }
+var stuff =
+    "https://enclica.com/api/user/info?token=" + localStorage.getItem("token");
+//use json and var stuff to get username
+$.get(stuff).done(function(d) {
+    username = d.data.username;
+});
 
 function timeConverter(UNIX_timestamp) {
     var a = new Date(UNIX_timestamp * 1000);
@@ -56,10 +60,8 @@ function getExtension(path) {
 
 
 function clearcache() {
-    session.defaultSession.clearStorageData(); //this code creates errors, WTF! ErRoR CrEaToR 7000
+    //clear nodejs cache for electron
+    session.defaultSession.clearCache(function() {
+        console.log("cache cleared");
+    });
 }
-
-
-//version and version name.
-var version = "3.0.0"; //this is used in about but not the splash screen??????
-var versionname = "Newton"; //this is used in about also under changelog, why?

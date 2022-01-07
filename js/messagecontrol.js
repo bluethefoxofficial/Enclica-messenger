@@ -32,7 +32,7 @@ function sendmessage(e, input) {
             }
             return commandhandler(input, "");
         }
-        if (numberofmessages == 10) {
+        if (numberofmessages > 10) {
             document.querySelector("#spam").style.display = "block";
             return;
         }
@@ -45,7 +45,7 @@ function sendmessage(e, input) {
         }
 
 
-        var stuff = `https://${host}/api/api1.php`;
+        var stuff = `https://enclica.com/api/`;
 
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
@@ -53,11 +53,7 @@ function sendmessage(e, input) {
                 console.log(this.responseText);
                 silent = 1;
                 getmessages();
-                document.querySelector("#" +
-                    currentserver + "_container"
-                ).scrollTop = document.querySelector("#" +
-                    currentserver + "_container"
-                ).scrollHeight;
+                document.getElementById(currentserver + "_container").scrollTop = document.getElementById(currentserver + "_container").scrollHeight;
                 silent = 1;
             } else {}
         };
@@ -65,7 +61,7 @@ function sendmessage(e, input) {
         xhttp.open("POST", stuff, true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send(
-            `key=${api}&function=sendmessage&token=` +
+            `function=sendmessage&token=` +
             localStorage.getItem("token") +
             "&serverid=" +
             currentserver +
@@ -170,7 +166,7 @@ loader();
 
 function deletemessage(messageid, file) {
     var stuff =
-        `https://${host}/api/api1.php?key=${api}&function=deletemessage&token=` +
+        `https://enclica.com/api/?&function=deletemessage&token=` +
         localStorage.getItem("token") +
         "&messageid=" +
         messageid + "&file=" + file;

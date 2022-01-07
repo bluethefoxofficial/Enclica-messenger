@@ -114,53 +114,10 @@ calling members has been moved to call.html
 </div>
 
 <div class="main" id="settings">
-  <h2>Settings</h2>
 
 
-  <textarea disabled id="bio"></textarea>
-  <button class="btn btn-success" style="width: 200px;" id="rbtn" onclick="refreshprofile();">Refresh<img src="../assets/images/sysload.gif"
-      id="l1-968b" style="display:none;" width="20px" /></button>
-
-  <p>Client settings:</p>
-
-
-  <button class="btn btn-danger" style="width: 200px;" onclick="logout();">Logout</button>
-  <button onclick="listgroups();"  style="width: 200px;" class="btn">Refresh server list</button>
-
-  <a id="uitest" style="display: none;" class="btn btn-success" href="../windows/uitest.html">UITEST</a>
-  <p>connection Info</p>
-  <p>API host: <span id="host"></span></p>
-
-  <button onclick="document.getElementById('about').style.display = 'block';" class="btn btn-success">Developers and contributers.</button>
+  <!-- include settings.html -->
   
-  <h3>Cache</h3>
-  <p style="font-size: small;">NOTE: clearing your cache will cause Enclica to restart or things may not work correctly. Only clear if needed.</p>
-  <button onclick="clearcache();" class="btn btn-warning">Clear cache</button>
-
-  <p class="normaltext" id="madeby">Made by enclica software.</p>
-
-
-<!-- The Modal -->
-<div id="about" class="modal">
-
-  <!-- Modal content -->
-  <div class="modal-content" style="height: 100%;">
-    <div class="modal-header bg-primary">
-      <span class="close" onclick="document.getElementById('about').style.display = 'none';">&times;</span>
-      <h2>About Enclica development</h2>
-    </div>
-    <div class="modal-body">
-      <p>Project manager and lead developer: Kessan Robertson.</p><br/>
-      <p>Contributer: vistax64 KonradCzerw</p><br/>
-      <p>Contributer: furry</p><br/>
-      <p>Contributer: Gamerappa</p><br/>
-      <p>Tester: Wilber</p><br/>
-      <p>Tester: Aruna the fluffy wolfie </p><br/>
-      <!-- insert your name here  <p>role: name</p><br/> -->
-    </div>
-  </div>
-
-</div>
 
 </div>
 <div class="main" id="games">
@@ -215,13 +172,13 @@ RTC CURRENTCALL SCREEN
   </div>
 
 </div>
-<script src="../js/Core.js"></script>
-<script src="../js/start.js"></script>
-<script src="../js/filecontrol.js"></script>
-<script src="../js/clientcontrol.js"></script>
-<script src="../js/modal.js"></script>
-<script src="../js/contextmenu.js"></script>
-<script src="../js/messagecontrol.js"></script>
-<script src="../js/audio.js"></script>
-<script src="../js/servercontrol.js"></script>
-<script>require('../renderer.js'); </script>
+<script async src="../js/Core.js"></script>
+<script async src="../js/start.js"></script>
+<script async src="../js/filecontrol.js"></script>
+<script async  src="../js/clientcontrol.js"></script>
+<script async src="../js/modal.js"></script>
+<script async src="../js/contextmenu.js"></script>
+<script async  src="../js/messagecontrol.js"></script>
+<script async src="../js/audio.js"></script>
+<script async src="../js/servercontrol.js"></script>
+<script>require('../renderer.js');</script>

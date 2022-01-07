@@ -5,7 +5,7 @@
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
-    border-radius: 20px;
+    border-radius: 0px;
     border: none;
     cursor: pointer;
     transition: 0.3s;
@@ -17,7 +17,7 @@
     color: white;
     padding: 5px 5px;
     margin: 8px 0;
-    border-radius: 20px;
+    border-radius: 0px;
     border: none;
     cursor: pointer;
     transition: 0.3s;
@@ -26,7 +26,7 @@
 
 .btn:hover {
     opacity: 0.6;
-    border-radius: 5px;
+    border-radius: 0px;
 }
 
 .btn-sm:hover {
@@ -56,7 +56,8 @@
 }
 
 .btn-primary {
-    background-color: #003ada;
+    background-color: #000000;
+    color: white;
 }
 
 .btn-alert {
@@ -85,7 +86,8 @@
 }
 
 .bg-primary {
-    background-color: #003ada !important;
+    background-color: #000000 !important;
+    color: white;
 }
 
 .bg-alert {

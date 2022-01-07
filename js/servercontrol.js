@@ -5,6 +5,7 @@
 //
 //
 var delbtn = "";
+var currentmessages = [];
 
 function joinserver() {
 
@@ -18,7 +19,7 @@ function joinserver() {
     if (sevmax == 100) return;
     var server = currentserver;
     var stuff =
-        `https://${host}/api/api1.php?key=${api}&function=joingroup&token=` +
+        `https://enclica.com/api/?key=${api}&function=joingroup&token=` +
         localStorage.getItem("token") +
         "&invite=" +
         document.getElementById("serverjoininputbox").value;
@@ -67,157 +68,107 @@ function joinserver() {
 
 
 function getmessages() {
-    document.getElementById('jerror').style.display = 'none';
+
+    //get messages from server and if its a image file display image and if its not an image then display the textarea using jquery $.get
+
     if (currentserver === null) {
         return;
     }
-
     var stuff =
-        `https://${host}/api/api1.php?key=${api}&function=getmessages&token=` +
+
+        `https://enclica.com/api/?&function=getmessages&token=` +
         localStorage.getItem("token") +
         "&serverid=" +
         currentserver;
-    //console.log(stuff);
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        var obj = null;
-        if (this.readyState == 4 && this.status == 200) {
-            try {
-                obj = JSON.parse(this.responseText);
-            } catch (e) {
-                if (nomessages) return;
-                document.getElementById(currentserver + "_container").innerHTML = "";
-                document.getElementById(currentserver + "_container").innerHTML +=
-                    `<svg id="i-msg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="50" height="50" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-    <path d="M2 4 L30 4 30 22 16 22 8 29 8 22 2 22 Z" />
-</svg><h3>This server is alittle empty. Let start a conversation</h3>`;
-                nomessages = 1;
-                return;
-            }
-            nomessages = 0;
-            if (this.responseText == currentmessages) {
-                return;
-            }
-            if (currentmessages == "") {
-                return;
-            }
-            if (currentserver == obj[0].serverid) {
-                if (
-                    document.getElementById(currentserver + "_container").innerHTML != ""
-                ) {
-                    if (silent == 1) {} else {
-                        var newmsg = new Audio(
-                            "../assets/sounds/mp3-converted/message.mp3"
-                        );
-                        newmsg.play();
 
-                        silent = 0;
-                    }
-                }
-            }
-            // console.log(this.responseText);
-            document.getElementById(currentserver + "_container").innerHTML = "";
-            document.getElementById(currentserver + "_container").innerHTML = "";
-            currentmessages = this.responseText;
+    $.get(stuff, function(data) {
+        if (data.length == 0) {
+            return;
+        }
+        if (currentmessages == Object.keys(data).length) {
+            return;
+        }
+        $('#' + currentserver + '_container').html('');
+        currentmessages = Object.keys(data).length;
+        data.forEach(function(message) {
+            //check if message contains a file and if it does then append with an image file and if not then append with a textarea
+            if (message.file) {
 
-            obj.forEach((function(data, index) {
-                if (data.sender == username) {
-                    delbtn = `<button class="btn btn-danger" style="width: 50px; height: 18px; padding:0px 0px;"onclick='deletemessage(${data.ID},"${data.file}");'><svg id="i-trash" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-                            <path d="M28 6 L6 6 8 30 24 30 26 6 4 6 M16 12 L16 24 M21 12 L20 24 M11 12 L12 24 M12 6 L13 2 19 2 20 6" />
-                        </svg></button>`;
-                }
-                if (data.file !== null) {
-                    console.log(`${data.file} FILE EXTENTION FOR ` + getExtension(data.file));
-                    if (getExtension(data.file) === "png" || getExtension(data.file) === "jpg" || getExtension(data.file) === "gif" || getExtension(data.file) == "tiff") {
-                        document.getElementById(currentserver + "_container").innerHTML += `<div id="${data.file}" class="img-modal">
-                    <span class="close" onclick="document.getElementById('${data.file}').style.display = 'none';">&times;</span>
-                    <img class="img-modal-content" src="https://cdn.enclica.com/enc/data/${data.sender}/${data.file}" id="img01">
-                    <div id="caption"><a onclick='shell.openExternal("https://cdn.enclica.com/enc/data/${data.sender}/${data.file}");' href="#">Open Original</a></div>
-                    </div>`;
-                    }
-
-
-                    //
-                    //message based off file type
-                    //
-                    /* IMAGES  */
-                    if (getExtension(data.file) === "png" || getExtension(data.file) === "jpg" || getExtension(data.file) === "gif" || getExtension(data.file) == "tiff") {
-                        document.getElementById(currentserver + "_container").innerHTML +=
-                            `<div class="ccontainer darker">
-                            <span class="sender">${data.sender}</span>
-                            <img class="avi" src="https://enclica.com/api/api1.php?key=grUs07Md3s4o9WIb7fi3vu0AGdjinGP8BvFFSvcNI6viEkXFhNY9ZODlNnNWMXfaapeb20NbVBadZtwH9kFUnOgPXn8oWuPPnqJL&function=pfpget&username=${data.sender}" alt="Avatar" style="width:100%;">
+                switch (getExtension(message.file)) {
+                    case 'jpg' || 'jpeg' || 'png' || 'gif':
+                        $('#' + currentserver + '_container').append(`
+                        <div class="ccontainer darker">
+                            <span class="sender">${message.sender}</span>
+                            <img class="avi" src="https://enclica.com/api/?function=pfpget&username=${message.sender}" alt="Avatar" style="width:100%;">
                             <p>
                            
-                            <img class="img" onclick="document.getElementById('${data.file}').style.display = 'block';" src="https://cdn.enclica.com/enc/data/${data.sender}/${data.file}" width="30%" />
-                            ${data.file}<br/>
+                            <img class="img" onclick="document.getElementById('${message.file}').style.display = 'block';" src="https://cdn.enclica.com/enc/data/${message.sender}/${message.file}" width="30%" />
+                            ${message.file}<br/>
                             </p>
-                            <span class="time-right">${timeConverter(data.time)}</span>
+                            <span class="time-right">${timeConverter(message.time)}</span>
                             ${delbtn}
-                            </div>`;
-                        /* AUDIO  */
-                    } else if (getExtension(data.file) === "mp3" || getExtension(data.file) === "wav") {
-                        document.getElementById(currentserver + "_container").innerHTML +=
-                            `<div class="ccontainer darker">
-                            <span class="sender">${data.sender}</span>
-                            <img class="avi" src="https://enclica.com/api/api1.php?key=grUs07Md3s4o9WIb7fi3vu0AGdjinGP8BvFFSvcNI6viEkXFhNY9ZODlNnNWMXfaapeb20NbVBadZtwH9kFUnOgPXn8oWuPPnqJL&function=pfpget&username=${data.sender}" alt="Avatar" style="width:100%;">
-                            <p>
-                            ${data.file}<br/>
-                            <button class="btn btn-info" onclick="play('https://cdn.enclica.com/enc/data/${data.sender}/${data.file}')">play audio</button>
-                            </p>
-                            <span class="time-right">${timeConverter(data.time)}</span>
-                            ${delbtn}
-                            </div>`;
-                        /* VIDEO  */
-                    } else if (getExtension(data.file) === "avi" || getExtension(data.file) === "mp4") {
-                        document.getElementById(currentserver + "_container").innerHTML +=
-                            `<div class="ccontainer darker">
-                            <span class="sender">${data.sender}</span>
-                            <img class="avi" src="https://enclica.com/api/api1.php?key=grUs07Md3s4o9WIb7fi3vu0AGdjinGP8BvFFSvcNI6viEkXFhNY9ZODlNnNWMXfaapeb20NbVBadZtwH9kFUnOgPXn8oWuPPnqJL&function=pfpget&username=${data.sender}" alt="Avatar" style="width:100%;">
-                            <p>
-                            ${data.file}<br/>
-                            <button class="btn btn-info" onclick="play('https://cdn.enclica.com/enc/data/${data.sender}/${data.file}', 'video')">play video</button>
-                            </p>
-                            <span class="time-right">${timeConverter(data.time)}</span>
-                            ${delbtn}
-                            </div>`;
-                        /* OTHERS */
-                    } else {
-                        document.getElementById(currentserver + "_container").innerHTML +=
-                            `<div class="ccontainer darker">
-                <span class="sender">${data.sender}</span>
-                <img class="avi" src="https://enclica.com/api/api1.php?key=grUs07Md3s4o9WIb7fi3vu0AGdjinGP8BvFFSvcNI6viEkXFhNY9ZODlNnNWMXfaapeb20NbVBadZtwH9kFUnOgPXn8oWuPPnqJL&function=pfpget&username=${data.sender}" alt="Avatar" style="width:100%;">
-                <p>
-                <a onclick='shell.openExternal("https://cdn.enclica.com/enc/data/${data.sender}/${data.file}");' href="#">Open ${data.file} in browser </a><br/><span style="color:red">UNTRUSTED FILE THIS HASNT BEEN SCANNED FOR VIRUSES</span>
-                </p>
-                <span class="time-right">${timeConverter(data.time)}</span>
-                ${delbtn}
-                </div>`;
-                    }
-                    return;
-                    scrollToBottom(document.getElementById(currentserver + "_container"));
-                    silent = 0;
-                    return;
+                            </div>
+                            
+                            <!-- modal for it -->
+                            
+                            <div id="${message.file}" class="img-modal">
+                    <span class="close" onclick="document.getElementById('${message.file}').style.display = 'none';">&times;</span>
+                    <img class="img-modal-content" src="https://cdn.enclica.com/enc/data/${message.sender}/${message.file}" id="img01">
+                    <div id="caption"><a onclick='shell.openExternal("https://cdn.enclica.com/enc/data/${message.sender}/${message.file}");' href="#">Open Original</a></div>
+                    </div>`);
+                        break;
+
+                        //audio file
+                    case 'mp3' || 'wav' || 'ogg' || 'flac':
+                        $('#' + currentserver + '_container').append(`<div class="ccontainer darker">
+                        <span class="sender">${message.sender}</span>
+                        <img class="avi" src="https://enclica.com/api/?function=pfpget&username=${message.sender}" alt="Avatar" style="width:100%;">
+                        <p>
+                        ${message.file}<br/>
+                        <button class="btn btn-info" onclick="play('https://cdn.enclica.com/enc/data/${message.sender}/${message.file}', 'audio')">play audio</button>
+                        </p>
+                        <span class="time-right">${timeConverter(message.time)}</span>
+                        ${delbtn}
+                        </div>`);
+                        break;
+                        //video file
+                    case 'mp4' || 'webm' || 'mkv' || 'avi' || 'mov':
+                        $('#' + currentserver + '_container').append(`<div class="ccontainer darker">
+                        <span class="sender">${message.sender}</span>
+                        <img class="avi" src="https://enclica.com/api/?function=pfpget&username=${message.sender}" alt="Avatar" style="width:100%;">
+                        <p>
+                        ${message.file}<br/>
+                        <button class="btn btn-info" onclick="play('https://cdn.enclica.com/enc/data/${message.sender}/${message.file}', 'video')">play video</button>
+                        </p>
+                        <span class="time-right">${timeConverter(message.time)}</span>
+                        ${delbtn}
+                        </div>`);
+
+                    default:
+                        $('#' + currentserver + '_container').append(`<div class="ccontainer darker">
+                        <span class="sender">${message.sender}</span>
+                        <img class="avi" src="https://enclica.com/api/?function=pfpget&username=${message.sender}" alt="Avatar" style="width:100%;">
+                        <p>
+                        <a onclick='shell.openExternal("https://cdn.enclica.com/enc/data/${message.sender}/${message.file}");' href="#">Open ${message.file} in browser </a><br/><span style="color:red">UNTRUSTED FILE THIS HASNT BEEN SCANNED FOR VIRUSES</span>
+                        </p>
+                        <span class="time-right">${timeConverter(message.time)}</span>
+                        ${delbtn}
+                        </div>`);
+                        break;
                 }
+            } else {
+                $('#' + currentserver + '_container').append(` <div class = "ccontainer">
+                                            <span class = "sender" > ${message.sender} </span> <img class = "avi"
+                                            src = "https://enclica.com/api/?function=pfpget&username=${message.sender}"
+                                            alt = "Avatar"
+                                            style = "width:100%;">
+                                            <p class = "message"> ${message.message} </p> <span class = "time-right" > ${timeConverter(message.time)} </span> </div> `);
+            }
+        });
 
-                //normal text
-                document.getElementById(currentserver + "_container").innerHTML +=
-                    `<div class="ccontainer darker">
-                            <span class="sender">${data.sender}</span>
-                            <img  class="avi" src="https://enclica.com/api/api1.php?key=grUs07Md3s4o9WIb7fi3vu0AGdjinGP8BvFFSvcNI6viEkXFhNY9ZODlNnNWMXfaapeb20NbVBadZtwH9kFUnOgPXn8oWuPPnqJL&function=pfpget&username=${data.sender}" alt="Avatar" style="width:100%;">
-                            <p>${linkify(data.message)}</p>
-                            <span class="time-right">${timeConverter(data.time)}</span>
-                            ${delbtn}
-                            </div>`;
 
-                // scrollToBottom(document.getElementById(currentserver + "_container"));
+    })
 
-                scrollToBottom(currentserver + "_scroll");
-            }));
-        } else {}
-    };
-
-    xhttp.open("GET", stuff, true);
-    xhttp.send();
 }
 
 //
@@ -233,7 +184,7 @@ function getmembers() {
     }
 
     var stuff =
-        `https://${host}/api/api1.php?key=${api}&function=getmembers&token=` +
+        `https://enclica.com/api/?function=getmembers&token=` +
         localStorage.getItem("token") +
         "&serverid=" +
         currentserver;
@@ -270,19 +221,18 @@ function getmembers() {
                 $.ajaxSetup({ async: false });
                 if (data == "") { return; }
                 var status = 'away';
-                $.get(`https://enclica.com/api/api1.php?function=statusget&username=${data}`, function(udata) {
-                    status = udata;
+                $.get(`https://enclica.com/api/user/getstatus/?username=${data}`, function(udata) {
+                    status = udata.status;
 
                 });
-                list += `<div class='icon-container' style="clear: left;">
-                <img style="float: right;"class="iconimg" src="https://enclica.com/api/api1.php?function=pfpget&username=${data}" />
-                <div class='statusmask'></div>
-                <div class='status-circle ${status}'></div>
-                <p class="membername">${data}</p>
-                </div>`;
+                $('#' + currentserver + '_members').append(`<div class='icon-container' style="clear: left;">
+                                                <img style="float: right;" class="iconimg" src="https://enclica.com/api/?function=pfpget&username=${data}" />
+                                                <div class='statusmask'></div>
+                                                <div class='status-circle ${status}'></div>
+                                                <p class="membername">${data}</p>
+                                            </div>`);
             }));
             $.ajaxSetup({ async: true });
-            document.getElementById(currentserver + "_members").innerHTML = list;
         } else {}
     };
 
@@ -302,7 +252,7 @@ function getmembers() {
 
 function leave(id) {
     var stuff =
-        "https://enclica.com/api/api1.php?key=grUs07Md3s4o9WIb7fi3vu0AGdjinGP8BvFFSvcNI6viEkXFhNY9ZODlNnNWMXfaapeb20NbVBadZtwH9kFUnOgPXn8oWuPPnqJL&function=leavegroup&token=" +
+        "https://enclica.com/api/?key=grUs07Md3s4o9WIb7fi3vu0AGdjinGP8BvFFSvcNI6viEkXFhNY9ZODlNnNWMXfaapeb20NbVBadZtwH9kFUnOgPXn8oWuPPnqJL&function=leavegroup&token=" +
         localStorage.getItem("token") +
         "&serverid=" +
         id;
@@ -340,7 +290,7 @@ function deletegroup(id) {
         .then((willDelete) => {
             if (willDelete) {
                 var stuff =
-                    `https://${host}/api/api1.php?key=${api}&function=deletegroup&token=` + localStorage.getItem("token") + "&serverid=" + id;
+                    `https://enclica.com/api/?key=${api}&function=deletegroup&token=` + localStorage.getItem("token") + "&serverid=" + id;
 
                 var xhttp = new XMLHttpRequest();
                 xhttp.onreadystatechange = function() {
@@ -385,7 +335,7 @@ function createserver() {
         return;
     }
     var stuff =
-        `https://${host}/api/api1.php?key=${api}&function=creategroup&token=` +
+        `https://enclica.com/api/?key=${api}&function=creategroup&token=` +
         localStorage.getItem("token") +
         "&name=" +
         input.value;

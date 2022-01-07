@@ -1,3 +1,18 @@
+//nodejs command line arguments
+const myArgs = process.argv.slice(2);
+console.log('myArgs: ', myArgs);
+
+switch (myArgs[0]) {
+    case 'rtcserver':
+        console.log(myArgs[1], 'smells quite badly.');
+        break;
+    case 'help':
+        console.log(myArgs[1], 'is really cool.');
+        break;
+    default:
+
+}
+
 const { app, BrowserWindow, Menu, Tray } = require("electron");
 
 
@@ -130,8 +145,10 @@ app.on('ready', () => {
 
     splash.loadFile("./windows/preload.html");
     win.loadFile("./windows/login.html");
+    //win.webContents.openDevTools();
     win.once('ready-to-show', () => {
         splash.destroy();
+
         win.show();
     });
 
@@ -151,7 +168,7 @@ app.on('ready', () => {
     });
     const path = require('path');
 
-    appIcon = new Tray(path.join(__dirname, '/resources/icons/icon.png'));
+    appIcon = new Tray(path.join(__dirname, '/resources/icons/icon.ico'));
     //appIcon=new Tray("assets/images/Global.ico"); Invalid
     //appIcon.setHighlightMode('always'); THIS CAUSES A ERROR FOR SOME REASON.
     appIcon.setContextMenu(menu);

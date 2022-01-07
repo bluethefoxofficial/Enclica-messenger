@@ -1,4 +1,5 @@
 function fileSelected(input) {
+    var swal = require('sweetalert');
 
 
     swal({
@@ -23,7 +24,7 @@ function fileSelected(input) {
             var rand = Math.random();
             $.ajax({
                 type: 'POST',
-                url: `https://${host}/api/api1.php`,
+                url: `https://enclica.com/api/`,
                 data: data,
                 cache: false,
                 enctype: 'multipart/form-data',
@@ -71,7 +72,7 @@ function fileSelected(input) {
                     $(`#upl-${currentserver}`).remove();
                 },
                 error: function(data) {
-                    swal(`UPLOAD ERROR", "Your file has had an error when trying to upload. Please try again. <p>${data.responseText}</p>`, "error");
+                    swal(`UPLOAD ERROR", "Your file has had an error when trying to upload. Please try again. <p></p>`, "error");
                     console.log(data);
                     $(`#pro-${currentserver}`).remove();
                     $(`#upl-${currentserver}`).remove();
