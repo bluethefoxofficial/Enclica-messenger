@@ -45,7 +45,7 @@ function sendmessage(e, input) {
         }
 
 
-        var stuff = `https://enclica.com/api/`;
+        var stuff = `https://enclica.com/api/messenger/sendmessage/`;
 
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
@@ -61,7 +61,7 @@ function sendmessage(e, input) {
         xhttp.open("POST", stuff, true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send(
-            `function=sendmessage&token=` +
+            `token=` +
             localStorage.getItem("token") +
             "&serverid=" +
             currentserver +

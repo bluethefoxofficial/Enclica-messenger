@@ -18,7 +18,7 @@ body {
     padding: 0;
 }
 
- ::selection {
+::selection {
     background: #a618e7;
 }
 
@@ -129,6 +129,7 @@ textarea:focus {
     border: 40px solid rbga(255, 255, 255, 1);
     backdrop-filter: blur(30px);
     transition: all 0.2s;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
 }
 
 h1 h2 h3 h4 h5 {
@@ -347,7 +348,7 @@ span.psw {
 
 /* width */
 
- ::-webkit-scrollbar {
+::-webkit-scrollbar {
     width: 10px;
     transition: 1s;
 }
@@ -355,21 +356,21 @@ span.psw {
 
 /* Track */
 
- ::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
     background: #f1f1f1;
 }
 
 
 /* Handle */
 
- ::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
     background: #888;
 }
 
 
 /* Handle on hover */
 
- ::-webkit-scrollbar-thumb:hover {
+::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
 
@@ -502,7 +503,7 @@ span.psw {
     background-color: rgba(80, 80, 80, 0.6);
     padding-bottom: 9px;
     transition: .2s;
-    text-align: right!important;
+    text-align: right !important;
 }
 
 .msg:hover {
@@ -565,14 +566,6 @@ span.psw {
     /* CSS */
     width: 100%;
     height: auto;
-}
-
-.flex {
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
 }
 
 

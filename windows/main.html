@@ -1,6 +1,8 @@
+
+
 <script>
  
-  const template = require("../js/template.js");
+  const template = require("../js/template.js")
   const electron = require("electron");
 
   if (!localStorage.getItem("token")) {
@@ -9,16 +11,25 @@
 
   var title = `Enclica messenger.`;
   var head = `<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i">`;
-  var body = ``;
+  var body = `<div style='backdrop-filter: blur(20px); background-color: rgba(0,0,0,0.5); position: fixed; z-index: 6000000; width: 100%; height:100%;' id="mainloader">
+    <!-- centered screen h3 saying loading with style -->
+    <h1 style="text-align: center; font-size: 50px; margin:auto; margin-top:50%; margin-bottom: 50%;">Loading...</h1>
+    
+      </div>`;
 
   template.createPage(title, head, body);
 </script>
+
+<script  type="module" src"../js/template.js"></script>
 
 
 <script>
    
   </script>
 </body>    
+
+
+</div>
 <div style="height:20px;"></div>
 <div class="sidenav">
   <p class="usernametextblock" id="usernametext"></p>

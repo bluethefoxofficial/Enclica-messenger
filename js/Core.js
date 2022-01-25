@@ -15,7 +15,7 @@ var swal = require('sweetalert');
 var os = require("os");
 
 var username;
-//const fs = require("fs");
+
 var host;
 var api;
 var currentlycalling = false;
@@ -27,12 +27,18 @@ if (localStorage.getItem("host")) {
     host = "enclica.com";
     api = ""; //can someone make this invalid, thanks.
 }
-var stuff =
-    "https://enclica.com/api/user/info?token=" + localStorage.getItem("token");
+var stuff = "https://enclica.com/api/user/info/singular/";
 //use json and var stuff to get username
-$.get(stuff).done(function(d) {
-    username = d.data.username;
-});
+
+function userinformation() {
+    $.get("https://enclica.com/api/user/info/singular/", { token: localStorage.getItem("token") }, function(d) {
+        console.log(d);
+        username = d.username;
+
+    });
+}
+
+userinformation();
 
 function timeConverter(UNIX_timestamp) {
     var a = new Date(UNIX_timestamp * 1000);

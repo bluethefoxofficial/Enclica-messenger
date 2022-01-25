@@ -28,4 +28,9 @@ var createPage = function(title, head, body) {
     document.write(page);
 }
 
-module.exports.createPage = createPage;
+if ('module' in window) {
+
+    module.exports.createPage = createPage;
+} else {
+    alert('dont try this in a browser');
+}

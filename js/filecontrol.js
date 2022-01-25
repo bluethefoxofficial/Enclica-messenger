@@ -16,15 +16,13 @@ function fileSelected(input) {
             //no security checks, yes this will cause issues.
             data = new FormData();
             data.append("serverid", currentserver);
-            data.append("key", api);
-            data.append("function", "upload");
             data.append("token", localStorage.getItem("token"));
             var attachment = document.getElementById(`attachment_${currentserver}`);
             data.append("fileToUpload", attachment.files[0]);
             var rand = Math.random();
             $.ajax({
                 type: 'POST',
-                url: `https://enclica.com/api/`,
+                url: `https://enclica.com/api/messenger/upload/`,
                 data: data,
                 cache: false,
                 enctype: 'multipart/form-data',

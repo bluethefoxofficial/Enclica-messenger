@@ -203,6 +203,7 @@
     margin-left: 10px;
     margin-right: 10px;
     text-align: center;
+    backdrop-filter: blur(40px);
     border-radius: 4px;
 }
 

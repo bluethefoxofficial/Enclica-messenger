@@ -68,6 +68,7 @@ function joinserver() {
 
 
 function getmessages() {
+    $('#mainloader').hide();
 
     //get messages from server and if its a image file display image and if its not an image then display the textarea using jquery $.get
 
@@ -75,7 +76,6 @@ function getmessages() {
         return;
     }
     var stuff =
-
         `https://enclica.com/api/?&function=getmessages&token=` +
         localStorage.getItem("token") +
         "&serverid=" +
@@ -91,33 +91,31 @@ function getmessages() {
         $('#' + currentserver + '_container').html('');
         currentmessages = Object.keys(data).length;
         data.forEach(function(message) {
+
             //check if message contains a file and if it does then append with an image file and if not then append with a textarea
             if (message.file) {
-
+                if (message.sender == username) {
+                    delbtn = `<button class="btn btn-danger btn-sm" onclick="deletemessage(${message.ID},'${message.file}')">X</button>`;
+                }
                 switch (getExtension(message.file)) {
-                    case 'jpg' || 'jpeg' || 'png' || 'gif':
+                    case 'jpg' || 'jpeg' || 'png' || 'gif' || 'PNG':
                         $('#' + currentserver + '_container').append(`
                         <div class="ccontainer darker">
                             <span class="sender">${message.sender}</span>
                             <img class="avi" src="https://enclica.com/api/?function=pfpget&username=${message.sender}" alt="Avatar" style="width:100%;">
                             <p>
-                           
                             <img class="img" onclick="document.getElementById('${message.file}').style.display = 'block';" src="https://cdn.enclica.com/enc/data/${message.sender}/${message.file}" width="30%" />
                             ${message.file}<br/>
                             </p>
                             <span class="time-right">${timeConverter(message.time)}</span>
                             ${delbtn}
                             </div>
-                            
-                            <!-- modal for it -->
-                            
                             <div id="${message.file}" class="img-modal">
                     <span class="close" onclick="document.getElementById('${message.file}').style.display = 'none';">&times;</span>
                     <img class="img-modal-content" src="https://cdn.enclica.com/enc/data/${message.sender}/${message.file}" id="img01">
                     <div id="caption"><a onclick='shell.openExternal("https://cdn.enclica.com/enc/data/${message.sender}/${message.file}");' href="#">Open Original</a></div>
                     </div>`);
                         break;
-
                         //audio file
                     case 'mp3' || 'wav' || 'ogg' || 'flac':
                         $('#' + currentserver + '_container').append(`<div class="ccontainer darker">
@@ -157,12 +155,16 @@ function getmessages() {
                         break;
                 }
             } else {
-                $('#' + currentserver + '_container').append(` <div class = "ccontainer">
-                                            <span class = "sender" > ${message.sender} </span> <img class = "avi"
-                                            src = "https://enclica.com/api/?function=pfpget&username=${message.sender}"
-                                            alt = "Avatar"
-                                            style = "width:100%;">
-                                            <p class = "message"> ${message.message} </p> <span class = "time-right" > ${timeConverter(message.time)} </span> </div> `);
+                if (message.sender == username) {
+                    delbtn = `<button class="btn btn-danger btn-sm" onclick="deletemessage(${message.ID},'0')">X</button>`;
+                }
+                $('#' + currentserver + '_container').append(`<div class="ccontainer darker">
+                <span class="sender">${message.sender}</span>
+                <img class="avi" src="https://enclica.com/api/?function=pfpget&username=${message.sender}" alt="Avatar" style="width:100%;">
+                <p>${message.message}</p>
+                <span class="time-right">${timeConverter(message.time)}</span>
+                ${delbtn}
+                </div>`);
             }
         });
 

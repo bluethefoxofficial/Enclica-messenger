@@ -133,7 +133,6 @@ app.on('ready', () => {
         frame: false,
         webPreferences: {
             nodeIntegration: true,
-            "page-visibility": true,
             webSecurity: true,
             enableRemoteModule: true
         },
@@ -144,9 +143,19 @@ app.on('ready', () => {
     splash = new BrowserWindow({ width: 500, height: 300, transparent: true, frame: false, alwaysOnTop: false });
 
     splash.loadFile("./windows/preload.html");
-    win.loadFile("./windows/login.html");
+    splash.show();
+    var localstoragesessiontoken = splash.webContents
+        .executeJavaScript('localStorage.getItem("token");', true)
+        .then(result => {
+            return result
+        });
+    if (localstoragesessiontoken == '') {
+        win.loadFile("./windows/login.html");
+    } else {
+        win.loadFile("./windows/main.html");
+    }
     //win.webContents.openDevTools();
-    win.once('ready-to-show', () => {
+    win.webContents.on('did-finish-load', () => {
         splash.destroy();
 
         win.show();
