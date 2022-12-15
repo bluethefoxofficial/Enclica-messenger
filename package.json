@@ -24,7 +24,7 @@
         "electron-localstorage": "^1.0.5",
         "electron-packager": "^15.4.0",
         "electron-squirrel-startup": "^1.0.0",
-        "express": "^4.17.2",
+        "express": "^4.17.3",
         "jquery": "^3.6.0",
         "md5": "^2.3.0",
         "node-ip": "^0.1.2",
