@@ -22,7 +22,7 @@
         "electron-installer-windows": "^3.0.0",
         "electron-is": "^3.0.0",
         "electron-localstorage": "^1.0.5",
-        "electron-packager": "^15.4.0",
+        "electron-packager": "^17.1.1",
         "electron-squirrel-startup": "^1.0.0",
         "express": "^4.17.2",
         "jquery": "^3.6.0",
@@ -37,8 +37,8 @@
         "wrtc": "^0.4.7"
     },
     "devDependencies": {
-        "electron": "^15.5.5",
-        "electron-builder": "^22.14.5",
+        "electron": "^23.1.0",
+        "electron-builder": "^23.6.0",
         "electron-reloader": "^1.2.1",
         "electron-winstaller": "^5.0.0"
     },
