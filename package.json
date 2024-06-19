@@ -30,7 +30,7 @@
         "node-ip": "^0.1.2",
         "path": "^0.12.7",
         "simple-peer": "^9.11.0",
-        "socket.io": "^4.6.1",
+        "socket.io": "^4.6.2",
         "sweetalert": "^2.1.2",
         "sweetalert2": "^10.16.9",
         "v8-compile-cache": "^2.3.0",
